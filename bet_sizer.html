@@ -43,15 +43,27 @@
 
       <div class="flex">
         <div class="form-group">
+          <label>Model input</label>
+          <select id="modelMode" class="form-control w-200">
+            <option value="delta" selected>Delta-based (use calibration)</option>
+            <option value="manual">Manual accuracy (%)</option>
+          </select>
+        </div>
+        <div class="form-group" id="deltaWrap">
           <label>Delta value</label>
           <input id="delta" type="number" class="form-control w-200" step="1" value="25" />
         </div>
         <div class="form-group">
-          <label>Delta favors</label>
+          <label>Favors side</label>
           <select id="deltaSide" class="form-control w-200">
             <option value="A">Team A</option>
             <option value="B" selected>Team B</option>
           </select>
+        </div>
+        <div class="form-group" id="manualWrap" style="display:none">
+          <label>Model accuracy (%)</label>
+          <input id="manualAcc" type="number" class="form-control w-200" step="0.01" min="0" max="100" placeholder="e.g. 76.92" />
+          <div class="small">Favored side win probability</div>
         </div>
         <div class="form-group">
           <label>Model weight</label>
@@ -138,9 +150,11 @@
       const oddsB = parseFloat(document.getElementById('oddsB').value);
       const bankroll = parseFloat(document.getElementById('bankroll').value);
       const kellyFrac = parseFloat(document.getElementById('kellyFrac').value);
+      const mode = document.getElementById('modelMode').value;
       const delta = parseFloat(document.getElementById('delta').value);
       const deltaSide = document.getElementById('deltaSide').value;
       const modelWeight = parseFloat(document.getElementById('modelWeight').value);
+      const manualAccRaw = parseFloat(document.getElementById('manualAcc').value);
 
       if (!(oddsA > 1 && oddsB > 1 && bankroll > 0 && kellyFrac >= 0 && kellyFrac <= 1 && modelWeight >= 0)) {
         document.getElementById('out').textContent = 'Please enter valid inputs.';
@@ -151,9 +165,19 @@
       const pB_imp = toImplied(oddsB);
       const { pA: pA_mkt, pB: pB_mkt, overround } = devig(pA_imp, pB_imp);
 
-      const pModelBase = interpCalibration(Math.abs(delta));
-      const pModelA = (deltaSide === 'A') ? pModelBase : 1 - pModelBase;
-      const pModelB = 1 - pModelA;
+      let pModelA, pModelB;
+      if (mode === 'manual') {
+        let pFav;
+        if (!isFinite(manualAccRaw)) { document.getElementById('out').textContent = 'Enter model accuracy (%)'; return; }
+        pFav = manualAccRaw > 1 ? manualAccRaw / 100 : manualAccRaw; // allow 76.92 or 0.7692
+        if (!(pFav > 0 && pFav < 1)) { document.getElementById('out').textContent = 'Model accuracy must be between 0 and 100%'; return; }
+        if (deltaSide === 'A') { pModelA = pFav; pModelB = 1 - pFav; }
+        else { pModelB = pFav; pModelA = 1 - pFav; }
+      } else {
+        const pModelBase = interpCalibration(Math.abs(delta));
+        pModelA = (deltaSide === 'A') ? pModelBase : 1 - pModelBase;
+        pModelB = 1 - pModelA;
+      }
 
       // Pool market and model
       const pA_final = logisticPool(pA_mkt, pModelA, modelWeight);
@@ -172,7 +196,7 @@
       const lines = [];
       lines.push('Overround (vig): ' + pct(overround));
       lines.push('Market (devigged): Team A ' + pct(pA_mkt) + ' | Team B ' + pct(pB_mkt));
-      lines.push('Model (from delta): Team A ' + pct(pModelA) + ' | Team B ' + pct(pModelB));
+      lines.push((mode === 'manual' ? 'Model (manual): ' : 'Model (from delta): ') + 'Team A ' + pct(pModelA) + ' | Team B ' + pct(pModelB));
       lines.push('Blended: Team A ' + pct(pA_final) + ' | Team B ' + pct(pB_final));
       lines.push('Recommended side: Team ' + betSide);
       lines.push('Full Kelly fraction: ' + pct(fKelly));
@@ -182,14 +206,24 @@
     }
 
     document.getElementById('calc').addEventListener('click', run);
+    document.getElementById('modelMode').addEventListener('change', function() {
+      const mode = this.value;
+      const showManual = (mode === 'manual');
+      document.getElementById('manualWrap').style.display = showManual ? '' : 'none';
+      document.getElementById('deltaWrap').style.display = showManual ? 'none' : '';
+    });
     document.getElementById('reset').addEventListener('click', function() {
       document.getElementById('oddsA').value = 2.17;
       document.getElementById('oddsB').value = 1.61;
       document.getElementById('bankroll').value = 1000;
       document.getElementById('kellyFrac').value = 0.5;
+      document.getElementById('modelMode').value = 'delta';
       document.getElementById('delta').value = 25;
       document.getElementById('deltaSide').value = 'B';
       document.getElementById('modelWeight').value = 1.0;
+      document.getElementById('manualAcc').value = '';
+      document.getElementById('manualWrap').style.display = 'none';
+      document.getElementById('deltaWrap').style.display = '';
       document.getElementById('out').textContent = '';
     });
   </script>
