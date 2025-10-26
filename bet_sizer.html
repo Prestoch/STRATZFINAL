@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bet Sizer - Market + Model Blending</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { padding: 24px; }
+    .panel { max-width: 860px; margin: 0 auto; }
+    .result { font-size: 16px; }
+    .small { color: #666; }
+    .form-inline .form-group { margin-right: 12px; }
+    .flex { display: flex; gap: 16px; flex-wrap: wrap; }
+    .w-200 { width: 200px; }
+  </style>
+</head>
+<body>
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong>Bet Sizer</strong> — blend market odds with model delta, then Kelly size</div>
+    <div class="panel-body">
+      <div class="flex">
+        <div class="form-group">
+          <label>Team A odds (decimal)</label>
+          <input id="oddsA" type="number" class="form-control w-200" step="0.01" value="2.17" />
+        </div>
+        <div class="form-group">
+          <label>Team B odds (decimal)</label>
+          <input id="oddsB" type="number" class="form-control w-200" step="0.01" value="1.61" />
+        </div>
+        <div class="form-group">
+          <label>Bankroll ($)</label>
+          <input id="bankroll" type="number" class="form-control w-200" step="1" value="1000" />
+        </div>
+        <div class="form-group">
+          <label>Kelly fraction</label>
+          <input id="kellyFrac" type="number" class="form-control w-200" step="0.05" min="0" max="1" value="0.5" />
+          <div class="small">0.5 = Half Kelly</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="flex">
+        <div class="form-group">
+          <label>Delta value</label>
+          <input id="delta" type="number" class="form-control w-200" step="1" value="25" />
+        </div>
+        <div class="form-group">
+          <label>Delta favors</label>
+          <select id="deltaSide" class="form-control w-200">
+            <option value="A">Team A</option>
+            <option value="B" selected>Team B</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Model weight</label>
+          <input id="modelWeight" type="number" class="form-control w-200" step="0.1" min="0" max="3" value="1.0" />
+          <div class="small">Blend strength (1.0 default)</div>
+        </div>
+      </div>
+
+      <div class="small">Calibration (win prob when |delta| ≥ x): 5→0.5298, 10→0.5386, 15→0.5468, 20→0.5539, 25→0.5646, 30→0.5767, 35→0.5606, 40→0.5555, 45→0.5496, 50→0.5789</div>
+
+      <hr />
+
+      <div class="form-inline">
+        <button id="calc" class="btn btn-primary">Calculate</button>
+        <button id="reset" class="btn btn-default">Reset</button>
+      </div>
+
+      <hr />
+
+      <div id="out" class="result"></div>
+    </div>
+  </div>
+
+  <script>
+    // Calibration table copied from model_accuracy.csv (final_delta rows)
+    const CALIBRATION = [
+      { t: 5,  p: 0.5298 },
+      { t: 10, p: 0.5386 },
+      { t: 15, p: 0.5468 },
+      { t: 20, p: 0.5539 },
+      { t: 25, p: 0.5646 },
+      { t: 30, p: 0.5767 },
+      { t: 35, p: 0.5606 },
+      { t: 40, p: 0.5555 },
+      { t: 45, p: 0.5496 },
+      { t: 50, p: 0.5789 }
+    ];
+
+    function interpCalibration(absDelta) {
+      // Clamp to min/max threshold
+      if (absDelta <= CALIBRATION[0].t) return CALIBRATION[0].p;
+      if (absDelta >= CALIBRATION[CALIBRATION.length - 1].t) return CALIBRATION[CALIBRATION.length - 1].p;
+      // Linear interpolate between nearest thresholds
+      for (let i = 1; i < CALIBRATION.length; i++) {
+        const lo = CALIBRATION[i-1];
+        const hi = CALIBRATION[i];
+        if (absDelta <= hi.t) {
+          const w = (absDelta - lo.t) / (hi.t - lo.t);
+          return lo.p * (1 - w) + hi.p * w;
+        }
+      }
+      return CALIBRATION[CALIBRATION.length - 1].p;
+    }
+
+    function devig(pA_imp, pB_imp) {
+      const s = pA_imp + pB_imp;
+      return { pA: pA_imp / s, pB: pB_imp / s, overround: s - 1 };
+    }
+
+    function toImplied(odds) { return 1 / odds; }
+    function toOdds(p) { return 1 / p; }
+
+    function logit(p) { return Math.log(p / (1 - p)); }
+    function invLogit(z) { return 1 / (1 + Math.exp(-z)); }
+
+    function logisticPool(pMarket, pModel, weight) {
+      // Weighted sum of logits then invert
+      const z = (1 - weight) * logit(pMarket) + weight * logit(pModel);
+      return invLogit(z);
+    }
+
+    function kellyFraction(p, odds) {
+      const b = odds - 1; // net odds
+      const q = 1 - p;
+      const f = (b * p - q) / b; // (d*p - 1) / (d - 1)
+      return Math.max(0, f); // no negative Kelly
+    }
+
+    function fmt2(x) { return Number(x).toFixed(2); }
+    function pct(x) { return (100 * x).toFixed(2) + '%'; }
+
+    function run() {
+      const oddsA = parseFloat(document.getElementById('oddsA').value);
+      const oddsB = parseFloat(document.getElementById('oddsB').value);
+      const bankroll = parseFloat(document.getElementById('bankroll').value);
+      const kellyFrac = parseFloat(document.getElementById('kellyFrac').value);
+      const delta = parseFloat(document.getElementById('delta').value);
+      const deltaSide = document.getElementById('deltaSide').value;
+      const modelWeight = parseFloat(document.getElementById('modelWeight').value);
+
+      if (!(oddsA > 1 && oddsB > 1 && bankroll > 0 && kellyFrac >= 0 && kellyFrac <= 1 && modelWeight >= 0)) {
+        document.getElementById('out').textContent = 'Please enter valid inputs.';
+        return;
+      }
+
+      const pA_imp = toImplied(oddsA);
+      const pB_imp = toImplied(oddsB);
+      const { pA: pA_mkt, pB: pB_mkt, overround } = devig(pA_imp, pB_imp);
+
+      const pModelBase = interpCalibration(Math.abs(delta));
+      const pModelA = (deltaSide === 'A') ? pModelBase : 1 - pModelBase;
+      const pModelB = 1 - pModelA;
+
+      // Pool market and model
+      const pA_final = logisticPool(pA_mkt, pModelA, modelWeight);
+      const pB_final = logisticPool(pB_mkt, pModelB, modelWeight);
+
+      // Pick side with edge > 0
+      const edgeA = pA_final - pA_mkt;
+      const edgeB = pB_final - pB_mkt;
+
+      let betSide, pFinal, odds;
+      if (edgeA > edgeB) { betSide = 'A'; pFinal = pA_final; odds = oddsA; } else { betSide = 'B'; pFinal = pB_final; odds = oddsB; }
+
+      const fKelly = kellyFraction(pFinal, odds);
+      const stake = bankroll * fKelly * kellyFrac;
+
+      const lines = [];
+      lines.push('Overround (vig): ' + pct(overround));
+      lines.push('Market (devigged): Team A ' + pct(pA_mkt) + ' | Team B ' + pct(pB_mkt));
+      lines.push('Model (from delta): Team A ' + pct(pModelA) + ' | Team B ' + pct(pModelB));
+      lines.push('Blended: Team A ' + pct(pA_final) + ' | Team B ' + pct(pB_final));
+      lines.push('Recommended side: Team ' + betSide);
+      lines.push('Full Kelly fraction: ' + pct(fKelly));
+      lines.push('Stake (' + (kellyFrac*100) + '% Kelly): $' + fmt2(stake));
+
+      document.getElementById('out').textContent = lines.join('\n');
+    }
+
+    document.getElementById('calc').addEventListener('click', run);
+    document.getElementById('reset').addEventListener('click', function() {
+      document.getElementById('oddsA').value = 2.17;
+      document.getElementById('oddsB').value = 1.61;
+      document.getElementById('bankroll').value = 1000;
+      document.getElementById('kellyFrac').value = 0.5;
+      document.getElementById('delta').value = 25;
+      document.getElementById('deltaSide').value = 'B';
+      document.getElementById('modelWeight').value = 1.0;
+      document.getElementById('out').textContent = '';
+    });
+  </script>
+</body>
+</html>
