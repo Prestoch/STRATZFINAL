@@ -51,7 +51,7 @@
           <th>total</th>
           <th>correct</th>
           <th>accuracy</th>
-          <th>accuracy_pct</th>
+          
         </tr>
       </thead>
       <tbody></tbody>
@@ -117,8 +117,7 @@
         Number(r.threshold),
         Number(r.total),
         Number(r.correct),
-        Number(r.accuracy),
-        Number(r.accuracy_pct)
+        Number(r.accuracy)
       ]);
       if (table) { table.clear().rows.add(data).draw(); return; }
       table = $('#accTable').DataTable({
@@ -130,10 +129,9 @@
           { title: 'threshold' },
           { title: 'total' },
           { title: 'correct' },
-          { title: 'accuracy' },
-          { title: 'accuracy_pct' }
+          { title: 'accuracy' }
         ],
-        order: [[7, 'desc']],
+        order: [[6, 'desc']],
         pageLength: 25
       });
     }

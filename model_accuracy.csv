@@ -1,797 +1,797 @@
-category,subcategory,role,threshold,total,correct,accuracy,accuracy_pct
-final_delta,,,5,67895,35973,0.5298,52.98
-final_delta,,,10,45157,24321,0.5386,53.86
-final_delta,,,15,27834,15220,0.5468,54.68
-final_delta,,,20,15971,8847,0.5539,55.39
-final_delta,,,25,8509,4804,0.5646,56.46
-final_delta,,,30,4427,2553,0.5767,57.67
-final_delta,,,35,2178,1221,0.5606,56.06
-final_delta,,,40,1064,591,0.5555,55.55
-final_delta,,,45,524,288,0.5496,54.96
-final_delta,,,50,266,154,0.5789,57.89
-role_advantage,positive,carry,5,18133,9521,0.5251,52.51
-role_advantage,positive,carry,8,4301,2342,0.5445,54.45
-role_advantage,positive,carry,10,1652,873,0.5285,52.85
-role_advantage,negative,carry,5,11700,6208,0.5306,53.06
-role_advantage,negative,carry,8,2940,1608,0.5469,54.69
-role_advantage,negative,carry,10,1250,685,0.5480,54.80
-role_advantage,positive,mid,5,11315,6110,0.5400,54.00
-role_advantage,positive,mid,8,1565,831,0.5310,53.10
-role_advantage,positive,mid,10,405,203,0.5012,50.12
-role_advantage,negative,mid,5,7507,4050,0.5395,53.95
-role_advantage,negative,mid,8,1274,722,0.5667,56.67
-role_advantage,negative,mid,10,442,255,0.5769,57.69
-role_advantage,positive,offlane,5,14250,7455,0.5232,52.32
-role_advantage,positive,offlane,8,3194,1702,0.5329,53.29
-role_advantage,positive,offlane,10,1197,631,0.5272,52.72
-role_advantage,negative,offlane,5,13107,6894,0.5260,52.60
-role_advantage,negative,offlane,8,3147,1662,0.5281,52.81
-role_advantage,negative,offlane,10,1351,725,0.5366,53.66
-role_advantage,positive,softsupport,5,7491,3875,0.5173,51.73
-role_advantage,positive,softsupport,8,963,498,0.5171,51.71
-role_advantage,positive,softsupport,10,262,143,0.5458,54.58
-role_advantage,negative,softsupport,5,5266,2786,0.5291,52.91
-role_advantage,negative,softsupport,8,663,343,0.5173,51.73
-role_advantage,negative,softsupport,10,234,124,0.5299,52.99
-role_advantage,positive,hardsupport,5,7716,4082,0.5290,52.90
-role_advantage,positive,hardsupport,8,1383,754,0.5452,54.52
-role_advantage,positive,hardsupport,10,666,369,0.5541,55.41
-role_advantage,negative,hardsupport,5,6848,3537,0.5165,51.65
-role_advantage,negative,hardsupport,8,1290,641,0.4969,49.69
-role_advantage,negative,hardsupport,10,575,295,0.5130,51.30
-hero_advantage,positive,Abaddon,5,103,58,0.5631,56.31
-hero_advantage,positive,Abaddon,8,12,9,0.7500,75.00
-hero_advantage,positive,Abaddon,10,2,1,0.5000,50.00
-hero_advantage,negative,Abaddon,5,686,366,0.5335,53.35
-hero_advantage,negative,Abaddon,8,115,71,0.6174,61.74
-hero_advantage,negative,Abaddon,10,28,17,0.6071,60.71
-hero_advantage,positive,Alchemist,5,87,51,0.5862,58.62
-hero_advantage,positive,Alchemist,8,2,1,0.5000,50.00
-hero_advantage,positive,Alchemist,10,0,0,0.0000,0.00
-hero_advantage,negative,Alchemist,5,39,21,0.5385,53.85
-hero_advantage,negative,Alchemist,8,0,0,0.0000,0.00
-hero_advantage,negative,Alchemist,10,0,0,0.0000,0.00
-hero_advantage,positive,Ancient Apparition,5,274,147,0.5365,53.65
-hero_advantage,positive,Ancient Apparition,8,58,37,0.6379,63.79
-hero_advantage,positive,Ancient Apparition,10,17,9,0.5294,52.94
-hero_advantage,negative,Ancient Apparition,5,84,45,0.5357,53.57
-hero_advantage,negative,Ancient Apparition,8,3,2,0.6667,66.67
-hero_advantage,negative,Ancient Apparition,10,0,0,0.0000,0.00
-hero_advantage,positive,Anti Mage,5,863,438,0.5075,50.75
-hero_advantage,positive,Anti Mage,8,475,252,0.5305,53.05
-hero_advantage,positive,Anti Mage,10,314,163,0.5191,51.91
-hero_advantage,negative,Anti Mage,5,397,210,0.5290,52.90
-hero_advantage,negative,Anti Mage,8,110,60,0.5455,54.55
-hero_advantage,negative,Anti Mage,10,43,24,0.5581,55.81
-hero_advantage,positive,Arc Warden,5,29,16,0.5517,55.17
-hero_advantage,positive,Arc Warden,8,3,3,1.0000,100.00
-hero_advantage,positive,Arc Warden,10,0,0,0.0000,0.00
-hero_advantage,negative,Arc Warden,5,198,122,0.6162,61.62
-hero_advantage,negative,Arc Warden,8,80,55,0.6875,68.75
-hero_advantage,negative,Arc Warden,10,45,30,0.6667,66.67
-hero_advantage,positive,Axe,5,530,258,0.4868,48.68
-hero_advantage,positive,Axe,8,57,30,0.5263,52.63
-hero_advantage,positive,Axe,10,9,5,0.5556,55.56
-hero_advantage,negative,Axe,5,314,172,0.5478,54.78
-hero_advantage,negative,Axe,8,25,13,0.5200,52.00
-hero_advantage,negative,Axe,10,3,1,0.3333,33.33
-hero_advantage,positive,Bane,5,341,201,0.5894,58.94
-hero_advantage,positive,Bane,8,11,6,0.5455,54.55
-hero_advantage,positive,Bane,10,0,0,0.0000,0.00
-hero_advantage,negative,Bane,5,543,272,0.5009,50.09
-hero_advantage,negative,Bane,8,201,105,0.5224,52.24
-hero_advantage,negative,Bane,10,99,57,0.5758,57.58
-hero_advantage,positive,Batrider,5,1108,592,0.5343,53.43
-hero_advantage,positive,Batrider,8,126,75,0.5952,59.52
-hero_advantage,positive,Batrider,10,14,11,0.7857,78.57
-hero_advantage,negative,Batrider,5,41,28,0.6829,68.29
-hero_advantage,negative,Batrider,8,1,1,1.0000,100.00
-hero_advantage,negative,Batrider,10,0,0,0.0000,0.00
-hero_advantage,positive,Beastmaster,5,1204,689,0.5723,57.23
-hero_advantage,positive,Beastmaster,8,247,146,0.5911,59.11
-hero_advantage,positive,Beastmaster,10,48,32,0.6667,66.67
-hero_advantage,negative,Beastmaster,5,1152,628,0.5451,54.51
-hero_advantage,negative,Beastmaster,8,399,234,0.5865,58.65
-hero_advantage,negative,Beastmaster,10,184,112,0.6087,60.87
-hero_advantage,positive,Bloodseeker,5,1452,726,0.5000,50.00
-hero_advantage,positive,Bloodseeker,8,420,221,0.5262,52.62
-hero_advantage,positive,Bloodseeker,10,116,52,0.4483,44.83
-hero_advantage,negative,Bloodseeker,5,727,367,0.5048,50.48
-hero_advantage,negative,Bloodseeker,8,332,158,0.4759,47.59
-hero_advantage,negative,Bloodseeker,10,204,90,0.4412,44.12
-hero_advantage,positive,Bounty Hunter,5,65,39,0.6000,60.00
-hero_advantage,positive,Bounty Hunter,8,0,0,0.0000,0.00
-hero_advantage,positive,Bounty Hunter,10,0,0,0.0000,0.00
-hero_advantage,negative,Bounty Hunter,5,109,66,0.6055,60.55
-hero_advantage,negative,Bounty Hunter,8,19,10,0.5263,52.63
-hero_advantage,negative,Bounty Hunter,10,1,1,1.0000,100.00
-hero_advantage,positive,Brewmaster,5,329,176,0.5350,53.50
-hero_advantage,positive,Brewmaster,8,41,23,0.5610,56.10
-hero_advantage,positive,Brewmaster,10,11,6,0.5455,54.55
-hero_advantage,negative,Brewmaster,5,788,398,0.5051,50.51
-hero_advantage,negative,Brewmaster,8,431,233,0.5406,54.06
-hero_advantage,negative,Brewmaster,10,265,138,0.5208,52.08
-hero_advantage,positive,Bristleback,5,1378,725,0.5261,52.61
-hero_advantage,positive,Bristleback,8,291,149,0.5120,51.20
-hero_advantage,positive,Bristleback,10,51,32,0.6275,62.75
-hero_advantage,negative,Bristleback,5,97,55,0.5670,56.70
-hero_advantage,negative,Bristleback,8,15,7,0.4667,46.67
-hero_advantage,negative,Bristleback,10,3,0,0.0000,0.00
-hero_advantage,positive,Broodmother,5,167,102,0.6108,61.08
-hero_advantage,positive,Broodmother,8,41,26,0.6341,63.41
-hero_advantage,positive,Broodmother,10,11,7,0.6364,63.64
-hero_advantage,negative,Broodmother,5,1238,567,0.4580,45.80
-hero_advantage,negative,Broodmother,8,595,292,0.4908,49.08
-hero_advantage,negative,Broodmother,10,334,166,0.4970,49.70
-hero_advantage,positive,Centaur Warrunner,5,338,175,0.5178,51.78
-hero_advantage,positive,Centaur Warrunner,8,101,56,0.5545,55.45
-hero_advantage,positive,Centaur Warrunner,10,29,17,0.5862,58.62
-hero_advantage,negative,Centaur Warrunner,5,572,284,0.4965,49.65
-hero_advantage,negative,Centaur Warrunner,8,41,21,0.5122,51.22
-hero_advantage,negative,Centaur Warrunner,10,2,0,0.0000,0.00
-hero_advantage,positive,Chaos Knight,5,643,301,0.4681,46.81
-hero_advantage,positive,Chaos Knight,8,310,144,0.4645,46.45
-hero_advantage,positive,Chaos Knight,10,194,86,0.4433,44.33
-hero_advantage,negative,Chaos Knight,5,1551,816,0.5261,52.61
-hero_advantage,negative,Chaos Knight,8,492,270,0.5488,54.88
-hero_advantage,negative,Chaos Knight,10,200,119,0.5950,59.50
-hero_advantage,positive,Chen,5,997,584,0.5858,58.58
-hero_advantage,positive,Chen,8,690,403,0.5841,58.41
-hero_advantage,positive,Chen,10,511,295,0.5773,57.73
-hero_advantage,negative,Chen,5,490,213,0.4347,43.47
-hero_advantage,negative,Chen,8,188,91,0.4840,48.40
-hero_advantage,negative,Chen,10,69,36,0.5217,52.17
-hero_advantage,positive,Clinkz,5,261,136,0.5211,52.11
-hero_advantage,positive,Clinkz,8,63,38,0.6032,60.32
-hero_advantage,positive,Clinkz,10,23,10,0.4348,43.48
-hero_advantage,negative,Clinkz,5,167,84,0.5030,50.30
-hero_advantage,negative,Clinkz,8,15,7,0.4667,46.67
-hero_advantage,negative,Clinkz,10,2,0,0.0000,0.00
-hero_advantage,positive,Clockwerk,5,187,116,0.6203,62.03
-hero_advantage,positive,Clockwerk,8,4,3,0.7500,75.00
-hero_advantage,positive,Clockwerk,10,0,0,0.0000,0.00
-hero_advantage,negative,Clockwerk,5,475,241,0.5074,50.74
-hero_advantage,negative,Clockwerk,8,9,5,0.5556,55.56
-hero_advantage,negative,Clockwerk,10,0,0,0.0000,0.00
-hero_advantage,positive,Crystal Maiden,5,1122,560,0.4991,49.91
-hero_advantage,positive,Crystal Maiden,8,115,54,0.4696,46.96
-hero_advantage,positive,Crystal Maiden,10,24,8,0.3333,33.33
-hero_advantage,negative,Crystal Maiden,5,55,31,0.5636,56.36
-hero_advantage,negative,Crystal Maiden,8,0,0,0.0000,0.00
-hero_advantage,negative,Crystal Maiden,10,0,0,0.0000,0.00
-hero_advantage,positive,Dark Seer,5,1250,669,0.5352,53.52
-hero_advantage,positive,Dark Seer,8,697,370,0.5308,53.08
-hero_advantage,positive,Dark Seer,10,469,247,0.5267,52.67
-hero_advantage,negative,Dark Seer,5,725,373,0.5145,51.45
-hero_advantage,negative,Dark Seer,8,231,121,0.5238,52.38
-hero_advantage,negative,Dark Seer,10,86,49,0.5698,56.98
-hero_advantage,positive,Dark Willow,5,665,317,0.4767,47.67
-hero_advantage,positive,Dark Willow,8,35,19,0.5429,54.29
-hero_advantage,positive,Dark Willow,10,4,2,0.5000,50.00
-hero_advantage,negative,Dark Willow,5,1,0,0.0000,0.00
-hero_advantage,negative,Dark Willow,8,0,0,0.0000,0.00
-hero_advantage,negative,Dark Willow,10,0,0,0.0000,0.00
-hero_advantage,positive,Dawnbreaker,5,293,151,0.5154,51.54
-hero_advantage,positive,Dawnbreaker,8,55,29,0.5273,52.73
-hero_advantage,positive,Dawnbreaker,10,12,6,0.5000,50.00
-hero_advantage,negative,Dawnbreaker,5,866,441,0.5092,50.92
-hero_advantage,negative,Dawnbreaker,8,54,24,0.4444,44.44
-hero_advantage,negative,Dawnbreaker,10,4,1,0.2500,25.00
-hero_advantage,positive,Dazzle,5,20,14,0.7000,70.00
-hero_advantage,positive,Dazzle,8,0,0,0.0000,0.00
-hero_advantage,positive,Dazzle,10,0,0,0.0000,0.00
-hero_advantage,negative,Dazzle,5,187,97,0.5187,51.87
-hero_advantage,negative,Dazzle,8,6,5,0.8333,83.33
-hero_advantage,negative,Dazzle,10,0,0,0.0000,0.00
-hero_advantage,positive,Death Prophet,5,461,261,0.5662,56.62
-hero_advantage,positive,Death Prophet,8,26,15,0.5769,57.69
-hero_advantage,positive,Death Prophet,10,2,1,0.5000,50.00
-hero_advantage,negative,Death Prophet,5,130,72,0.5538,55.38
-hero_advantage,negative,Death Prophet,8,2,2,1.0000,100.00
-hero_advantage,negative,Death Prophet,10,0,0,0.0000,0.00
-hero_advantage,positive,Disruptor,5,127,64,0.5039,50.39
-hero_advantage,positive,Disruptor,8,0,0,0.0000,0.00
-hero_advantage,positive,Disruptor,10,0,0,0.0000,0.00
-hero_advantage,negative,Disruptor,5,18,7,0.3889,38.89
-hero_advantage,negative,Disruptor,8,0,0,0.0000,0.00
-hero_advantage,negative,Disruptor,10,0,0,0.0000,0.00
-hero_advantage,positive,Doom,5,2961,1485,0.5015,50.15
-hero_advantage,positive,Doom,8,729,353,0.4842,48.42
-hero_advantage,positive,Doom,10,220,98,0.4455,44.55
-hero_advantage,negative,Doom,5,0,0,0.0000,0.00
-hero_advantage,negative,Doom,8,0,0,0.0000,0.00
-hero_advantage,negative,Doom,10,0,0,0.0000,0.00
-hero_advantage,positive,Dragon Knight,5,538,266,0.4944,49.44
-hero_advantage,positive,Dragon Knight,8,175,85,0.4857,48.57
-hero_advantage,positive,Dragon Knight,10,77,33,0.4286,42.86
-hero_advantage,negative,Dragon Knight,5,972,535,0.5504,55.04
-hero_advantage,negative,Dragon Knight,8,94,52,0.5532,55.32
-hero_advantage,negative,Dragon Knight,10,11,8,0.7273,72.73
-hero_advantage,positive,Drow Ranger,5,182,94,0.5165,51.65
-hero_advantage,positive,Drow Ranger,8,6,6,1.0000,100.00
-hero_advantage,positive,Drow Ranger,10,0,0,0.0000,0.00
-hero_advantage,negative,Drow Ranger,5,142,81,0.5704,57.04
-hero_advantage,negative,Drow Ranger,8,8,5,0.6250,62.50
-hero_advantage,negative,Drow Ranger,10,0,0,0.0000,0.00
-hero_advantage,positive,Earth Spirit,5,27,16,0.5926,59.26
-hero_advantage,positive,Earth Spirit,8,0,0,0.0000,0.00
-hero_advantage,positive,Earth Spirit,10,0,0,0.0000,0.00
-hero_advantage,negative,Earth Spirit,5,19,8,0.4211,42.11
-hero_advantage,negative,Earth Spirit,8,0,0,0.0000,0.00
-hero_advantage,negative,Earth Spirit,10,0,0,0.0000,0.00
-hero_advantage,positive,Earthshaker,5,550,248,0.4509,45.09
-hero_advantage,positive,Earthshaker,8,183,81,0.4426,44.26
-hero_advantage,positive,Earthshaker,10,70,33,0.4714,47.14
-hero_advantage,negative,Earthshaker,5,89,52,0.5843,58.43
-hero_advantage,negative,Earthshaker,8,0,0,0.0000,0.00
-hero_advantage,negative,Earthshaker,10,0,0,0.0000,0.00
-hero_advantage,positive,Elder Titan,5,399,204,0.5113,51.13
-hero_advantage,positive,Elder Titan,8,141,75,0.5319,53.19
-hero_advantage,positive,Elder Titan,10,71,41,0.5775,57.75
-hero_advantage,negative,Elder Titan,5,664,322,0.4849,48.49
-hero_advantage,negative,Elder Titan,8,419,206,0.4916,49.16
-hero_advantage,negative,Elder Titan,10,326,158,0.4847,48.47
-hero_advantage,positive,Ember Spirit,5,1422,754,0.5302,53.02
-hero_advantage,positive,Ember Spirit,8,178,100,0.5618,56.18
-hero_advantage,positive,Ember Spirit,10,26,17,0.6538,65.38
-hero_advantage,negative,Ember Spirit,5,648,373,0.5756,57.56
-hero_advantage,negative,Ember Spirit,8,127,71,0.5591,55.91
-hero_advantage,negative,Ember Spirit,10,42,21,0.5000,50.00
-hero_advantage,positive,Enchantress,5,656,335,0.5107,51.07
-hero_advantage,positive,Enchantress,8,102,54,0.5294,52.94
-hero_advantage,positive,Enchantress,10,41,24,0.5854,58.54
-hero_advantage,negative,Enchantress,5,255,127,0.4980,49.80
-hero_advantage,negative,Enchantress,8,14,2,0.1429,14.29
-hero_advantage,negative,Enchantress,10,1,0,0.0000,0.00
-hero_advantage,positive,Enigma,5,186,114,0.6129,61.29
-hero_advantage,positive,Enigma,8,3,3,1.0000,100.00
-hero_advantage,positive,Enigma,10,0,0,0.0000,0.00
-hero_advantage,negative,Enigma,5,365,157,0.4301,43.01
-hero_advantage,negative,Enigma,8,61,24,0.3934,39.34
-hero_advantage,negative,Enigma,10,13,6,0.4615,46.15
-hero_advantage,positive,Faceless Void,5,560,302,0.5393,53.93
-hero_advantage,positive,Faceless Void,8,58,31,0.5345,53.45
-hero_advantage,positive,Faceless Void,10,7,3,0.4286,42.86
-hero_advantage,negative,Faceless Void,5,103,66,0.6408,64.08
-hero_advantage,negative,Faceless Void,8,5,5,1.0000,100.00
-hero_advantage,negative,Faceless Void,10,1,1,1.0000,100.00
-hero_advantage,positive,Grimstroke,5,271,153,0.5646,56.46
-hero_advantage,positive,Grimstroke,8,17,12,0.7059,70.59
-hero_advantage,positive,Grimstroke,10,0,0,0.0000,0.00
-hero_advantage,negative,Grimstroke,5,558,310,0.5556,55.56
-hero_advantage,negative,Grimstroke,8,139,83,0.5971,59.71
-hero_advantage,negative,Grimstroke,10,52,35,0.6731,67.31
-hero_advantage,positive,Gyrocopter,5,1002,484,0.4830,48.30
-hero_advantage,positive,Gyrocopter,8,112,56,0.5000,50.00
-hero_advantage,positive,Gyrocopter,10,13,4,0.3077,30.77
-hero_advantage,negative,Gyrocopter,5,0,0,0.0000,0.00
-hero_advantage,negative,Gyrocopter,8,0,0,0.0000,0.00
-hero_advantage,negative,Gyrocopter,10,0,0,0.0000,0.00
-hero_advantage,positive,Hoodwink,5,77,40,0.5195,51.95
-hero_advantage,positive,Hoodwink,8,0,0,0.0000,0.00
-hero_advantage,positive,Hoodwink,10,0,0,0.0000,0.00
-hero_advantage,negative,Hoodwink,5,6,4,0.6667,66.67
-hero_advantage,negative,Hoodwink,8,0,0,0.0000,0.00
-hero_advantage,negative,Hoodwink,10,0,0,0.0000,0.00
-hero_advantage,positive,Huskar,5,596,341,0.5721,57.21
-hero_advantage,positive,Huskar,8,184,106,0.5761,57.61
-hero_advantage,positive,Huskar,10,76,43,0.5658,56.58
-hero_advantage,negative,Huskar,5,298,170,0.5705,57.05
-hero_advantage,negative,Huskar,8,86,50,0.5814,58.14
-hero_advantage,negative,Huskar,10,35,25,0.7143,71.43
-hero_advantage,positive,Invoker,5,31,18,0.5806,58.06
-hero_advantage,positive,Invoker,8,0,0,0.0000,0.00
-hero_advantage,positive,Invoker,10,0,0,0.0000,0.00
-hero_advantage,negative,Invoker,5,198,102,0.5152,51.52
-hero_advantage,negative,Invoker,8,3,2,0.6667,66.67
-hero_advantage,negative,Invoker,10,0,0,0.0000,0.00
-hero_advantage,positive,Io,5,146,82,0.5616,56.16
-hero_advantage,positive,Io,8,17,7,0.4118,41.18
-hero_advantage,positive,Io,10,1,0,0.0000,0.00
-hero_advantage,negative,Io,5,357,176,0.4930,49.30
-hero_advantage,negative,Io,8,32,10,0.3125,31.25
-hero_advantage,negative,Io,10,4,2,0.5000,50.00
-hero_advantage,positive,Jakiro,5,264,125,0.4735,47.35
-hero_advantage,positive,Jakiro,8,10,4,0.4000,40.00
-hero_advantage,positive,Jakiro,10,2,1,0.5000,50.00
-hero_advantage,negative,Jakiro,5,8,4,0.5000,50.00
-hero_advantage,negative,Jakiro,8,0,0,0.0000,0.00
-hero_advantage,negative,Jakiro,10,0,0,0.0000,0.00
-hero_advantage,positive,Juggernaut,5,469,244,0.5203,52.03
-hero_advantage,positive,Juggernaut,8,58,30,0.5172,51.72
-hero_advantage,positive,Juggernaut,10,11,9,0.8182,81.82
-hero_advantage,negative,Juggernaut,5,152,78,0.5132,51.32
-hero_advantage,negative,Juggernaut,8,5,4,0.8000,80.00
-hero_advantage,negative,Juggernaut,10,0,0,0.0000,0.00
-hero_advantage,positive,Keeper Of The Light,5,878,489,0.5569,55.69
-hero_advantage,positive,Keeper Of The Light,8,111,60,0.5405,54.05
-hero_advantage,positive,Keeper Of The Light,10,7,3,0.4286,42.86
-hero_advantage,negative,Keeper Of The Light,5,672,349,0.5193,51.93
-hero_advantage,negative,Keeper Of The Light,8,281,152,0.5409,54.09
-hero_advantage,negative,Keeper Of The Light,10,150,81,0.5400,54.00
-hero_advantage,positive,Kez,5,0,0,0.0000,0.00
-hero_advantage,positive,Kez,8,0,0,0.0000,0.00
-hero_advantage,positive,Kez,10,0,0,0.0000,0.00
-hero_advantage,negative,Kez,5,0,0,0.0000,0.00
-hero_advantage,negative,Kez,8,0,0,0.0000,0.00
-hero_advantage,negative,Kez,10,0,0,0.0000,0.00
-hero_advantage,positive,Kunkka,5,297,149,0.5017,50.17
-hero_advantage,positive,Kunkka,8,10,6,0.6000,60.00
-hero_advantage,positive,Kunkka,10,2,1,0.5000,50.00
-hero_advantage,negative,Kunkka,5,106,57,0.5377,53.77
-hero_advantage,negative,Kunkka,8,3,2,0.6667,66.67
-hero_advantage,negative,Kunkka,10,0,0,0.0000,0.00
-hero_advantage,positive,Legion Commander,5,328,184,0.5610,56.10
-hero_advantage,positive,Legion Commander,8,20,17,0.8500,85.00
-hero_advantage,positive,Legion Commander,10,1,1,1.0000,100.00
-hero_advantage,negative,Legion Commander,5,907,487,0.5369,53.69
-hero_advantage,negative,Legion Commander,8,125,64,0.5120,51.20
-hero_advantage,negative,Legion Commander,10,31,15,0.4839,48.39
-hero_advantage,positive,Leshrac,5,143,77,0.5385,53.85
-hero_advantage,positive,Leshrac,8,5,4,0.8000,80.00
-hero_advantage,positive,Leshrac,10,0,0,0.0000,0.00
-hero_advantage,negative,Leshrac,5,651,322,0.4946,49.46
-hero_advantage,negative,Leshrac,8,100,54,0.5400,54.00
-hero_advantage,negative,Leshrac,10,25,16,0.6400,64.00
-hero_advantage,positive,Lich,5,15,9,0.6000,60.00
-hero_advantage,positive,Lich,8,0,0,0.0000,0.00
-hero_advantage,positive,Lich,10,0,0,0.0000,0.00
-hero_advantage,negative,Lich,5,66,31,0.4697,46.97
-hero_advantage,negative,Lich,8,0,0,0.0000,0.00
-hero_advantage,negative,Lich,10,0,0,0.0000,0.00
-hero_advantage,positive,Lifestealer,5,581,303,0.5215,52.15
-hero_advantage,positive,Lifestealer,8,86,43,0.5000,50.00
-hero_advantage,positive,Lifestealer,10,16,6,0.3750,37.50
-hero_advantage,negative,Lifestealer,5,665,356,0.5353,53.53
-hero_advantage,negative,Lifestealer,8,131,68,0.5191,51.91
-hero_advantage,negative,Lifestealer,10,28,23,0.8214,82.14
-hero_advantage,positive,Lina,5,514,265,0.5156,51.56
-hero_advantage,positive,Lina,8,51,27,0.5294,52.94
-hero_advantage,positive,Lina,10,8,3,0.3750,37.50
-hero_advantage,negative,Lina,5,6,4,0.6667,66.67
-hero_advantage,negative,Lina,8,0,0,0.0000,0.00
-hero_advantage,negative,Lina,10,0,0,0.0000,0.00
-hero_advantage,positive,Lion,5,18,12,0.6667,66.67
-hero_advantage,positive,Lion,8,0,0,0.0000,0.00
-hero_advantage,positive,Lion,10,0,0,0.0000,0.00
-hero_advantage,negative,Lion,5,50,29,0.5800,58.00
-hero_advantage,negative,Lion,8,0,0,0.0000,0.00
-hero_advantage,negative,Lion,10,0,0,0.0000,0.00
-hero_advantage,positive,Lone Druid,5,79,41,0.5190,51.90
-hero_advantage,positive,Lone Druid,8,10,5,0.5000,50.00
-hero_advantage,positive,Lone Druid,10,0,0,0.0000,0.00
-hero_advantage,negative,Lone Druid,5,425,207,0.4871,48.71
-hero_advantage,negative,Lone Druid,8,109,60,0.5505,55.05
-hero_advantage,negative,Lone Druid,10,27,14,0.5185,51.85
-hero_advantage,positive,Luna,5,267,137,0.5131,51.31
-hero_advantage,positive,Luna,8,7,4,0.5714,57.14
-hero_advantage,positive,Luna,10,0,0,0.0000,0.00
-hero_advantage,negative,Luna,5,95,51,0.5368,53.68
-hero_advantage,negative,Luna,8,0,0,0.0000,0.00
-hero_advantage,negative,Luna,10,0,0,0.0000,0.00
-hero_advantage,positive,Lycan,5,610,347,0.5689,56.89
-hero_advantage,positive,Lycan,8,232,130,0.5603,56.03
-hero_advantage,positive,Lycan,10,119,63,0.5294,52.94
-hero_advantage,negative,Lycan,5,886,414,0.4673,46.73
-hero_advantage,negative,Lycan,8,423,204,0.4823,48.23
-hero_advantage,negative,Lycan,10,255,130,0.5098,50.98
-hero_advantage,positive,Magnus,5,115,54,0.4696,46.96
-hero_advantage,positive,Magnus,8,0,0,0.0000,0.00
-hero_advantage,positive,Magnus,10,0,0,0.0000,0.00
-hero_advantage,negative,Magnus,5,100,56,0.5600,56.00
-hero_advantage,negative,Magnus,8,0,0,0.0000,0.00
-hero_advantage,negative,Magnus,10,0,0,0.0000,0.00
-hero_advantage,positive,Marci,5,275,147,0.5345,53.45
-hero_advantage,positive,Marci,8,13,9,0.6923,69.23
-hero_advantage,positive,Marci,10,1,1,1.0000,100.00
-hero_advantage,negative,Marci,5,234,128,0.5470,54.70
-hero_advantage,negative,Marci,8,11,4,0.3636,36.36
-hero_advantage,negative,Marci,10,1,1,1.0000,100.00
-hero_advantage,positive,Mars,5,322,158,0.4907,49.07
-hero_advantage,positive,Mars,8,9,3,0.3333,33.33
-hero_advantage,positive,Mars,10,0,0,0.0000,0.00
-hero_advantage,negative,Mars,5,117,64,0.5470,54.70
-hero_advantage,negative,Mars,8,0,0,0.0000,0.00
-hero_advantage,negative,Mars,10,0,0,0.0000,0.00
-hero_advantage,positive,Medusa,5,1021,597,0.5847,58.47
-hero_advantage,positive,Medusa,8,356,216,0.6067,60.67
-hero_advantage,positive,Medusa,10,137,85,0.6204,62.04
-hero_advantage,negative,Medusa,5,1210,635,0.5248,52.48
-hero_advantage,negative,Medusa,8,605,327,0.5405,54.05
-hero_advantage,negative,Medusa,10,362,195,0.5387,53.87
-hero_advantage,positive,Meepo,5,139,73,0.5252,52.52
-hero_advantage,positive,Meepo,8,48,32,0.6667,66.67
-hero_advantage,positive,Meepo,10,20,12,0.6000,60.00
-hero_advantage,negative,Meepo,5,365,201,0.5507,55.07
-hero_advantage,negative,Meepo,8,198,108,0.5455,54.55
-hero_advantage,negative,Meepo,10,121,63,0.5207,52.07
-hero_advantage,positive,Mirana,5,1,0,0.0000,0.00
-hero_advantage,positive,Mirana,8,0,0,0.0000,0.00
-hero_advantage,positive,Mirana,10,0,0,0.0000,0.00
-hero_advantage,negative,Mirana,5,21,12,0.5714,57.14
-hero_advantage,negative,Mirana,8,0,0,0.0000,0.00
-hero_advantage,negative,Mirana,10,0,0,0.0000,0.00
-hero_advantage,positive,Monkey King,5,2079,1085,0.5219,52.19
-hero_advantage,positive,Monkey King,8,383,193,0.5039,50.39
-hero_advantage,positive,Monkey King,10,75,41,0.5467,54.67
-hero_advantage,negative,Monkey King,5,70,37,0.5286,52.86
-hero_advantage,negative,Monkey King,8,4,4,1.0000,100.00
-hero_advantage,negative,Monkey King,10,0,0,0.0000,0.00
-hero_advantage,positive,Morphling,5,1531,804,0.5251,52.51
-hero_advantage,positive,Morphling,8,201,109,0.5423,54.23
-hero_advantage,positive,Morphling,10,28,17,0.6071,60.71
-hero_advantage,negative,Morphling,5,131,77,0.5878,58.78
-hero_advantage,negative,Morphling,8,4,2,0.5000,50.00
-hero_advantage,negative,Morphling,10,1,1,1.0000,100.00
-hero_advantage,positive,Muerta,5,645,332,0.5147,51.47
-hero_advantage,positive,Muerta,8,132,65,0.4924,49.24
-hero_advantage,positive,Muerta,10,32,12,0.3750,37.50
-hero_advantage,negative,Muerta,5,155,85,0.5484,54.84
-hero_advantage,negative,Muerta,8,5,2,0.4000,40.00
-hero_advantage,negative,Muerta,10,0,0,0.0000,0.00
-hero_advantage,positive,Naga Siren,5,1446,758,0.5242,52.42
-hero_advantage,positive,Naga Siren,8,873,473,0.5418,54.18
-hero_advantage,positive,Naga Siren,10,582,298,0.5120,51.20
-hero_advantage,negative,Naga Siren,5,483,214,0.4431,44.31
-hero_advantage,negative,Naga Siren,8,162,74,0.4568,45.68
-hero_advantage,negative,Naga Siren,10,48,25,0.5208,52.08
-hero_advantage,positive,Natures Prophet,5,107,59,0.5514,55.14
-hero_advantage,positive,Natures Prophet,8,1,0,0.0000,0.00
-hero_advantage,positive,Natures Prophet,10,0,0,0.0000,0.00
-hero_advantage,negative,Natures Prophet,5,378,194,0.5132,51.32
-hero_advantage,negative,Natures Prophet,8,17,7,0.4118,41.18
-hero_advantage,negative,Natures Prophet,10,1,0,0.0000,0.00
-hero_advantage,positive,Necrophos,5,410,207,0.5049,50.49
-hero_advantage,positive,Necrophos,8,98,53,0.5408,54.08
-hero_advantage,positive,Necrophos,10,31,18,0.5806,58.06
-hero_advantage,negative,Necrophos,5,408,208,0.5098,50.98
-hero_advantage,negative,Necrophos,8,87,44,0.5057,50.57
-hero_advantage,negative,Necrophos,10,26,13,0.5000,50.00
-hero_advantage,positive,Night Stalker,5,125,72,0.5760,57.60
-hero_advantage,positive,Night Stalker,8,3,1,0.3333,33.33
-hero_advantage,positive,Night Stalker,10,0,0,0.0000,0.00
-hero_advantage,negative,Night Stalker,5,829,445,0.5368,53.68
-hero_advantage,negative,Night Stalker,8,175,100,0.5714,57.14
-hero_advantage,negative,Night Stalker,10,45,30,0.6667,66.67
-hero_advantage,positive,Nyx Assassin,5,207,103,0.4976,49.76
-hero_advantage,positive,Nyx Assassin,8,29,10,0.3448,34.48
-hero_advantage,positive,Nyx Assassin,10,4,1,0.2500,25.00
-hero_advantage,negative,Nyx Assassin,5,261,143,0.5479,54.79
-hero_advantage,negative,Nyx Assassin,8,5,0,0.0000,0.00
-hero_advantage,negative,Nyx Assassin,10,0,0,0.0000,0.00
-hero_advantage,positive,Ogre Magi,5,116,58,0.5000,50.00
-hero_advantage,positive,Ogre Magi,8,0,0,0.0000,0.00
-hero_advantage,positive,Ogre Magi,10,0,0,0.0000,0.00
-hero_advantage,negative,Ogre Magi,5,41,17,0.4146,41.46
-hero_advantage,negative,Ogre Magi,8,1,0,0.0000,0.00
-hero_advantage,negative,Ogre Magi,10,0,0,0.0000,0.00
-hero_advantage,positive,Omniknight,5,147,73,0.4966,49.66
-hero_advantage,positive,Omniknight,8,36,20,0.5556,55.56
-hero_advantage,positive,Omniknight,10,16,11,0.6875,68.75
-hero_advantage,negative,Omniknight,5,222,116,0.5225,52.25
-hero_advantage,negative,Omniknight,8,20,12,0.6000,60.00
-hero_advantage,negative,Omniknight,10,1,1,1.0000,100.00
-hero_advantage,positive,Oracle,5,132,84,0.6364,63.64
-hero_advantage,positive,Oracle,8,12,6,0.5000,50.00
-hero_advantage,positive,Oracle,10,0,0,0.0000,0.00
-hero_advantage,negative,Oracle,5,221,120,0.5430,54.30
-hero_advantage,negative,Oracle,8,21,12,0.5714,57.14
-hero_advantage,negative,Oracle,10,3,0,0.0000,0.00
-hero_advantage,positive,Outworld Destroyer,5,2,1,0.5000,50.00
-hero_advantage,positive,Outworld Destroyer,8,0,0,0.0000,0.00
-hero_advantage,positive,Outworld Destroyer,10,0,0,0.0000,0.00
-hero_advantage,negative,Outworld Destroyer,5,1,1,1.0000,100.00
-hero_advantage,negative,Outworld Destroyer,8,1,1,1.0000,100.00
-hero_advantage,negative,Outworld Destroyer,10,0,0,0.0000,0.00
-hero_advantage,positive,Pangolier,5,977,529,0.5415,54.15
-hero_advantage,positive,Pangolier,8,66,29,0.4394,43.94
-hero_advantage,positive,Pangolier,10,8,4,0.5000,50.00
-hero_advantage,negative,Pangolier,5,632,355,0.5617,56.17
-hero_advantage,negative,Pangolier,8,77,41,0.5325,53.25
-hero_advantage,negative,Pangolier,10,14,5,0.3571,35.71
-hero_advantage,positive,Phantom Assassin,5,323,137,0.4241,42.41
-hero_advantage,positive,Phantom Assassin,8,18,10,0.5556,55.56
-hero_advantage,positive,Phantom Assassin,10,2,2,1.0000,100.00
-hero_advantage,negative,Phantom Assassin,5,233,126,0.5408,54.08
-hero_advantage,negative,Phantom Assassin,8,4,2,0.5000,50.00
-hero_advantage,negative,Phantom Assassin,10,0,0,0.0000,0.00
-hero_advantage,positive,Phantom Lancer,5,424,206,0.4858,48.58
-hero_advantage,positive,Phantom Lancer,8,170,88,0.5176,51.76
-hero_advantage,positive,Phantom Lancer,10,74,45,0.6081,60.81
-hero_advantage,negative,Phantom Lancer,5,447,256,0.5727,57.27
-hero_advantage,negative,Phantom Lancer,8,204,122,0.5980,59.80
-hero_advantage,negative,Phantom Lancer,10,118,70,0.5932,59.32
-hero_advantage,positive,Phoenix,5,608,301,0.4951,49.51
-hero_advantage,positive,Phoenix,8,39,17,0.4359,43.59
-hero_advantage,positive,Phoenix,10,5,2,0.4000,40.00
-hero_advantage,negative,Phoenix,5,162,88,0.5432,54.32
-hero_advantage,negative,Phoenix,8,7,3,0.4286,42.86
-hero_advantage,negative,Phoenix,10,2,1,0.5000,50.00
-hero_advantage,positive,Primal Beast,5,550,295,0.5364,53.64
-hero_advantage,positive,Primal Beast,8,43,21,0.4884,48.84
-hero_advantage,positive,Primal Beast,10,5,3,0.6000,60.00
-hero_advantage,negative,Primal Beast,5,106,52,0.4906,49.06
-hero_advantage,negative,Primal Beast,8,5,3,0.6000,60.00
-hero_advantage,negative,Primal Beast,10,0,0,0.0000,0.00
-hero_advantage,positive,Puck,5,482,296,0.6141,61.41
-hero_advantage,positive,Puck,8,28,12,0.4286,42.86
-hero_advantage,positive,Puck,10,1,1,1.0000,100.00
-hero_advantage,negative,Puck,5,818,450,0.5501,55.01
-hero_advantage,negative,Puck,8,98,54,0.5510,55.10
-hero_advantage,negative,Puck,10,11,8,0.7273,72.73
-hero_advantage,positive,Pudge,5,369,177,0.4797,47.97
-hero_advantage,positive,Pudge,8,16,5,0.3125,31.25
-hero_advantage,positive,Pudge,10,0,0,0.0000,0.00
-hero_advantage,negative,Pudge,5,406,226,0.5567,55.67
-hero_advantage,negative,Pudge,8,8,7,0.8750,87.50
-hero_advantage,negative,Pudge,10,0,0,0.0000,0.00
-hero_advantage,positive,Pugna,5,488,285,0.5840,58.40
-hero_advantage,positive,Pugna,8,35,16,0.4571,45.71
-hero_advantage,positive,Pugna,10,4,1,0.2500,25.00
-hero_advantage,negative,Pugna,5,71,35,0.4930,49.30
-hero_advantage,negative,Pugna,8,0,0,0.0000,0.00
-hero_advantage,negative,Pugna,10,0,0,0.0000,0.00
-hero_advantage,positive,Queen Of Pain,5,884,463,0.5238,52.38
-hero_advantage,positive,Queen Of Pain,8,86,51,0.5930,59.30
-hero_advantage,positive,Queen Of Pain,10,15,7,0.4667,46.67
-hero_advantage,negative,Queen Of Pain,5,312,168,0.5385,53.85
-hero_advantage,negative,Queen Of Pain,8,29,14,0.4828,48.28
-hero_advantage,negative,Queen Of Pain,10,0,0,0.0000,0.00
-hero_advantage,positive,Razor,5,276,150,0.5435,54.35
-hero_advantage,positive,Razor,8,13,9,0.6923,69.23
-hero_advantage,positive,Razor,10,1,1,1.0000,100.00
-hero_advantage,negative,Razor,5,681,404,0.5932,59.32
-hero_advantage,negative,Razor,8,127,75,0.5906,59.06
-hero_advantage,negative,Razor,10,37,22,0.5946,59.46
-hero_advantage,positive,Riki,5,152,84,0.5526,55.26
-hero_advantage,positive,Riki,8,15,9,0.6000,60.00
-hero_advantage,positive,Riki,10,1,0,0.0000,0.00
-hero_advantage,negative,Riki,5,117,61,0.5214,52.14
-hero_advantage,negative,Riki,8,5,2,0.4000,40.00
-hero_advantage,negative,Riki,10,0,0,0.0000,0.00
-hero_advantage,positive,Ringmaster,5,45,29,0.6444,64.44
-hero_advantage,positive,Ringmaster,8,1,0,0.0000,0.00
-hero_advantage,positive,Ringmaster,10,0,0,0.0000,0.00
-hero_advantage,negative,Ringmaster,5,2,1,0.5000,50.00
-hero_advantage,negative,Ringmaster,8,0,0,0.0000,0.00
-hero_advantage,negative,Ringmaster,10,0,0,0.0000,0.00
-hero_advantage,positive,Rubick,5,1555,832,0.5350,53.50
-hero_advantage,positive,Rubick,8,185,103,0.5568,55.68
-hero_advantage,positive,Rubick,10,29,18,0.6207,62.07
-hero_advantage,negative,Rubick,5,591,316,0.5347,53.47
-hero_advantage,negative,Rubick,8,19,10,0.5263,52.63
-hero_advantage,negative,Rubick,10,0,0,0.0000,0.00
-hero_advantage,positive,Sand King,5,830,452,0.5446,54.46
-hero_advantage,positive,Sand King,8,219,123,0.5616,56.16
-hero_advantage,positive,Sand King,10,62,32,0.5161,51.61
-hero_advantage,negative,Sand King,5,293,156,0.5324,53.24
-hero_advantage,negative,Sand King,8,23,12,0.5217,52.17
-hero_advantage,negative,Sand King,10,8,5,0.6250,62.50
-hero_advantage,positive,Shadow Demon,5,740,368,0.4973,49.73
-hero_advantage,positive,Shadow Demon,8,137,68,0.4964,49.64
-hero_advantage,positive,Shadow Demon,10,31,20,0.6452,64.52
-hero_advantage,negative,Shadow Demon,5,152,78,0.5132,51.32
-hero_advantage,negative,Shadow Demon,8,7,4,0.5714,57.14
-hero_advantage,negative,Shadow Demon,10,0,0,0.0000,0.00
-hero_advantage,positive,Shadow Fiend,5,116,68,0.5862,58.62
-hero_advantage,positive,Shadow Fiend,8,5,5,1.0000,100.00
-hero_advantage,positive,Shadow Fiend,10,0,0,0.0000,0.00
-hero_advantage,negative,Shadow Fiend,5,27,17,0.6296,62.96
-hero_advantage,negative,Shadow Fiend,8,0,0,0.0000,0.00
-hero_advantage,negative,Shadow Fiend,10,0,0,0.0000,0.00
-hero_advantage,positive,Shadow Shaman,5,16,10,0.6250,62.50
-hero_advantage,positive,Shadow Shaman,8,0,0,0.0000,0.00
-hero_advantage,positive,Shadow Shaman,10,0,0,0.0000,0.00
-hero_advantage,negative,Shadow Shaman,5,71,36,0.5070,50.70
-hero_advantage,negative,Shadow Shaman,8,2,0,0.0000,0.00
-hero_advantage,negative,Shadow Shaman,10,0,0,0.0000,0.00
-hero_advantage,positive,Silencer,5,115,54,0.4696,46.96
-hero_advantage,positive,Silencer,8,1,1,1.0000,100.00
-hero_advantage,positive,Silencer,10,0,0,0.0000,0.00
-hero_advantage,negative,Silencer,5,250,147,0.5880,58.80
-hero_advantage,negative,Silencer,8,11,8,0.7273,72.73
-hero_advantage,negative,Silencer,10,2,1,0.5000,50.00
-hero_advantage,positive,Skywrath Mage,5,150,82,0.5467,54.67
-hero_advantage,positive,Skywrath Mage,8,10,6,0.6000,60.00
-hero_advantage,positive,Skywrath Mage,10,1,0,0.0000,0.00
-hero_advantage,negative,Skywrath Mage,5,437,270,0.6178,61.78
-hero_advantage,negative,Skywrath Mage,8,20,16,0.8000,80.00
-hero_advantage,negative,Skywrath Mage,10,0,0,0.0000,0.00
-hero_advantage,positive,Slardar,5,174,93,0.5345,53.45
-hero_advantage,positive,Slardar,8,5,4,0.8000,80.00
-hero_advantage,positive,Slardar,10,1,1,1.0000,100.00
-hero_advantage,negative,Slardar,5,541,274,0.5065,50.65
-hero_advantage,negative,Slardar,8,102,41,0.4020,40.20
-hero_advantage,negative,Slardar,10,23,7,0.3043,30.43
-hero_advantage,positive,Slark,5,884,499,0.5645,56.45
-hero_advantage,positive,Slark,8,243,154,0.6337,63.37
-hero_advantage,positive,Slark,10,65,48,0.7385,73.85
-hero_advantage,negative,Slark,5,547,299,0.5466,54.66
-hero_advantage,negative,Slark,8,121,64,0.5289,52.89
-hero_advantage,negative,Slark,10,27,17,0.6296,62.96
-hero_advantage,positive,Snapfire,5,66,31,0.4697,46.97
-hero_advantage,positive,Snapfire,8,0,0,0.0000,0.00
-hero_advantage,positive,Snapfire,10,0,0,0.0000,0.00
-hero_advantage,negative,Snapfire,5,42,25,0.5952,59.52
-hero_advantage,negative,Snapfire,8,0,0,0.0000,0.00
-hero_advantage,negative,Snapfire,10,0,0,0.0000,0.00
-hero_advantage,positive,Sniper,5,160,91,0.5687,56.88
-hero_advantage,positive,Sniper,8,4,1,0.2500,25.00
-hero_advantage,positive,Sniper,10,0,0,0.0000,0.00
-hero_advantage,negative,Sniper,5,174,89,0.5115,51.15
-hero_advantage,negative,Sniper,8,12,7,0.5833,58.33
-hero_advantage,negative,Sniper,10,0,0,0.0000,0.00
-hero_advantage,positive,Spectre,5,85,42,0.4941,49.41
-hero_advantage,positive,Spectre,8,4,4,1.0000,100.00
-hero_advantage,positive,Spectre,10,0,0,0.0000,0.00
-hero_advantage,negative,Spectre,5,181,111,0.6133,61.33
-hero_advantage,negative,Spectre,8,17,13,0.7647,76.47
-hero_advantage,negative,Spectre,10,3,2,0.6667,66.67
-hero_advantage,positive,Spirit Breaker,5,129,68,0.5271,52.71
-hero_advantage,positive,Spirit Breaker,8,6,5,0.8333,83.33
-hero_advantage,positive,Spirit Breaker,10,0,0,0.0000,0.00
-hero_advantage,negative,Spirit Breaker,5,258,131,0.5078,50.78
-hero_advantage,negative,Spirit Breaker,8,4,2,0.5000,50.00
-hero_advantage,negative,Spirit Breaker,10,0,0,0.0000,0.00
-hero_advantage,positive,Storm Spirit,5,680,377,0.5544,55.44
-hero_advantage,positive,Storm Spirit,8,29,18,0.6207,62.07
-hero_advantage,positive,Storm Spirit,10,1,0,0.0000,0.00
-hero_advantage,negative,Storm Spirit,5,262,135,0.5153,51.53
-hero_advantage,negative,Storm Spirit,8,17,13,0.7647,76.47
-hero_advantage,negative,Storm Spirit,10,2,2,1.0000,100.00
-hero_advantage,positive,Sven,5,556,288,0.5180,51.80
-hero_advantage,positive,Sven,8,105,56,0.5333,53.33
-hero_advantage,positive,Sven,10,33,16,0.4848,48.48
-hero_advantage,negative,Sven,5,301,143,0.4751,47.51
-hero_advantage,negative,Sven,8,36,15,0.4167,41.67
-hero_advantage,negative,Sven,10,8,7,0.8750,87.50
-hero_advantage,positive,Techies,5,108,45,0.4167,41.67
-hero_advantage,positive,Techies,8,0,0,0.0000,0.00
-hero_advantage,positive,Techies,10,0,0,0.0000,0.00
-hero_advantage,negative,Techies,5,117,64,0.5470,54.70
-hero_advantage,negative,Techies,8,1,1,1.0000,100.00
-hero_advantage,negative,Techies,10,0,0,0.0000,0.00
-hero_advantage,positive,Templar Assassin,5,942,501,0.5318,53.18
-hero_advantage,positive,Templar Assassin,8,157,80,0.5096,50.96
-hero_advantage,positive,Templar Assassin,10,24,11,0.4583,45.83
-hero_advantage,negative,Templar Assassin,5,1666,872,0.5234,52.34
-hero_advantage,negative,Templar Assassin,8,437,248,0.5675,56.75
-hero_advantage,negative,Templar Assassin,10,134,72,0.5373,53.73
-hero_advantage,positive,Terrorblade,5,1702,901,0.5294,52.94
-hero_advantage,positive,Terrorblade,8,406,228,0.5616,56.16
-hero_advantage,positive,Terrorblade,10,120,68,0.5667,56.67
-hero_advantage,negative,Terrorblade,5,525,291,0.5543,55.43
-hero_advantage,negative,Terrorblade,8,99,64,0.6465,64.65
-hero_advantage,negative,Terrorblade,10,26,20,0.7692,76.92
-hero_advantage,positive,Tidehunter,5,751,379,0.5047,50.47
-hero_advantage,positive,Tidehunter,8,137,65,0.4745,47.45
-hero_advantage,positive,Tidehunter,10,32,15,0.4688,46.88
-hero_advantage,negative,Tidehunter,5,246,133,0.5407,54.07
-hero_advantage,negative,Tidehunter,8,20,14,0.7000,70.00
-hero_advantage,negative,Tidehunter,10,3,3,1.0000,100.00
-hero_advantage,positive,Timbersaw,5,894,465,0.5201,52.01
-hero_advantage,positive,Timbersaw,8,107,54,0.5047,50.47
-hero_advantage,positive,Timbersaw,10,20,10,0.5000,50.00
-hero_advantage,negative,Timbersaw,5,898,505,0.5624,56.24
-hero_advantage,negative,Timbersaw,8,162,94,0.5802,58.02
-hero_advantage,negative,Timbersaw,10,46,31,0.6739,67.39
-hero_advantage,positive,Tinker,5,270,116,0.4296,42.96
-hero_advantage,positive,Tinker,8,27,10,0.3704,37.04
-hero_advantage,positive,Tinker,10,0,0,0.0000,0.00
-hero_advantage,negative,Tinker,5,10,6,0.6000,60.00
-hero_advantage,negative,Tinker,8,0,0,0.0000,0.00
-hero_advantage,negative,Tinker,10,0,0,0.0000,0.00
-hero_advantage,positive,Tiny,5,811,443,0.5462,54.62
-hero_advantage,positive,Tiny,8,17,12,0.7059,70.59
-hero_advantage,positive,Tiny,10,0,0,0.0000,0.00
-hero_advantage,negative,Tiny,5,75,33,0.4400,44.00
-hero_advantage,negative,Tiny,8,0,0,0.0000,0.00
-hero_advantage,negative,Tiny,10,0,0,0.0000,0.00
-hero_advantage,positive,Treant Protector,5,106,59,0.5566,55.66
-hero_advantage,positive,Treant Protector,8,3,3,1.0000,100.00
-hero_advantage,positive,Treant Protector,10,0,0,0.0000,0.00
-hero_advantage,negative,Treant Protector,5,580,283,0.4879,48.79
-hero_advantage,negative,Treant Protector,8,149,77,0.5168,51.68
-hero_advantage,negative,Treant Protector,10,45,22,0.4889,48.89
-hero_advantage,positive,Troll Warlord,5,418,217,0.5191,51.91
-hero_advantage,positive,Troll Warlord,8,69,41,0.5942,59.42
-hero_advantage,positive,Troll Warlord,10,15,8,0.5333,53.33
-hero_advantage,negative,Troll Warlord,5,382,215,0.5628,56.28
-hero_advantage,negative,Troll Warlord,8,46,26,0.5652,56.52
-hero_advantage,negative,Troll Warlord,10,8,6,0.7500,75.00
-hero_advantage,positive,Tusk,5,188,103,0.5479,54.79
-hero_advantage,positive,Tusk,8,7,3,0.4286,42.86
-hero_advantage,positive,Tusk,10,0,0,0.0000,0.00
-hero_advantage,negative,Tusk,5,648,370,0.5710,57.10
-hero_advantage,negative,Tusk,8,61,37,0.6066,60.66
-hero_advantage,negative,Tusk,10,10,6,0.6000,60.00
-hero_advantage,positive,Underlord,5,665,341,0.5128,51.28
-hero_advantage,positive,Underlord,8,142,77,0.5423,54.23
-hero_advantage,positive,Underlord,10,25,14,0.5600,56.00
-hero_advantage,negative,Underlord,5,84,52,0.6190,61.90
-hero_advantage,negative,Underlord,8,9,5,0.5556,55.56
-hero_advantage,negative,Underlord,10,1,0,0.0000,0.00
-hero_advantage,positive,Undying,5,563,299,0.5311,53.11
-hero_advantage,positive,Undying,8,63,27,0.4286,42.86
-hero_advantage,positive,Undying,10,16,8,0.5000,50.00
-hero_advantage,negative,Undying,5,440,225,0.5114,51.14
-hero_advantage,negative,Undying,8,30,12,0.4000,40.00
-hero_advantage,negative,Undying,10,4,2,0.5000,50.00
-hero_advantage,positive,Ursa,5,292,159,0.5445,54.45
-hero_advantage,positive,Ursa,8,24,14,0.5833,58.33
-hero_advantage,positive,Ursa,10,2,2,1.0000,100.00
-hero_advantage,negative,Ursa,5,345,185,0.5362,53.62
-hero_advantage,negative,Ursa,8,21,12,0.5714,57.14
-hero_advantage,negative,Ursa,10,0,0,0.0000,0.00
-hero_advantage,positive,Vengeful Spirit,5,0,0,0.0000,0.00
-hero_advantage,positive,Vengeful Spirit,8,0,0,0.0000,0.00
-hero_advantage,positive,Vengeful Spirit,10,0,0,0.0000,0.00
-hero_advantage,negative,Vengeful Spirit,5,589,314,0.5331,53.31
-hero_advantage,negative,Vengeful Spirit,8,26,13,0.5000,50.00
-hero_advantage,negative,Vengeful Spirit,10,0,0,0.0000,0.00
-hero_advantage,positive,Venomancer,5,157,93,0.5924,59.24
-hero_advantage,positive,Venomancer,8,2,2,1.0000,100.00
-hero_advantage,positive,Venomancer,10,0,0,0.0000,0.00
-hero_advantage,negative,Venomancer,5,113,56,0.4956,49.56
-hero_advantage,negative,Venomancer,8,7,3,0.4286,42.86
-hero_advantage,negative,Venomancer,10,1,0,0.0000,0.00
-hero_advantage,positive,Viper,5,378,217,0.5741,57.41
-hero_advantage,positive,Viper,8,57,41,0.7193,71.93
-hero_advantage,positive,Viper,10,13,9,0.6923,69.23
-hero_advantage,negative,Viper,5,328,186,0.5671,56.71
-hero_advantage,negative,Viper,8,51,29,0.5686,56.86
-hero_advantage,negative,Viper,10,22,10,0.4545,45.45
-hero_advantage,positive,Visage,5,30,19,0.6333,63.33
-hero_advantage,positive,Visage,8,0,0,0.0000,0.00
-hero_advantage,positive,Visage,10,0,0,0.0000,0.00
-hero_advantage,negative,Visage,5,447,208,0.4653,46.53
-hero_advantage,negative,Visage,8,52,23,0.4423,44.23
-hero_advantage,negative,Visage,10,10,2,0.2000,20.00
-hero_advantage,positive,Void Spirit,5,51,22,0.4314,43.14
-hero_advantage,positive,Void Spirit,8,1,1,1.0000,100.00
-hero_advantage,positive,Void Spirit,10,0,0,0.0000,0.00
-hero_advantage,negative,Void Spirit,5,569,316,0.5554,55.54
-hero_advantage,negative,Void Spirit,8,45,26,0.5778,57.78
-hero_advantage,negative,Void Spirit,10,10,5,0.5000,50.00
-hero_advantage,positive,Warlock,5,177,94,0.5311,53.11
-hero_advantage,positive,Warlock,8,18,7,0.3889,38.89
-hero_advantage,positive,Warlock,10,3,1,0.3333,33.33
-hero_advantage,negative,Warlock,5,257,143,0.5564,55.64
-hero_advantage,negative,Warlock,8,22,12,0.5455,54.55
-hero_advantage,negative,Warlock,10,3,2,0.6667,66.67
-hero_advantage,positive,Weaver,5,672,346,0.5149,51.49
-hero_advantage,positive,Weaver,8,58,26,0.4483,44.83
-hero_advantage,positive,Weaver,10,6,0,0.0000,0.00
-hero_advantage,negative,Weaver,5,289,163,0.5640,56.40
-hero_advantage,negative,Weaver,8,26,14,0.5385,53.85
-hero_advantage,negative,Weaver,10,3,3,1.0000,100.00
-hero_advantage,positive,Windranger,5,192,95,0.4948,49.48
-hero_advantage,positive,Windranger,8,11,4,0.3636,36.36
-hero_advantage,positive,Windranger,10,0,0,0.0000,0.00
-hero_advantage,negative,Windranger,5,162,88,0.5432,54.32
-hero_advantage,negative,Windranger,8,1,1,1.0000,100.00
-hero_advantage,negative,Windranger,10,0,0,0.0000,0.00
-hero_advantage,positive,Winter Wyvern,5,179,82,0.4581,45.81
-hero_advantage,positive,Winter Wyvern,8,28,14,0.5000,50.00
-hero_advantage,positive,Winter Wyvern,10,11,3,0.2727,27.27
-hero_advantage,negative,Winter Wyvern,5,226,125,0.5531,55.31
-hero_advantage,negative,Winter Wyvern,8,9,3,0.3333,33.33
-hero_advantage,negative,Winter Wyvern,10,0,0,0.0000,0.00
-hero_advantage,positive,Witch Doctor,5,50,25,0.5000,50.00
-hero_advantage,positive,Witch Doctor,8,0,0,0.0000,0.00
-hero_advantage,positive,Witch Doctor,10,0,0,0.0000,0.00
-hero_advantage,negative,Witch Doctor,5,46,26,0.5652,56.52
-hero_advantage,negative,Witch Doctor,8,2,2,1.0000,100.00
-hero_advantage,negative,Witch Doctor,10,0,0,0.0000,0.00
-hero_advantage,positive,Wraith King,5,224,133,0.5938,59.38
-hero_advantage,positive,Wraith King,8,10,5,0.5000,50.00
-hero_advantage,positive,Wraith King,10,1,0,0.0000,0.00
-hero_advantage,negative,Wraith King,5,831,458,0.5511,55.11
-hero_advantage,negative,Wraith King,8,231,124,0.5368,53.68
-hero_advantage,negative,Wraith King,10,88,47,0.5341,53.41
-hero_advantage,positive,Zeus,5,70,33,0.4714,47.14
-hero_advantage,positive,Zeus,8,0,0,0.0000,0.00
-hero_advantage,positive,Zeus,10,0,0,0.0000,0.00
-hero_advantage,negative,Zeus,5,181,108,0.5967,59.67
-hero_advantage,negative,Zeus,8,7,6,0.8571,85.71
-hero_advantage,negative,Zeus,10,1,1,1.0000,100.00
+category,subcategory,role,threshold,total,correct,accuracy
+final_delta,,,5,67895,35973,0.5298
+final_delta,,,10,45157,24321,0.5386
+final_delta,,,15,27834,15220,0.5468
+final_delta,,,20,15971,8847,0.5539
+final_delta,,,25,8509,4804,0.5646
+final_delta,,,30,4427,2553,0.5767
+final_delta,,,35,2178,1221,0.5606
+final_delta,,,40,1064,591,0.5555
+final_delta,,,45,524,288,0.5496
+final_delta,,,50,266,154,0.5789
+role_advantage,positive,carry,5,18133,9521,0.5251
+role_advantage,positive,carry,8,4301,2342,0.5445
+role_advantage,positive,carry,10,1652,873,0.5285
+role_advantage,negative,carry,5,11700,6208,0.5306
+role_advantage,negative,carry,8,2940,1608,0.5469
+role_advantage,negative,carry,10,1250,685,0.5480
+role_advantage,positive,mid,5,11315,6110,0.5400
+role_advantage,positive,mid,8,1565,831,0.5310
+role_advantage,positive,mid,10,405,203,0.5012
+role_advantage,negative,mid,5,7507,4050,0.5395
+role_advantage,negative,mid,8,1274,722,0.5667
+role_advantage,negative,mid,10,442,255,0.5769
+role_advantage,positive,offlane,5,14250,7455,0.5232
+role_advantage,positive,offlane,8,3194,1702,0.5329
+role_advantage,positive,offlane,10,1197,631,0.5272
+role_advantage,negative,offlane,5,13107,6894,0.5260
+role_advantage,negative,offlane,8,3147,1662,0.5281
+role_advantage,negative,offlane,10,1351,725,0.5366
+role_advantage,positive,softsupport,5,7491,3875,0.5173
+role_advantage,positive,softsupport,8,963,498,0.5171
+role_advantage,positive,softsupport,10,262,143,0.5458
+role_advantage,negative,softsupport,5,5266,2786,0.5291
+role_advantage,negative,softsupport,8,663,343,0.5173
+role_advantage,negative,softsupport,10,234,124,0.5299
+role_advantage,positive,hardsupport,5,7716,4082,0.5290
+role_advantage,positive,hardsupport,8,1383,754,0.5452
+role_advantage,positive,hardsupport,10,666,369,0.5541
+role_advantage,negative,hardsupport,5,6848,3537,0.5165
+role_advantage,negative,hardsupport,8,1290,641,0.4969
+role_advantage,negative,hardsupport,10,575,295,0.5130
+hero_advantage,positive,Abaddon,5,103,58,0.5631
+hero_advantage,positive,Abaddon,8,12,9,0.7500
+hero_advantage,positive,Abaddon,10,2,1,0.5000
+hero_advantage,negative,Abaddon,5,686,366,0.5335
+hero_advantage,negative,Abaddon,8,115,71,0.6174
+hero_advantage,negative,Abaddon,10,28,17,0.6071
+hero_advantage,positive,Alchemist,5,87,51,0.5862
+hero_advantage,positive,Alchemist,8,2,1,0.5000
+hero_advantage,positive,Alchemist,10,0,0,0.0000
+hero_advantage,negative,Alchemist,5,39,21,0.5385
+hero_advantage,negative,Alchemist,8,0,0,0.0000
+hero_advantage,negative,Alchemist,10,0,0,0.0000
+hero_advantage,positive,Ancient Apparition,5,274,147,0.5365
+hero_advantage,positive,Ancient Apparition,8,58,37,0.6379
+hero_advantage,positive,Ancient Apparition,10,17,9,0.5294
+hero_advantage,negative,Ancient Apparition,5,84,45,0.5357
+hero_advantage,negative,Ancient Apparition,8,3,2,0.6667
+hero_advantage,negative,Ancient Apparition,10,0,0,0.0000
+hero_advantage,positive,Anti Mage,5,863,438,0.5075
+hero_advantage,positive,Anti Mage,8,475,252,0.5305
+hero_advantage,positive,Anti Mage,10,314,163,0.5191
+hero_advantage,negative,Anti Mage,5,397,210,0.5290
+hero_advantage,negative,Anti Mage,8,110,60,0.5455
+hero_advantage,negative,Anti Mage,10,43,24,0.5581
+hero_advantage,positive,Arc Warden,5,29,16,0.5517
+hero_advantage,positive,Arc Warden,8,3,3,1.0000
+hero_advantage,positive,Arc Warden,10,0,0,0.0000
+hero_advantage,negative,Arc Warden,5,198,122,0.6162
+hero_advantage,negative,Arc Warden,8,80,55,0.6875
+hero_advantage,negative,Arc Warden,10,45,30,0.6667
+hero_advantage,positive,Axe,5,530,258,0.4868
+hero_advantage,positive,Axe,8,57,30,0.5263
+hero_advantage,positive,Axe,10,9,5,0.5556
+hero_advantage,negative,Axe,5,314,172,0.5478
+hero_advantage,negative,Axe,8,25,13,0.5200
+hero_advantage,negative,Axe,10,3,1,0.3333
+hero_advantage,positive,Bane,5,341,201,0.5894
+hero_advantage,positive,Bane,8,11,6,0.5455
+hero_advantage,positive,Bane,10,0,0,0.0000
+hero_advantage,negative,Bane,5,543,272,0.5009
+hero_advantage,negative,Bane,8,201,105,0.5224
+hero_advantage,negative,Bane,10,99,57,0.5758
+hero_advantage,positive,Batrider,5,1108,592,0.5343
+hero_advantage,positive,Batrider,8,126,75,0.5952
+hero_advantage,positive,Batrider,10,14,11,0.7857
+hero_advantage,negative,Batrider,5,41,28,0.6829
+hero_advantage,negative,Batrider,8,1,1,1.0000
+hero_advantage,negative,Batrider,10,0,0,0.0000
+hero_advantage,positive,Beastmaster,5,1204,689,0.5723
+hero_advantage,positive,Beastmaster,8,247,146,0.5911
+hero_advantage,positive,Beastmaster,10,48,32,0.6667
+hero_advantage,negative,Beastmaster,5,1152,628,0.5451
+hero_advantage,negative,Beastmaster,8,399,234,0.5865
+hero_advantage,negative,Beastmaster,10,184,112,0.6087
+hero_advantage,positive,Bloodseeker,5,1452,726,0.5000
+hero_advantage,positive,Bloodseeker,8,420,221,0.5262
+hero_advantage,positive,Bloodseeker,10,116,52,0.4483
+hero_advantage,negative,Bloodseeker,5,727,367,0.5048
+hero_advantage,negative,Bloodseeker,8,332,158,0.4759
+hero_advantage,negative,Bloodseeker,10,204,90,0.4412
+hero_advantage,positive,Bounty Hunter,5,65,39,0.6000
+hero_advantage,positive,Bounty Hunter,8,0,0,0.0000
+hero_advantage,positive,Bounty Hunter,10,0,0,0.0000
+hero_advantage,negative,Bounty Hunter,5,109,66,0.6055
+hero_advantage,negative,Bounty Hunter,8,19,10,0.5263
+hero_advantage,negative,Bounty Hunter,10,1,1,1.0000
+hero_advantage,positive,Brewmaster,5,329,176,0.5350
+hero_advantage,positive,Brewmaster,8,41,23,0.5610
+hero_advantage,positive,Brewmaster,10,11,6,0.5455
+hero_advantage,negative,Brewmaster,5,788,398,0.5051
+hero_advantage,negative,Brewmaster,8,431,233,0.5406
+hero_advantage,negative,Brewmaster,10,265,138,0.5208
+hero_advantage,positive,Bristleback,5,1378,725,0.5261
+hero_advantage,positive,Bristleback,8,291,149,0.5120
+hero_advantage,positive,Bristleback,10,51,32,0.6275
+hero_advantage,negative,Bristleback,5,97,55,0.5670
+hero_advantage,negative,Bristleback,8,15,7,0.4667
+hero_advantage,negative,Bristleback,10,3,0,0.0000
+hero_advantage,positive,Broodmother,5,167,102,0.6108
+hero_advantage,positive,Broodmother,8,41,26,0.6341
+hero_advantage,positive,Broodmother,10,11,7,0.6364
+hero_advantage,negative,Broodmother,5,1238,567,0.4580
+hero_advantage,negative,Broodmother,8,595,292,0.4908
+hero_advantage,negative,Broodmother,10,334,166,0.4970
+hero_advantage,positive,Centaur Warrunner,5,338,175,0.5178
+hero_advantage,positive,Centaur Warrunner,8,101,56,0.5545
+hero_advantage,positive,Centaur Warrunner,10,29,17,0.5862
+hero_advantage,negative,Centaur Warrunner,5,572,284,0.4965
+hero_advantage,negative,Centaur Warrunner,8,41,21,0.5122
+hero_advantage,negative,Centaur Warrunner,10,2,0,0.0000
+hero_advantage,positive,Chaos Knight,5,643,301,0.4681
+hero_advantage,positive,Chaos Knight,8,310,144,0.4645
+hero_advantage,positive,Chaos Knight,10,194,86,0.4433
+hero_advantage,negative,Chaos Knight,5,1551,816,0.5261
+hero_advantage,negative,Chaos Knight,8,492,270,0.5488
+hero_advantage,negative,Chaos Knight,10,200,119,0.5950
+hero_advantage,positive,Chen,5,997,584,0.5858
+hero_advantage,positive,Chen,8,690,403,0.5841
+hero_advantage,positive,Chen,10,511,295,0.5773
+hero_advantage,negative,Chen,5,490,213,0.4347
+hero_advantage,negative,Chen,8,188,91,0.4840
+hero_advantage,negative,Chen,10,69,36,0.5217
+hero_advantage,positive,Clinkz,5,261,136,0.5211
+hero_advantage,positive,Clinkz,8,63,38,0.6032
+hero_advantage,positive,Clinkz,10,23,10,0.4348
+hero_advantage,negative,Clinkz,5,167,84,0.5030
+hero_advantage,negative,Clinkz,8,15,7,0.4667
+hero_advantage,negative,Clinkz,10,2,0,0.0000
+hero_advantage,positive,Clockwerk,5,187,116,0.6203
+hero_advantage,positive,Clockwerk,8,4,3,0.7500
+hero_advantage,positive,Clockwerk,10,0,0,0.0000
+hero_advantage,negative,Clockwerk,5,475,241,0.5074
+hero_advantage,negative,Clockwerk,8,9,5,0.5556
+hero_advantage,negative,Clockwerk,10,0,0,0.0000
+hero_advantage,positive,Crystal Maiden,5,1122,560,0.4991
+hero_advantage,positive,Crystal Maiden,8,115,54,0.4696
+hero_advantage,positive,Crystal Maiden,10,24,8,0.3333
+hero_advantage,negative,Crystal Maiden,5,55,31,0.5636
+hero_advantage,negative,Crystal Maiden,8,0,0,0.0000
+hero_advantage,negative,Crystal Maiden,10,0,0,0.0000
+hero_advantage,positive,Dark Seer,5,1250,669,0.5352
+hero_advantage,positive,Dark Seer,8,697,370,0.5308
+hero_advantage,positive,Dark Seer,10,469,247,0.5267
+hero_advantage,negative,Dark Seer,5,725,373,0.5145
+hero_advantage,negative,Dark Seer,8,231,121,0.5238
+hero_advantage,negative,Dark Seer,10,86,49,0.5698
+hero_advantage,positive,Dark Willow,5,665,317,0.4767
+hero_advantage,positive,Dark Willow,8,35,19,0.5429
+hero_advantage,positive,Dark Willow,10,4,2,0.5000
+hero_advantage,negative,Dark Willow,5,1,0,0.0000
+hero_advantage,negative,Dark Willow,8,0,0,0.0000
+hero_advantage,negative,Dark Willow,10,0,0,0.0000
+hero_advantage,positive,Dawnbreaker,5,293,151,0.5154
+hero_advantage,positive,Dawnbreaker,8,55,29,0.5273
+hero_advantage,positive,Dawnbreaker,10,12,6,0.5000
+hero_advantage,negative,Dawnbreaker,5,866,441,0.5092
+hero_advantage,negative,Dawnbreaker,8,54,24,0.4444
+hero_advantage,negative,Dawnbreaker,10,4,1,0.2500
+hero_advantage,positive,Dazzle,5,20,14,0.7000
+hero_advantage,positive,Dazzle,8,0,0,0.0000
+hero_advantage,positive,Dazzle,10,0,0,0.0000
+hero_advantage,negative,Dazzle,5,187,97,0.5187
+hero_advantage,negative,Dazzle,8,6,5,0.8333
+hero_advantage,negative,Dazzle,10,0,0,0.0000
+hero_advantage,positive,Death Prophet,5,461,261,0.5662
+hero_advantage,positive,Death Prophet,8,26,15,0.5769
+hero_advantage,positive,Death Prophet,10,2,1,0.5000
+hero_advantage,negative,Death Prophet,5,130,72,0.5538
+hero_advantage,negative,Death Prophet,8,2,2,1.0000
+hero_advantage,negative,Death Prophet,10,0,0,0.0000
+hero_advantage,positive,Disruptor,5,127,64,0.5039
+hero_advantage,positive,Disruptor,8,0,0,0.0000
+hero_advantage,positive,Disruptor,10,0,0,0.0000
+hero_advantage,negative,Disruptor,5,18,7,0.3889
+hero_advantage,negative,Disruptor,8,0,0,0.0000
+hero_advantage,negative,Disruptor,10,0,0,0.0000
+hero_advantage,positive,Doom,5,2961,1485,0.5015
+hero_advantage,positive,Doom,8,729,353,0.4842
+hero_advantage,positive,Doom,10,220,98,0.4455
+hero_advantage,negative,Doom,5,0,0,0.0000
+hero_advantage,negative,Doom,8,0,0,0.0000
+hero_advantage,negative,Doom,10,0,0,0.0000
+hero_advantage,positive,Dragon Knight,5,538,266,0.4944
+hero_advantage,positive,Dragon Knight,8,175,85,0.4857
+hero_advantage,positive,Dragon Knight,10,77,33,0.4286
+hero_advantage,negative,Dragon Knight,5,972,535,0.5504
+hero_advantage,negative,Dragon Knight,8,94,52,0.5532
+hero_advantage,negative,Dragon Knight,10,11,8,0.7273
+hero_advantage,positive,Drow Ranger,5,182,94,0.5165
+hero_advantage,positive,Drow Ranger,8,6,6,1.0000
+hero_advantage,positive,Drow Ranger,10,0,0,0.0000
+hero_advantage,negative,Drow Ranger,5,142,81,0.5704
+hero_advantage,negative,Drow Ranger,8,8,5,0.6250
+hero_advantage,negative,Drow Ranger,10,0,0,0.0000
+hero_advantage,positive,Earth Spirit,5,27,16,0.5926
+hero_advantage,positive,Earth Spirit,8,0,0,0.0000
+hero_advantage,positive,Earth Spirit,10,0,0,0.0000
+hero_advantage,negative,Earth Spirit,5,19,8,0.4211
+hero_advantage,negative,Earth Spirit,8,0,0,0.0000
+hero_advantage,negative,Earth Spirit,10,0,0,0.0000
+hero_advantage,positive,Earthshaker,5,550,248,0.4509
+hero_advantage,positive,Earthshaker,8,183,81,0.4426
+hero_advantage,positive,Earthshaker,10,70,33,0.4714
+hero_advantage,negative,Earthshaker,5,89,52,0.5843
+hero_advantage,negative,Earthshaker,8,0,0,0.0000
+hero_advantage,negative,Earthshaker,10,0,0,0.0000
+hero_advantage,positive,Elder Titan,5,399,204,0.5113
+hero_advantage,positive,Elder Titan,8,141,75,0.5319
+hero_advantage,positive,Elder Titan,10,71,41,0.5775
+hero_advantage,negative,Elder Titan,5,664,322,0.4849
+hero_advantage,negative,Elder Titan,8,419,206,0.4916
+hero_advantage,negative,Elder Titan,10,326,158,0.4847
+hero_advantage,positive,Ember Spirit,5,1422,754,0.5302
+hero_advantage,positive,Ember Spirit,8,178,100,0.5618
+hero_advantage,positive,Ember Spirit,10,26,17,0.6538
+hero_advantage,negative,Ember Spirit,5,648,373,0.5756
+hero_advantage,negative,Ember Spirit,8,127,71,0.5591
+hero_advantage,negative,Ember Spirit,10,42,21,0.5000
+hero_advantage,positive,Enchantress,5,656,335,0.5107
+hero_advantage,positive,Enchantress,8,102,54,0.5294
+hero_advantage,positive,Enchantress,10,41,24,0.5854
+hero_advantage,negative,Enchantress,5,255,127,0.4980
+hero_advantage,negative,Enchantress,8,14,2,0.1429
+hero_advantage,negative,Enchantress,10,1,0,0.0000
+hero_advantage,positive,Enigma,5,186,114,0.6129
+hero_advantage,positive,Enigma,8,3,3,1.0000
+hero_advantage,positive,Enigma,10,0,0,0.0000
+hero_advantage,negative,Enigma,5,365,157,0.4301
+hero_advantage,negative,Enigma,8,61,24,0.3934
+hero_advantage,negative,Enigma,10,13,6,0.4615
+hero_advantage,positive,Faceless Void,5,560,302,0.5393
+hero_advantage,positive,Faceless Void,8,58,31,0.5345
+hero_advantage,positive,Faceless Void,10,7,3,0.4286
+hero_advantage,negative,Faceless Void,5,103,66,0.6408
+hero_advantage,negative,Faceless Void,8,5,5,1.0000
+hero_advantage,negative,Faceless Void,10,1,1,1.0000
+hero_advantage,positive,Grimstroke,5,271,153,0.5646
+hero_advantage,positive,Grimstroke,8,17,12,0.7059
+hero_advantage,positive,Grimstroke,10,0,0,0.0000
+hero_advantage,negative,Grimstroke,5,558,310,0.5556
+hero_advantage,negative,Grimstroke,8,139,83,0.5971
+hero_advantage,negative,Grimstroke,10,52,35,0.6731
+hero_advantage,positive,Gyrocopter,5,1002,484,0.4830
+hero_advantage,positive,Gyrocopter,8,112,56,0.5000
+hero_advantage,positive,Gyrocopter,10,13,4,0.3077
+hero_advantage,negative,Gyrocopter,5,0,0,0.0000
+hero_advantage,negative,Gyrocopter,8,0,0,0.0000
+hero_advantage,negative,Gyrocopter,10,0,0,0.0000
+hero_advantage,positive,Hoodwink,5,77,40,0.5195
+hero_advantage,positive,Hoodwink,8,0,0,0.0000
+hero_advantage,positive,Hoodwink,10,0,0,0.0000
+hero_advantage,negative,Hoodwink,5,6,4,0.6667
+hero_advantage,negative,Hoodwink,8,0,0,0.0000
+hero_advantage,negative,Hoodwink,10,0,0,0.0000
+hero_advantage,positive,Huskar,5,596,341,0.5721
+hero_advantage,positive,Huskar,8,184,106,0.5761
+hero_advantage,positive,Huskar,10,76,43,0.5658
+hero_advantage,negative,Huskar,5,298,170,0.5705
+hero_advantage,negative,Huskar,8,86,50,0.5814
+hero_advantage,negative,Huskar,10,35,25,0.7143
+hero_advantage,positive,Invoker,5,31,18,0.5806
+hero_advantage,positive,Invoker,8,0,0,0.0000
+hero_advantage,positive,Invoker,10,0,0,0.0000
+hero_advantage,negative,Invoker,5,198,102,0.5152
+hero_advantage,negative,Invoker,8,3,2,0.6667
+hero_advantage,negative,Invoker,10,0,0,0.0000
+hero_advantage,positive,Io,5,146,82,0.5616
+hero_advantage,positive,Io,8,17,7,0.4118
+hero_advantage,positive,Io,10,1,0,0.0000
+hero_advantage,negative,Io,5,357,176,0.4930
+hero_advantage,negative,Io,8,32,10,0.3125
+hero_advantage,negative,Io,10,4,2,0.5000
+hero_advantage,positive,Jakiro,5,264,125,0.4735
+hero_advantage,positive,Jakiro,8,10,4,0.4000
+hero_advantage,positive,Jakiro,10,2,1,0.5000
+hero_advantage,negative,Jakiro,5,8,4,0.5000
+hero_advantage,negative,Jakiro,8,0,0,0.0000
+hero_advantage,negative,Jakiro,10,0,0,0.0000
+hero_advantage,positive,Juggernaut,5,469,244,0.5203
+hero_advantage,positive,Juggernaut,8,58,30,0.5172
+hero_advantage,positive,Juggernaut,10,11,9,0.8182
+hero_advantage,negative,Juggernaut,5,152,78,0.5132
+hero_advantage,negative,Juggernaut,8,5,4,0.8000
+hero_advantage,negative,Juggernaut,10,0,0,0.0000
+hero_advantage,positive,Keeper Of The Light,5,878,489,0.5569
+hero_advantage,positive,Keeper Of The Light,8,111,60,0.5405
+hero_advantage,positive,Keeper Of The Light,10,7,3,0.4286
+hero_advantage,negative,Keeper Of The Light,5,672,349,0.5193
+hero_advantage,negative,Keeper Of The Light,8,281,152,0.5409
+hero_advantage,negative,Keeper Of The Light,10,150,81,0.5400
+hero_advantage,positive,Kez,5,0,0,0.0000
+hero_advantage,positive,Kez,8,0,0,0.0000
+hero_advantage,positive,Kez,10,0,0,0.0000
+hero_advantage,negative,Kez,5,0,0,0.0000
+hero_advantage,negative,Kez,8,0,0,0.0000
+hero_advantage,negative,Kez,10,0,0,0.0000
+hero_advantage,positive,Kunkka,5,297,149,0.5017
+hero_advantage,positive,Kunkka,8,10,6,0.6000
+hero_advantage,positive,Kunkka,10,2,1,0.5000
+hero_advantage,negative,Kunkka,5,106,57,0.5377
+hero_advantage,negative,Kunkka,8,3,2,0.6667
+hero_advantage,negative,Kunkka,10,0,0,0.0000
+hero_advantage,positive,Legion Commander,5,328,184,0.5610
+hero_advantage,positive,Legion Commander,8,20,17,0.8500
+hero_advantage,positive,Legion Commander,10,1,1,1.0000
+hero_advantage,negative,Legion Commander,5,907,487,0.5369
+hero_advantage,negative,Legion Commander,8,125,64,0.5120
+hero_advantage,negative,Legion Commander,10,31,15,0.4839
+hero_advantage,positive,Leshrac,5,143,77,0.5385
+hero_advantage,positive,Leshrac,8,5,4,0.8000
+hero_advantage,positive,Leshrac,10,0,0,0.0000
+hero_advantage,negative,Leshrac,5,651,322,0.4946
+hero_advantage,negative,Leshrac,8,100,54,0.5400
+hero_advantage,negative,Leshrac,10,25,16,0.6400
+hero_advantage,positive,Lich,5,15,9,0.6000
+hero_advantage,positive,Lich,8,0,0,0.0000
+hero_advantage,positive,Lich,10,0,0,0.0000
+hero_advantage,negative,Lich,5,66,31,0.4697
+hero_advantage,negative,Lich,8,0,0,0.0000
+hero_advantage,negative,Lich,10,0,0,0.0000
+hero_advantage,positive,Lifestealer,5,581,303,0.5215
+hero_advantage,positive,Lifestealer,8,86,43,0.5000
+hero_advantage,positive,Lifestealer,10,16,6,0.3750
+hero_advantage,negative,Lifestealer,5,665,356,0.5353
+hero_advantage,negative,Lifestealer,8,131,68,0.5191
+hero_advantage,negative,Lifestealer,10,28,23,0.8214
+hero_advantage,positive,Lina,5,514,265,0.5156
+hero_advantage,positive,Lina,8,51,27,0.5294
+hero_advantage,positive,Lina,10,8,3,0.3750
+hero_advantage,negative,Lina,5,6,4,0.6667
+hero_advantage,negative,Lina,8,0,0,0.0000
+hero_advantage,negative,Lina,10,0,0,0.0000
+hero_advantage,positive,Lion,5,18,12,0.6667
+hero_advantage,positive,Lion,8,0,0,0.0000
+hero_advantage,positive,Lion,10,0,0,0.0000
+hero_advantage,negative,Lion,5,50,29,0.5800
+hero_advantage,negative,Lion,8,0,0,0.0000
+hero_advantage,negative,Lion,10,0,0,0.0000
+hero_advantage,positive,Lone Druid,5,79,41,0.5190
+hero_advantage,positive,Lone Druid,8,10,5,0.5000
+hero_advantage,positive,Lone Druid,10,0,0,0.0000
+hero_advantage,negative,Lone Druid,5,425,207,0.4871
+hero_advantage,negative,Lone Druid,8,109,60,0.5505
+hero_advantage,negative,Lone Druid,10,27,14,0.5185
+hero_advantage,positive,Luna,5,267,137,0.5131
+hero_advantage,positive,Luna,8,7,4,0.5714
+hero_advantage,positive,Luna,10,0,0,0.0000
+hero_advantage,negative,Luna,5,95,51,0.5368
+hero_advantage,negative,Luna,8,0,0,0.0000
+hero_advantage,negative,Luna,10,0,0,0.0000
+hero_advantage,positive,Lycan,5,610,347,0.5689
+hero_advantage,positive,Lycan,8,232,130,0.5603
+hero_advantage,positive,Lycan,10,119,63,0.5294
+hero_advantage,negative,Lycan,5,886,414,0.4673
+hero_advantage,negative,Lycan,8,423,204,0.4823
+hero_advantage,negative,Lycan,10,255,130,0.5098
+hero_advantage,positive,Magnus,5,115,54,0.4696
+hero_advantage,positive,Magnus,8,0,0,0.0000
+hero_advantage,positive,Magnus,10,0,0,0.0000
+hero_advantage,negative,Magnus,5,100,56,0.5600
+hero_advantage,negative,Magnus,8,0,0,0.0000
+hero_advantage,negative,Magnus,10,0,0,0.0000
+hero_advantage,positive,Marci,5,275,147,0.5345
+hero_advantage,positive,Marci,8,13,9,0.6923
+hero_advantage,positive,Marci,10,1,1,1.0000
+hero_advantage,negative,Marci,5,234,128,0.5470
+hero_advantage,negative,Marci,8,11,4,0.3636
+hero_advantage,negative,Marci,10,1,1,1.0000
+hero_advantage,positive,Mars,5,322,158,0.4907
+hero_advantage,positive,Mars,8,9,3,0.3333
+hero_advantage,positive,Mars,10,0,0,0.0000
+hero_advantage,negative,Mars,5,117,64,0.5470
+hero_advantage,negative,Mars,8,0,0,0.0000
+hero_advantage,negative,Mars,10,0,0,0.0000
+hero_advantage,positive,Medusa,5,1021,597,0.5847
+hero_advantage,positive,Medusa,8,356,216,0.6067
+hero_advantage,positive,Medusa,10,137,85,0.6204
+hero_advantage,negative,Medusa,5,1210,635,0.5248
+hero_advantage,negative,Medusa,8,605,327,0.5405
+hero_advantage,negative,Medusa,10,362,195,0.5387
+hero_advantage,positive,Meepo,5,139,73,0.5252
+hero_advantage,positive,Meepo,8,48,32,0.6667
+hero_advantage,positive,Meepo,10,20,12,0.6000
+hero_advantage,negative,Meepo,5,365,201,0.5507
+hero_advantage,negative,Meepo,8,198,108,0.5455
+hero_advantage,negative,Meepo,10,121,63,0.5207
+hero_advantage,positive,Mirana,5,1,0,0.0000
+hero_advantage,positive,Mirana,8,0,0,0.0000
+hero_advantage,positive,Mirana,10,0,0,0.0000
+hero_advantage,negative,Mirana,5,21,12,0.5714
+hero_advantage,negative,Mirana,8,0,0,0.0000
+hero_advantage,negative,Mirana,10,0,0,0.0000
+hero_advantage,positive,Monkey King,5,2079,1085,0.5219
+hero_advantage,positive,Monkey King,8,383,193,0.5039
+hero_advantage,positive,Monkey King,10,75,41,0.5467
+hero_advantage,negative,Monkey King,5,70,37,0.5286
+hero_advantage,negative,Monkey King,8,4,4,1.0000
+hero_advantage,negative,Monkey King,10,0,0,0.0000
+hero_advantage,positive,Morphling,5,1531,804,0.5251
+hero_advantage,positive,Morphling,8,201,109,0.5423
+hero_advantage,positive,Morphling,10,28,17,0.6071
+hero_advantage,negative,Morphling,5,131,77,0.5878
+hero_advantage,negative,Morphling,8,4,2,0.5000
+hero_advantage,negative,Morphling,10,1,1,1.0000
+hero_advantage,positive,Muerta,5,645,332,0.5147
+hero_advantage,positive,Muerta,8,132,65,0.4924
+hero_advantage,positive,Muerta,10,32,12,0.3750
+hero_advantage,negative,Muerta,5,155,85,0.5484
+hero_advantage,negative,Muerta,8,5,2,0.4000
+hero_advantage,negative,Muerta,10,0,0,0.0000
+hero_advantage,positive,Naga Siren,5,1446,758,0.5242
+hero_advantage,positive,Naga Siren,8,873,473,0.5418
+hero_advantage,positive,Naga Siren,10,582,298,0.5120
+hero_advantage,negative,Naga Siren,5,483,214,0.4431
+hero_advantage,negative,Naga Siren,8,162,74,0.4568
+hero_advantage,negative,Naga Siren,10,48,25,0.5208
+hero_advantage,positive,Natures Prophet,5,107,59,0.5514
+hero_advantage,positive,Natures Prophet,8,1,0,0.0000
+hero_advantage,positive,Natures Prophet,10,0,0,0.0000
+hero_advantage,negative,Natures Prophet,5,378,194,0.5132
+hero_advantage,negative,Natures Prophet,8,17,7,0.4118
+hero_advantage,negative,Natures Prophet,10,1,0,0.0000
+hero_advantage,positive,Necrophos,5,410,207,0.5049
+hero_advantage,positive,Necrophos,8,98,53,0.5408
+hero_advantage,positive,Necrophos,10,31,18,0.5806
+hero_advantage,negative,Necrophos,5,408,208,0.5098
+hero_advantage,negative,Necrophos,8,87,44,0.5057
+hero_advantage,negative,Necrophos,10,26,13,0.5000
+hero_advantage,positive,Night Stalker,5,125,72,0.5760
+hero_advantage,positive,Night Stalker,8,3,1,0.3333
+hero_advantage,positive,Night Stalker,10,0,0,0.0000
+hero_advantage,negative,Night Stalker,5,829,445,0.5368
+hero_advantage,negative,Night Stalker,8,175,100,0.5714
+hero_advantage,negative,Night Stalker,10,45,30,0.6667
+hero_advantage,positive,Nyx Assassin,5,207,103,0.4976
+hero_advantage,positive,Nyx Assassin,8,29,10,0.3448
+hero_advantage,positive,Nyx Assassin,10,4,1,0.2500
+hero_advantage,negative,Nyx Assassin,5,261,143,0.5479
+hero_advantage,negative,Nyx Assassin,8,5,0,0.0000
+hero_advantage,negative,Nyx Assassin,10,0,0,0.0000
+hero_advantage,positive,Ogre Magi,5,116,58,0.5000
+hero_advantage,positive,Ogre Magi,8,0,0,0.0000
+hero_advantage,positive,Ogre Magi,10,0,0,0.0000
+hero_advantage,negative,Ogre Magi,5,41,17,0.4146
+hero_advantage,negative,Ogre Magi,8,1,0,0.0000
+hero_advantage,negative,Ogre Magi,10,0,0,0.0000
+hero_advantage,positive,Omniknight,5,147,73,0.4966
+hero_advantage,positive,Omniknight,8,36,20,0.5556
+hero_advantage,positive,Omniknight,10,16,11,0.6875
+hero_advantage,negative,Omniknight,5,222,116,0.5225
+hero_advantage,negative,Omniknight,8,20,12,0.6000
+hero_advantage,negative,Omniknight,10,1,1,1.0000
+hero_advantage,positive,Oracle,5,132,84,0.6364
+hero_advantage,positive,Oracle,8,12,6,0.5000
+hero_advantage,positive,Oracle,10,0,0,0.0000
+hero_advantage,negative,Oracle,5,221,120,0.5430
+hero_advantage,negative,Oracle,8,21,12,0.5714
+hero_advantage,negative,Oracle,10,3,0,0.0000
+hero_advantage,positive,Outworld Destroyer,5,2,1,0.5000
+hero_advantage,positive,Outworld Destroyer,8,0,0,0.0000
+hero_advantage,positive,Outworld Destroyer,10,0,0,0.0000
+hero_advantage,negative,Outworld Destroyer,5,1,1,1.0000
+hero_advantage,negative,Outworld Destroyer,8,1,1,1.0000
+hero_advantage,negative,Outworld Destroyer,10,0,0,0.0000
+hero_advantage,positive,Pangolier,5,977,529,0.5415
+hero_advantage,positive,Pangolier,8,66,29,0.4394
+hero_advantage,positive,Pangolier,10,8,4,0.5000
+hero_advantage,negative,Pangolier,5,632,355,0.5617
+hero_advantage,negative,Pangolier,8,77,41,0.5325
+hero_advantage,negative,Pangolier,10,14,5,0.3571
+hero_advantage,positive,Phantom Assassin,5,323,137,0.4241
+hero_advantage,positive,Phantom Assassin,8,18,10,0.5556
+hero_advantage,positive,Phantom Assassin,10,2,2,1.0000
+hero_advantage,negative,Phantom Assassin,5,233,126,0.5408
+hero_advantage,negative,Phantom Assassin,8,4,2,0.5000
+hero_advantage,negative,Phantom Assassin,10,0,0,0.0000
+hero_advantage,positive,Phantom Lancer,5,424,206,0.4858
+hero_advantage,positive,Phantom Lancer,8,170,88,0.5176
+hero_advantage,positive,Phantom Lancer,10,74,45,0.6081
+hero_advantage,negative,Phantom Lancer,5,447,256,0.5727
+hero_advantage,negative,Phantom Lancer,8,204,122,0.5980
+hero_advantage,negative,Phantom Lancer,10,118,70,0.5932
+hero_advantage,positive,Phoenix,5,608,301,0.4951
+hero_advantage,positive,Phoenix,8,39,17,0.4359
+hero_advantage,positive,Phoenix,10,5,2,0.4000
+hero_advantage,negative,Phoenix,5,162,88,0.5432
+hero_advantage,negative,Phoenix,8,7,3,0.4286
+hero_advantage,negative,Phoenix,10,2,1,0.5000
+hero_advantage,positive,Primal Beast,5,550,295,0.5364
+hero_advantage,positive,Primal Beast,8,43,21,0.4884
+hero_advantage,positive,Primal Beast,10,5,3,0.6000
+hero_advantage,negative,Primal Beast,5,106,52,0.4906
+hero_advantage,negative,Primal Beast,8,5,3,0.6000
+hero_advantage,negative,Primal Beast,10,0,0,0.0000
+hero_advantage,positive,Puck,5,482,296,0.6141
+hero_advantage,positive,Puck,8,28,12,0.4286
+hero_advantage,positive,Puck,10,1,1,1.0000
+hero_advantage,negative,Puck,5,818,450,0.5501
+hero_advantage,negative,Puck,8,98,54,0.5510
+hero_advantage,negative,Puck,10,11,8,0.7273
+hero_advantage,positive,Pudge,5,369,177,0.4797
+hero_advantage,positive,Pudge,8,16,5,0.3125
+hero_advantage,positive,Pudge,10,0,0,0.0000
+hero_advantage,negative,Pudge,5,406,226,0.5567
+hero_advantage,negative,Pudge,8,8,7,0.8750
+hero_advantage,negative,Pudge,10,0,0,0.0000
+hero_advantage,positive,Pugna,5,488,285,0.5840
+hero_advantage,positive,Pugna,8,35,16,0.4571
+hero_advantage,positive,Pugna,10,4,1,0.2500
+hero_advantage,negative,Pugna,5,71,35,0.4930
+hero_advantage,negative,Pugna,8,0,0,0.0000
+hero_advantage,negative,Pugna,10,0,0,0.0000
+hero_advantage,positive,Queen Of Pain,5,884,463,0.5238
+hero_advantage,positive,Queen Of Pain,8,86,51,0.5930
+hero_advantage,positive,Queen Of Pain,10,15,7,0.4667
+hero_advantage,negative,Queen Of Pain,5,312,168,0.5385
+hero_advantage,negative,Queen Of Pain,8,29,14,0.4828
+hero_advantage,negative,Queen Of Pain,10,0,0,0.0000
+hero_advantage,positive,Razor,5,276,150,0.5435
+hero_advantage,positive,Razor,8,13,9,0.6923
+hero_advantage,positive,Razor,10,1,1,1.0000
+hero_advantage,negative,Razor,5,681,404,0.5932
+hero_advantage,negative,Razor,8,127,75,0.5906
+hero_advantage,negative,Razor,10,37,22,0.5946
+hero_advantage,positive,Riki,5,152,84,0.5526
+hero_advantage,positive,Riki,8,15,9,0.6000
+hero_advantage,positive,Riki,10,1,0,0.0000
+hero_advantage,negative,Riki,5,117,61,0.5214
+hero_advantage,negative,Riki,8,5,2,0.4000
+hero_advantage,negative,Riki,10,0,0,0.0000
+hero_advantage,positive,Ringmaster,5,45,29,0.6444
+hero_advantage,positive,Ringmaster,8,1,0,0.0000
+hero_advantage,positive,Ringmaster,10,0,0,0.0000
+hero_advantage,negative,Ringmaster,5,2,1,0.5000
+hero_advantage,negative,Ringmaster,8,0,0,0.0000
+hero_advantage,negative,Ringmaster,10,0,0,0.0000
+hero_advantage,positive,Rubick,5,1555,832,0.5350
+hero_advantage,positive,Rubick,8,185,103,0.5568
+hero_advantage,positive,Rubick,10,29,18,0.6207
+hero_advantage,negative,Rubick,5,591,316,0.5347
+hero_advantage,negative,Rubick,8,19,10,0.5263
+hero_advantage,negative,Rubick,10,0,0,0.0000
+hero_advantage,positive,Sand King,5,830,452,0.5446
+hero_advantage,positive,Sand King,8,219,123,0.5616
+hero_advantage,positive,Sand King,10,62,32,0.5161
+hero_advantage,negative,Sand King,5,293,156,0.5324
+hero_advantage,negative,Sand King,8,23,12,0.5217
+hero_advantage,negative,Sand King,10,8,5,0.6250
+hero_advantage,positive,Shadow Demon,5,740,368,0.4973
+hero_advantage,positive,Shadow Demon,8,137,68,0.4964
+hero_advantage,positive,Shadow Demon,10,31,20,0.6452
+hero_advantage,negative,Shadow Demon,5,152,78,0.5132
+hero_advantage,negative,Shadow Demon,8,7,4,0.5714
+hero_advantage,negative,Shadow Demon,10,0,0,0.0000
+hero_advantage,positive,Shadow Fiend,5,116,68,0.5862
+hero_advantage,positive,Shadow Fiend,8,5,5,1.0000
+hero_advantage,positive,Shadow Fiend,10,0,0,0.0000
+hero_advantage,negative,Shadow Fiend,5,27,17,0.6296
+hero_advantage,negative,Shadow Fiend,8,0,0,0.0000
+hero_advantage,negative,Shadow Fiend,10,0,0,0.0000
+hero_advantage,positive,Shadow Shaman,5,16,10,0.6250
+hero_advantage,positive,Shadow Shaman,8,0,0,0.0000
+hero_advantage,positive,Shadow Shaman,10,0,0,0.0000
+hero_advantage,negative,Shadow Shaman,5,71,36,0.5070
+hero_advantage,negative,Shadow Shaman,8,2,0,0.0000
+hero_advantage,negative,Shadow Shaman,10,0,0,0.0000
+hero_advantage,positive,Silencer,5,115,54,0.4696
+hero_advantage,positive,Silencer,8,1,1,1.0000
+hero_advantage,positive,Silencer,10,0,0,0.0000
+hero_advantage,negative,Silencer,5,250,147,0.5880
+hero_advantage,negative,Silencer,8,11,8,0.7273
+hero_advantage,negative,Silencer,10,2,1,0.5000
+hero_advantage,positive,Skywrath Mage,5,150,82,0.5467
+hero_advantage,positive,Skywrath Mage,8,10,6,0.6000
+hero_advantage,positive,Skywrath Mage,10,1,0,0.0000
+hero_advantage,negative,Skywrath Mage,5,437,270,0.6178
+hero_advantage,negative,Skywrath Mage,8,20,16,0.8000
+hero_advantage,negative,Skywrath Mage,10,0,0,0.0000
+hero_advantage,positive,Slardar,5,174,93,0.5345
+hero_advantage,positive,Slardar,8,5,4,0.8000
+hero_advantage,positive,Slardar,10,1,1,1.0000
+hero_advantage,negative,Slardar,5,541,274,0.5065
+hero_advantage,negative,Slardar,8,102,41,0.4020
+hero_advantage,negative,Slardar,10,23,7,0.3043
+hero_advantage,positive,Slark,5,884,499,0.5645
+hero_advantage,positive,Slark,8,243,154,0.6337
+hero_advantage,positive,Slark,10,65,48,0.7385
+hero_advantage,negative,Slark,5,547,299,0.5466
+hero_advantage,negative,Slark,8,121,64,0.5289
+hero_advantage,negative,Slark,10,27,17,0.6296
+hero_advantage,positive,Snapfire,5,66,31,0.4697
+hero_advantage,positive,Snapfire,8,0,0,0.0000
+hero_advantage,positive,Snapfire,10,0,0,0.0000
+hero_advantage,negative,Snapfire,5,42,25,0.5952
+hero_advantage,negative,Snapfire,8,0,0,0.0000
+hero_advantage,negative,Snapfire,10,0,0,0.0000
+hero_advantage,positive,Sniper,5,160,91,0.5687
+hero_advantage,positive,Sniper,8,4,1,0.2500
+hero_advantage,positive,Sniper,10,0,0,0.0000
+hero_advantage,negative,Sniper,5,174,89,0.5115
+hero_advantage,negative,Sniper,8,12,7,0.5833
+hero_advantage,negative,Sniper,10,0,0,0.0000
+hero_advantage,positive,Spectre,5,85,42,0.4941
+hero_advantage,positive,Spectre,8,4,4,1.0000
+hero_advantage,positive,Spectre,10,0,0,0.0000
+hero_advantage,negative,Spectre,5,181,111,0.6133
+hero_advantage,negative,Spectre,8,17,13,0.7647
+hero_advantage,negative,Spectre,10,3,2,0.6667
+hero_advantage,positive,Spirit Breaker,5,129,68,0.5271
+hero_advantage,positive,Spirit Breaker,8,6,5,0.8333
+hero_advantage,positive,Spirit Breaker,10,0,0,0.0000
+hero_advantage,negative,Spirit Breaker,5,258,131,0.5078
+hero_advantage,negative,Spirit Breaker,8,4,2,0.5000
+hero_advantage,negative,Spirit Breaker,10,0,0,0.0000
+hero_advantage,positive,Storm Spirit,5,680,377,0.5544
+hero_advantage,positive,Storm Spirit,8,29,18,0.6207
+hero_advantage,positive,Storm Spirit,10,1,0,0.0000
+hero_advantage,negative,Storm Spirit,5,262,135,0.5153
+hero_advantage,negative,Storm Spirit,8,17,13,0.7647
+hero_advantage,negative,Storm Spirit,10,2,2,1.0000
+hero_advantage,positive,Sven,5,556,288,0.5180
+hero_advantage,positive,Sven,8,105,56,0.5333
+hero_advantage,positive,Sven,10,33,16,0.4848
+hero_advantage,negative,Sven,5,301,143,0.4751
+hero_advantage,negative,Sven,8,36,15,0.4167
+hero_advantage,negative,Sven,10,8,7,0.8750
+hero_advantage,positive,Techies,5,108,45,0.4167
+hero_advantage,positive,Techies,8,0,0,0.0000
+hero_advantage,positive,Techies,10,0,0,0.0000
+hero_advantage,negative,Techies,5,117,64,0.5470
+hero_advantage,negative,Techies,8,1,1,1.0000
+hero_advantage,negative,Techies,10,0,0,0.0000
+hero_advantage,positive,Templar Assassin,5,942,501,0.5318
+hero_advantage,positive,Templar Assassin,8,157,80,0.5096
+hero_advantage,positive,Templar Assassin,10,24,11,0.4583
+hero_advantage,negative,Templar Assassin,5,1666,872,0.5234
+hero_advantage,negative,Templar Assassin,8,437,248,0.5675
+hero_advantage,negative,Templar Assassin,10,134,72,0.5373
+hero_advantage,positive,Terrorblade,5,1702,901,0.5294
+hero_advantage,positive,Terrorblade,8,406,228,0.5616
+hero_advantage,positive,Terrorblade,10,120,68,0.5667
+hero_advantage,negative,Terrorblade,5,525,291,0.5543
+hero_advantage,negative,Terrorblade,8,99,64,0.6465
+hero_advantage,negative,Terrorblade,10,26,20,0.7692
+hero_advantage,positive,Tidehunter,5,751,379,0.5047
+hero_advantage,positive,Tidehunter,8,137,65,0.4745
+hero_advantage,positive,Tidehunter,10,32,15,0.4688
+hero_advantage,negative,Tidehunter,5,246,133,0.5407
+hero_advantage,negative,Tidehunter,8,20,14,0.7000
+hero_advantage,negative,Tidehunter,10,3,3,1.0000
+hero_advantage,positive,Timbersaw,5,894,465,0.5201
+hero_advantage,positive,Timbersaw,8,107,54,0.5047
+hero_advantage,positive,Timbersaw,10,20,10,0.5000
+hero_advantage,negative,Timbersaw,5,898,505,0.5624
+hero_advantage,negative,Timbersaw,8,162,94,0.5802
+hero_advantage,negative,Timbersaw,10,46,31,0.6739
+hero_advantage,positive,Tinker,5,270,116,0.4296
+hero_advantage,positive,Tinker,8,27,10,0.3704
+hero_advantage,positive,Tinker,10,0,0,0.0000
+hero_advantage,negative,Tinker,5,10,6,0.6000
+hero_advantage,negative,Tinker,8,0,0,0.0000
+hero_advantage,negative,Tinker,10,0,0,0.0000
+hero_advantage,positive,Tiny,5,811,443,0.5462
+hero_advantage,positive,Tiny,8,17,12,0.7059
+hero_advantage,positive,Tiny,10,0,0,0.0000
+hero_advantage,negative,Tiny,5,75,33,0.4400
+hero_advantage,negative,Tiny,8,0,0,0.0000
+hero_advantage,negative,Tiny,10,0,0,0.0000
+hero_advantage,positive,Treant Protector,5,106,59,0.5566
+hero_advantage,positive,Treant Protector,8,3,3,1.0000
+hero_advantage,positive,Treant Protector,10,0,0,0.0000
+hero_advantage,negative,Treant Protector,5,580,283,0.4879
+hero_advantage,negative,Treant Protector,8,149,77,0.5168
+hero_advantage,negative,Treant Protector,10,45,22,0.4889
+hero_advantage,positive,Troll Warlord,5,418,217,0.5191
+hero_advantage,positive,Troll Warlord,8,69,41,0.5942
+hero_advantage,positive,Troll Warlord,10,15,8,0.5333
+hero_advantage,negative,Troll Warlord,5,382,215,0.5628
+hero_advantage,negative,Troll Warlord,8,46,26,0.5652
+hero_advantage,negative,Troll Warlord,10,8,6,0.7500
+hero_advantage,positive,Tusk,5,188,103,0.5479
+hero_advantage,positive,Tusk,8,7,3,0.4286
+hero_advantage,positive,Tusk,10,0,0,0.0000
+hero_advantage,negative,Tusk,5,648,370,0.5710
+hero_advantage,negative,Tusk,8,61,37,0.6066
+hero_advantage,negative,Tusk,10,10,6,0.6000
+hero_advantage,positive,Underlord,5,665,341,0.5128
+hero_advantage,positive,Underlord,8,142,77,0.5423
+hero_advantage,positive,Underlord,10,25,14,0.5600
+hero_advantage,negative,Underlord,5,84,52,0.6190
+hero_advantage,negative,Underlord,8,9,5,0.5556
+hero_advantage,negative,Underlord,10,1,0,0.0000
+hero_advantage,positive,Undying,5,563,299,0.5311
+hero_advantage,positive,Undying,8,63,27,0.4286
+hero_advantage,positive,Undying,10,16,8,0.5000
+hero_advantage,negative,Undying,5,440,225,0.5114
+hero_advantage,negative,Undying,8,30,12,0.4000
+hero_advantage,negative,Undying,10,4,2,0.5000
+hero_advantage,positive,Ursa,5,292,159,0.5445
+hero_advantage,positive,Ursa,8,24,14,0.5833
+hero_advantage,positive,Ursa,10,2,2,1.0000
+hero_advantage,negative,Ursa,5,345,185,0.5362
+hero_advantage,negative,Ursa,8,21,12,0.5714
+hero_advantage,negative,Ursa,10,0,0,0.0000
+hero_advantage,positive,Vengeful Spirit,5,0,0,0.0000
+hero_advantage,positive,Vengeful Spirit,8,0,0,0.0000
+hero_advantage,positive,Vengeful Spirit,10,0,0,0.0000
+hero_advantage,negative,Vengeful Spirit,5,589,314,0.5331
+hero_advantage,negative,Vengeful Spirit,8,26,13,0.5000
+hero_advantage,negative,Vengeful Spirit,10,0,0,0.0000
+hero_advantage,positive,Venomancer,5,157,93,0.5924
+hero_advantage,positive,Venomancer,8,2,2,1.0000
+hero_advantage,positive,Venomancer,10,0,0,0.0000
+hero_advantage,negative,Venomancer,5,113,56,0.4956
+hero_advantage,negative,Venomancer,8,7,3,0.4286
+hero_advantage,negative,Venomancer,10,1,0,0.0000
+hero_advantage,positive,Viper,5,378,217,0.5741
+hero_advantage,positive,Viper,8,57,41,0.7193
+hero_advantage,positive,Viper,10,13,9,0.6923
+hero_advantage,negative,Viper,5,328,186,0.5671
+hero_advantage,negative,Viper,8,51,29,0.5686
+hero_advantage,negative,Viper,10,22,10,0.4545
+hero_advantage,positive,Visage,5,30,19,0.6333
+hero_advantage,positive,Visage,8,0,0,0.0000
+hero_advantage,positive,Visage,10,0,0,0.0000
+hero_advantage,negative,Visage,5,447,208,0.4653
+hero_advantage,negative,Visage,8,52,23,0.4423
+hero_advantage,negative,Visage,10,10,2,0.2000
+hero_advantage,positive,Void Spirit,5,51,22,0.4314
+hero_advantage,positive,Void Spirit,8,1,1,1.0000
+hero_advantage,positive,Void Spirit,10,0,0,0.0000
+hero_advantage,negative,Void Spirit,5,569,316,0.5554
+hero_advantage,negative,Void Spirit,8,45,26,0.5778
+hero_advantage,negative,Void Spirit,10,10,5,0.5000
+hero_advantage,positive,Warlock,5,177,94,0.5311
+hero_advantage,positive,Warlock,8,18,7,0.3889
+hero_advantage,positive,Warlock,10,3,1,0.3333
+hero_advantage,negative,Warlock,5,257,143,0.5564
+hero_advantage,negative,Warlock,8,22,12,0.5455
+hero_advantage,negative,Warlock,10,3,2,0.6667
+hero_advantage,positive,Weaver,5,672,346,0.5149
+hero_advantage,positive,Weaver,8,58,26,0.4483
+hero_advantage,positive,Weaver,10,6,0,0.0000
+hero_advantage,negative,Weaver,5,289,163,0.5640
+hero_advantage,negative,Weaver,8,26,14,0.5385
+hero_advantage,negative,Weaver,10,3,3,1.0000
+hero_advantage,positive,Windranger,5,192,95,0.4948
+hero_advantage,positive,Windranger,8,11,4,0.3636
+hero_advantage,positive,Windranger,10,0,0,0.0000
+hero_advantage,negative,Windranger,5,162,88,0.5432
+hero_advantage,negative,Windranger,8,1,1,1.0000
+hero_advantage,negative,Windranger,10,0,0,0.0000
+hero_advantage,positive,Winter Wyvern,5,179,82,0.4581
+hero_advantage,positive,Winter Wyvern,8,28,14,0.5000
+hero_advantage,positive,Winter Wyvern,10,11,3,0.2727
+hero_advantage,negative,Winter Wyvern,5,226,125,0.5531
+hero_advantage,negative,Winter Wyvern,8,9,3,0.3333
+hero_advantage,negative,Winter Wyvern,10,0,0,0.0000
+hero_advantage,positive,Witch Doctor,5,50,25,0.5000
+hero_advantage,positive,Witch Doctor,8,0,0,0.0000
+hero_advantage,positive,Witch Doctor,10,0,0,0.0000
+hero_advantage,negative,Witch Doctor,5,46,26,0.5652
+hero_advantage,negative,Witch Doctor,8,2,2,1.0000
+hero_advantage,negative,Witch Doctor,10,0,0,0.0000
+hero_advantage,positive,Wraith King,5,224,133,0.5938
+hero_advantage,positive,Wraith King,8,10,5,0.5000
+hero_advantage,positive,Wraith King,10,1,0,0.0000
+hero_advantage,negative,Wraith King,5,831,458,0.5511
+hero_advantage,negative,Wraith King,8,231,124,0.5368
+hero_advantage,negative,Wraith King,10,88,47,0.5341
+hero_advantage,positive,Zeus,5,70,33,0.4714
+hero_advantage,positive,Zeus,8,0,0,0.0000
+hero_advantage,positive,Zeus,10,0,0,0.0000
+hero_advantage,negative,Zeus,5,181,108,0.5967
+hero_advantage,negative,Zeus,8,7,6,0.8571
+hero_advantage,negative,Zeus,10,1,1,1.0000

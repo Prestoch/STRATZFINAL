@@ -224,12 +224,12 @@ function main() {
   }
 
   const out = [];
-  out.push(['category','subcategory','role','threshold','total','correct','accuracy','accuracy_pct'].join(','));
+  out.push(['category','subcategory','role','threshold','total','correct','accuracy'].join(','));
 
   for (const t of DELTA_THRESHOLDS) {
     const c = finalAcc.get(t);
     const acc = c.total > 0 ? (c.correct / c.total) : 0;
-    out.push(['final_delta','', '', t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+    out.push(['final_delta','', '', t, c.total, c.correct, acc.toFixed(4)].join(','));
   }
 
   for (const r of ROLES) {
@@ -238,12 +238,12 @@ function main() {
     for (const t of POS_THRESHOLDS) {
       const c = m1.get(t);
       const acc = c.total > 0 ? (c.correct / c.total) : 0;
-      out.push(['role_advantage','positive', r, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+      out.push(['role_advantage','positive', r, t, c.total, c.correct, acc.toFixed(4)].join(','));
     }
     for (const t of NEG_THRESHOLDS) {
       const c = m2.get(t);
       const acc = c.total > 0 ? (c.correct / c.total) : 0;
-      out.push(['role_advantage','negative', r, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+      out.push(['role_advantage','negative', r, t, c.total, c.correct, acc.toFixed(4)].join(','));
     }
   }
 
@@ -255,12 +255,12 @@ function main() {
     for (const t of POS_THRESHOLDS) {
       const c = mPos.get(t);
       const acc = c.total > 0 ? (c.correct / c.total) : 0;
-      out.push(['hero_advantage','positive', name, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+      out.push(['hero_advantage','positive', name, t, c.total, c.correct, acc.toFixed(4)].join(','));
     }
     for (const t of NEG_THRESHOLDS) {
       const c = mNeg.get(t);
       const acc = c.total > 0 ? (c.correct / c.total) : 0;
-      out.push(['hero_advantage','negative', name, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+      out.push(['hero_advantage','negative', name, t, c.total, c.correct, acc.toFixed(4)].join(','));
     }
   }
 
