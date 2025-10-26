@@ -120,7 +120,7 @@ function computeMatchStats(match, mapping, csData) {
   }
 
   const delta = nb1 - nb2;
-  return { delta, advR, advD, roleR, roleD };
+  return { delta, advR, advD, roleR, roleD, lineup, lineup2 };
 }
 
 function main() {
@@ -140,6 +140,19 @@ function main() {
     for (const t of NEG_THRESHOLDS) m2.set(t, { total: 0, correct: 0 });
     rolePos.set(r, m1);
     roleNeg.set(r, m2);
+  }
+
+  // Per-hero advantage accuracy (+ thresholds use POS_THRESHOLDS, - thresholds use NEG_THRESHOLDS)
+  // heroPos[h] and heroNeg[h] hold maps threshold -> { total, correct }
+  const heroPos = [];
+  const heroNeg = [];
+  for (let h = 0; h < csData.heroes.length; h++) {
+    const mPos = new Map();
+    const mNeg = new Map();
+    for (const t of POS_THRESHOLDS) mPos.set(t, { total: 0, correct: 0 });
+    for (const t of NEG_THRESHOLDS) mNeg.set(t, { total: 0, correct: 0 });
+    heroPos[h] = mPos;
+    heroNeg[h] = mNeg;
   }
 
   const keys = Object.keys(stratz);
@@ -163,22 +176,30 @@ function main() {
       }
     }
 
-    // role positive thresholds
+    // role positive thresholds and per-hero thresholds
     for (let i = 0; i < 5; i++) {
       const rRole = s.roleR[i];
       const dRole = s.roleD[i];
       const aR = s.advR[i];
       const aD = s.advD[i];
+      const idR = s.lineup[i];
+      const idD = s.lineup2[i];
       for (const t of POS_THRESHOLDS) {
         if (aR >= t) {
           const c = rolePos.get(rRole).get(t);
           c.total += 1;
           c.correct += radiantWin ? 1 : 0; // predict Radiant wins
+          const h = heroPos[idR].get(t);
+          h.total += 1;
+          h.correct += radiantWin ? 1 : 0;
         }
         if (aD >= t) {
           const c = rolePos.get(dRole).get(t);
           c.total += 1;
           c.correct += (!radiantWin) ? 1 : 0; // predict Dire wins
+          const h = heroPos[idD].get(t);
+          h.total += 1;
+          h.correct += (!radiantWin) ? 1 : 0;
         }
       }
       for (const t of NEG_THRESHOLDS) {
@@ -186,11 +207,17 @@ function main() {
           const c = roleNeg.get(rRole).get(t);
           c.total += 1;
           c.correct += (!radiantWin) ? 1 : 0; // predict Radiant loses
+          const h = heroNeg[idR].get(t);
+          h.total += 1;
+          h.correct += (!radiantWin) ? 1 : 0;
         }
         if (aD <= -t) {
           const c = roleNeg.get(dRole).get(t);
           c.total += 1;
           c.correct += radiantWin ? 1 : 0; // predict Dire loses
+          const h = heroNeg[idD].get(t);
+          h.total += 1;
+          h.correct += radiantWin ? 1 : 0;
         }
       }
     }
@@ -217,6 +244,23 @@ function main() {
       const c = m2.get(t);
       const acc = c.total > 0 ? (c.correct / c.total) : 0;
       out.push(['role_advantage','negative', r, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+    }
+  }
+
+  // Append per-hero advantage rows
+  for (let h = 0; h < csData.heroes.length; h++) {
+    const name = csData.heroes[h];
+    const mPos = heroPos[h];
+    const mNeg = heroNeg[h];
+    for (const t of POS_THRESHOLDS) {
+      const c = mPos.get(t);
+      const acc = c.total > 0 ? (c.correct / c.total) : 0;
+      out.push(['hero_advantage','positive', name, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
+    }
+    for (const t of NEG_THRESHOLDS) {
+      const c = mNeg.get(t);
+      const acc = c.total > 0 ? (c.correct / c.total) : 0;
+      out.push(['hero_advantage','negative', name, t, c.total, c.correct, acc.toFixed(4), (acc*100).toFixed(2)].join(','));
     }
   }
 
