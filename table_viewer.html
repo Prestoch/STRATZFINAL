@@ -129,7 +129,12 @@
           { title: 'threshold' },
           { title: 'total' },
           { title: 'correct' },
-          { title: 'accuracy' }
+          { title: 'accuracy', render: function(val, type) {
+              const num = Number(val);
+              if (type === 'display') return isFinite(num) ? (num * 100).toFixed(2) + '%': '';
+              return num;
+            }
+          }
         ],
         order: [[6, 'desc']],
         pageLength: 25
@@ -174,7 +179,7 @@
         $('#catFilter').val('');
         $('#subFilter').val('');
         $('#searchText').val('');
-        for (let i = 0; i < 8; i++) table.column(i).search('');
+        for (let i = 0; i < table.columns().count(); i++) table.column(i).search('');
         table.draw();
       });
       $('#reloadCsv').on('click', function() { loadData(); });
