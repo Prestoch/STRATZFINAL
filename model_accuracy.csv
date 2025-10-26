@@ -15,20 +15,20 @@ role_advantage,positive,carry,10,1652,873,0.5285,52.85
 role_advantage,negative,carry,5,11700,6208,0.5306,53.06
 role_advantage,negative,carry,8,2940,1608,0.5469,54.69
 role_advantage,negative,carry,10,1250,685,0.5480,54.80
-role_advantage,positive,mid,5,11315,6110,0.5400,54.00
+role_advantage,positive,mid,5,11313,6109,0.5400,54.00
 role_advantage,positive,mid,8,1565,831,0.5310,53.10
 role_advantage,positive,mid,10,405,203,0.5012,50.12
-role_advantage,negative,mid,5,7507,4050,0.5395,53.95
+role_advantage,negative,mid,5,7506,4049,0.5394,53.94
 role_advantage,negative,mid,8,1274,722,0.5667,56.67
 role_advantage,negative,mid,10,442,255,0.5769,57.69
-role_advantage,positive,offlane,5,14250,7455,0.5232,52.32
+role_advantage,positive,offlane,5,14249,7454,0.5231,52.31
 role_advantage,positive,offlane,8,3194,1702,0.5329,53.29
 role_advantage,positive,offlane,10,1197,631,0.5272,52.72
 role_advantage,negative,offlane,5,13107,6894,0.5260,52.60
 role_advantage,negative,offlane,8,3147,1662,0.5281,52.81
 role_advantage,negative,offlane,10,1351,725,0.5366,53.66
 role_advantage,positive,softsupport,5,7491,3875,0.5173,51.73
-role_advantage,positive,softsupport,8,963,498,0.5171,51.71
+role_advantage,positive,softsupport,8,962,497,0.5166,51.66
 role_advantage,positive,softsupport,10,262,143,0.5458,54.58
 role_advantage,negative,softsupport,5,5266,2786,0.5291,52.91
 role_advantage,negative,softsupport,8,663,343,0.5173,51.73
@@ -183,7 +183,7 @@ hero_advantage,positive,Dazzle,10,0,0,0.0000,0.00
 hero_advantage,negative,Dazzle,5,187,97,0.5187,51.87
 hero_advantage,negative,Dazzle,8,6,5,0.8333,83.33
 hero_advantage,negative,Dazzle,10,0,0,0.0000,0.00
-hero_advantage,positive,Death Prophet,5,461,261,0.5662,56.62
+hero_advantage,positive,Death Prophet,5,460,260,0.5652,56.52
 hero_advantage,positive,Death Prophet,8,26,15,0.5769,57.69
 hero_advantage,positive,Death Prophet,10,2,1,0.5000,50.00
 hero_advantage,negative,Death Prophet,5,130,72,0.5538,55.38
@@ -441,7 +441,7 @@ hero_advantage,positive,Natures Prophet,10,0,0,0.0000,0.00
 hero_advantage,negative,Natures Prophet,5,378,194,0.5132,51.32
 hero_advantage,negative,Natures Prophet,8,17,7,0.4118,41.18
 hero_advantage,negative,Natures Prophet,10,1,0,0.0000,0.00
-hero_advantage,positive,Necrophos,5,410,207,0.5049,50.49
+hero_advantage,positive,Necrophos,5,409,207,0.5061,50.61
 hero_advantage,positive,Necrophos,8,98,53,0.5408,54.08
 hero_advantage,positive,Necrophos,10,31,18,0.5806,58.06
 hero_advantage,negative,Necrophos,5,408,208,0.5098,50.98
@@ -534,7 +534,7 @@ hero_advantage,negative,Pugna,10,0,0,0.0000,0.00
 hero_advantage,positive,Queen Of Pain,5,884,463,0.5238,52.38
 hero_advantage,positive,Queen Of Pain,8,86,51,0.5930,59.30
 hero_advantage,positive,Queen Of Pain,10,15,7,0.4667,46.67
-hero_advantage,negative,Queen Of Pain,5,312,168,0.5385,53.85
+hero_advantage,negative,Queen Of Pain,5,311,167,0.5370,53.70
 hero_advantage,negative,Queen Of Pain,8,29,14,0.4828,48.28
 hero_advantage,negative,Queen Of Pain,10,0,0,0.0000,0.00
 hero_advantage,positive,Razor,5,276,150,0.5435,54.35
@@ -556,7 +556,7 @@ hero_advantage,negative,Ringmaster,5,2,1,0.5000,50.00
 hero_advantage,negative,Ringmaster,8,0,0,0.0000,0.00
 hero_advantage,negative,Ringmaster,10,0,0,0.0000,0.00
 hero_advantage,positive,Rubick,5,1555,832,0.5350,53.50
-hero_advantage,positive,Rubick,8,185,103,0.5568,55.68
+hero_advantage,positive,Rubick,8,184,102,0.5543,55.43
 hero_advantage,positive,Rubick,10,29,18,0.6207,62.07
 hero_advantage,negative,Rubick,5,591,316,0.5347,53.47
 hero_advantage,negative,Rubick,8,19,10,0.5263,52.63
@@ -597,7 +597,7 @@ hero_advantage,positive,Skywrath Mage,10,1,0,0.0000,0.00
 hero_advantage,negative,Skywrath Mage,5,437,270,0.6178,61.78
 hero_advantage,negative,Skywrath Mage,8,20,16,0.8000,80.00
 hero_advantage,negative,Skywrath Mage,10,0,0,0.0000,0.00
-hero_advantage,positive,Slardar,5,174,93,0.5345,53.45
+hero_advantage,positive,Slardar,5,173,92,0.5318,53.18
 hero_advantage,positive,Slardar,8,5,4,0.8000,80.00
 hero_advantage,positive,Slardar,10,1,1,1.0000,100.00
 hero_advantage,negative,Slardar,5,541,274,0.5065,50.65

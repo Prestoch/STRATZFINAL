@@ -185,7 +185,7 @@ function main() {
       const idR = s.lineup[i];
       const idD = s.lineup2[i];
       for (const t of POS_THRESHOLDS) {
-        if (aR >= t) {
+        if (aR > t) {
           const c = rolePos.get(rRole).get(t);
           c.total += 1;
           c.correct += radiantWin ? 1 : 0; // predict Radiant wins
@@ -193,7 +193,7 @@ function main() {
           h.total += 1;
           h.correct += radiantWin ? 1 : 0;
         }
-        if (aD >= t) {
+        if (aD > t) {
           const c = rolePos.get(dRole).get(t);
           c.total += 1;
           c.correct += (!radiantWin) ? 1 : 0; // predict Dire wins
@@ -203,7 +203,7 @@ function main() {
         }
       }
       for (const t of NEG_THRESHOLDS) {
-        if (aR <= -t) {
+        if (aR < -t) {
           const c = roleNeg.get(rRole).get(t);
           c.total += 1;
           c.correct += (!radiantWin) ? 1 : 0; // predict Radiant loses
@@ -211,7 +211,7 @@ function main() {
           h.total += 1;
           h.correct += (!radiantWin) ? 1 : 0;
         }
-        if (aD <= -t) {
+        if (aD < -t) {
           const c = roleNeg.get(dRole).get(t);
           c.total += 1;
           c.correct += radiantWin ? 1 : 0; // predict Dire loses
