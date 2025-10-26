@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Model Accuracy Viewer</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { padding: 24px; }
+    .container { max-width: 1200px; }
+    table.dataTable tbody tr:hover { background: #f7fbff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Model Accuracy CSV Viewer</h3>
+    <p class="text-muted">Loads <code>model_accuracy.csv</code> from the same directory. You can sort and filter.</p>
+    <div class="form-inline" style="margin-bottom:12px">
+      <label>Filter category:&nbsp;</label>
+      <select id="catFilter" class="form-control">
+        <option value="">All</option>
+        <option value="final_delta">final_delta</option>
+        <option value="role_advantage">role_advantage</option>
+        <option value="hero_advantage">hero_advantage</option>
+      </select>
+      <label style="margin-left:8px">Subcategory:&nbsp;</label>
+      <select id="subFilter" class="form-control">
+        <option value="">All</option>
+        <option value="positive">positive</option>
+        <option value="negative">negative</option>
+      </select>
+      <label style="margin-left:8px">Contains (role/hero):&nbsp;</label>
+      <input id="searchText" class="form-control" placeholder="e.g., Abaddon or carry" />
+      <button id="applyFilters" class="btn btn-default" style="margin-left:8px">Apply</button>
+      <button id="clearFilters" class="btn btn-default" style="margin-left:4px">Clear</button>
+    </div>
+    <div class="form-inline" style="margin:6px 0 14px 0">
+      <label>CSV URL (optional):&nbsp;</label>
+      <input id="csvUrl" class="form-control" style="min-width:440px" placeholder="https://raw.githubusercontent.com/<user>/<repo>/<branch>/model_accuracy.csv" />
+      <button id="reloadCsv" class="btn btn-default" style="margin-left:6px">Load CSV</button>
+      <span class="text-muted" style="margin-left:8px">On htmlpreview this will auto-resolve to raw.githubusercontent if left empty.</span>
+    </div>
+    <table id="accTable" class="table table-striped table-bordered" style="width:100%">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>subcategory</th>
+          <th>role</th>
+          <th>threshold</th>
+          <th>total</th>
+          <th>correct</th>
+          <th>accuracy</th>
+          <th>accuracy_pct</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap.min.js"></script>
+  <script>
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const header = lines[0].split(',');
+      return lines.slice(1).map(line => {
+        // simple CSV parse (no embedded commas expected)
+        const cols = line.split(',');
+        const obj = {};
+        for (let i = 0; i < header.length; i++) obj[header[i]] = cols[i];
+        return obj;
+      });
+    }
+
+    let table;
+
+    function deriveRawCsvUrlFromHtmlPreview() {
+      try {
+        const q = decodeURIComponent(window.location.search || '');
+        // q like '?https://github.com/<user>/<repo>/blob/<branch>/table_viewer.html'
+        const src = q.startsWith('?') ? q.substring(1) : q;
+        if (!src.startsWith('http')) return null;
+        const u = new URL(src);
+        if (u.hostname !== 'github.com') return null;
+        const parts = u.pathname.split('/').filter(Boolean);
+        // [user, repo, 'blob', branch, ...path]
+        const user = parts[0], repo = parts[1];
+        if (parts[2] !== 'blob') return null;
+        const branch = parts[3];
+        const rest = parts.slice(4); // path to this html
+        if (rest.length === 0) return null;
+        rest[rest.length - 1] = 'model_accuracy.csv';
+        return `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${rest.join('/')}`;
+      } catch (e) { return null; }
+    }
+
+    function pickCsvUrl() {
+      const override = document.getElementById('csvUrl').value.trim();
+      if (override) return override;
+      // Try same-directory first
+      const sameDir = 'model_accuracy.csv';
+      // If on htmlpreview, prefer raw github URL
+      if (location.hostname === 'htmlpreview.github.io') {
+        const raw = deriveRawCsvUrlFromHtmlPreview();
+        if (raw) return raw;
+      }
+      return sameDir;
+    }
+
+    function initTable(rows) {
+      const data = rows.map(r => [
+        r.category,
+        r.subcategory,
+        r.role,
+        Number(r.threshold),
+        Number(r.total),
+        Number(r.correct),
+        Number(r.accuracy),
+        Number(r.accuracy_pct)
+      ]);
+      if (table) { table.clear().rows.add(data).draw(); return; }
+      table = $('#accTable').DataTable({
+        data,
+        columns: [
+          { title: 'category' },
+          { title: 'subcategory' },
+          { title: 'role' },
+          { title: 'threshold' },
+          { title: 'total' },
+          { title: 'correct' },
+          { title: 'accuracy' },
+          { title: 'accuracy_pct' }
+        ],
+        order: [[7, 'desc']],
+        pageLength: 25
+      });
+    }
+
+    function loadData() {
+      const url = pickCsvUrl();
+      fetch(url)
+        .then(r => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.text(); })
+        .then(text => initTable(parseCSV(text)))
+        .catch(err => {
+          // Fallback: try alternate URL (raw) if first attempt failed and we didn't try raw
+          const raw = deriveRawCsvUrlFromHtmlPreview();
+          if (url !== 'model_accuracy.csv' && raw && url !== raw) {
+            fetch(raw)
+              .then(r => { if (!r.ok) throw new Error(r.status + ' ' + r.statusText); return r.text(); })
+              .then(text => initTable(parseCSV(text)))
+              .catch(e2 => alert('Failed to load CSV. Tried: ' + url + ' and ' + raw + '\n' + e2.message));
+          } else {
+            alert('Failed to load CSV from ' + url + '\n' + err.message);
+          }
+        });
+    }
+
+    function applyFilters() {
+      const cat = $('#catFilter').val();
+      const sub = $('#subFilter').val();
+      const txt = $('#searchText').val();
+      // Clear existing column searches
+      for (let i = 0; i < 8; i++) table.column(i).search('');
+      if (cat) table.column(0).search('^' + cat + '$', true, false);
+      if (sub) table.column(1).search('^' + sub + '$', true, false);
+      if (txt) table.column(2).search(txt, true, false);
+      table.draw();
+    }
+
+    $(function() {
+      loadData();
+      $('#applyFilters').on('click', applyFilters);
+      $('#clearFilters').on('click', function() {
+        $('#catFilter').val('');
+        $('#subFilter').val('');
+        $('#searchText').val('');
+        for (let i = 0; i < 8; i++) table.column(i).search('');
+        table.draw();
+      });
+      $('#reloadCsv').on('click', function() { loadData(); });
+    });
+  </script>
+</body>
+</html>
