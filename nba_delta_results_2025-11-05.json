@@ -1,0 +1,387 @@
+[
+  {
+    "matchup": "Philadelphia 76ers at Cleveland Cavaliers",
+    "date": "2025-11-06T00:00Z",
+    "home_team": {
+      "abbr": "CLE",
+      "name": "Cleveland Cavaliers",
+      "team_id": "1610612739"
+    },
+    "away_team": {
+      "abbr": "PHI",
+      "name": "Philadelphia 76ers",
+      "team_id": "1610612755"
+    },
+    "home_lineup": {
+      "entity_id": "1628378-1628386-1629631-1630241-1630596",
+      "name": "Donovan Mitchell, Jarrett Allen, De'Andre Hunter, Sam Merrill, Evan Mobley",
+      "off_poss": 46,
+      "def_poss": 45
+    },
+    "away_lineup": {
+      "entity_id": "1626162-1630178-1631133-1642845-203954",
+      "name": "Kelly Oubre Jr., Tyrese Maxey, Jabari Walker, VJ Edgecombe, Joel Embiid",
+      "off_poss": 60,
+      "def_poss": 58
+    },
+    "baseline_delta": 33.7481259370315,
+    "slot_adjustments": {
+      "pf": -2.14285714285715,
+      "pg": 3.11594202898551,
+      "sg": 1.12287160607455,
+      "sf": 0.598251265531524,
+      "c": 6.6213921901528
+    },
+    "final_delta": 43.0637258849188
+  },
+  {
+    "matchup": "Utah Jazz at Detroit Pistons",
+    "date": "2025-11-06T00:00Z",
+    "home_team": {
+      "abbr": "DET",
+      "name": "Detroit Pistons",
+      "team_id": "1610612765"
+    },
+    "away_team": {
+      "abbr": "UTAH",
+      "name": "Utah Jazz",
+      "team_id": "1610612762"
+    },
+    "home_lineup": {
+      "entity_id": "1629130-1630595-1631105-1641709-202699",
+      "name": "Duncan Robinson, Cade Cunningham, Jalen Duren, Ausar Thompson, Tobias Harris",
+      "off_poss": 125,
+      "def_poss": 125
+    },
+    "away_lineup": {
+      "entity_id": "1628374-1629004-1631117-1641718-1642271",
+      "name": "Lauri Markkanen, Svi Mykhailiuk, Walker Kessler, Keyonte George, Kyle Filipowski",
+      "off_poss": 103,
+      "def_poss": 100
+    },
+    "baseline_delta": -38.6932038834951,
+    "slot_adjustments": {
+      "pf": -9.04761904761905,
+      "pg": 0.217475728155339,
+      "sf": -12.6613929805419,
+      "c": -4.65840093882341,
+      "sg": -4.3135115475541
+    },
+    "final_delta": -69.1566526698783
+  },
+  {
+    "matchup": "Brooklyn Nets at Indiana Pacers",
+    "date": "2025-11-06T00:00Z",
+    "home_team": {
+      "abbr": "IND",
+      "name": "Indiana Pacers",
+      "team_id": "1610612754"
+    },
+    "away_team": {
+      "abbr": "BKN",
+      "name": "Brooklyn Nets",
+      "team_id": "1610612751"
+    },
+    "home_lineup": {
+      "entity_id": "1627783-1630174-1630543-1631245-1641716",
+      "name": "Pascal Siakam, Aaron Nesmith, Isaiah Jackson, Quenton Jackson, Jarace Walker",
+      "off_poss": 71,
+      "def_poss": 77
+    },
+    "away_lineup": {
+      "entity_id": "1629008-1629611-1629651-1630560-1642879",
+      "name": "Michael Porter Jr., Terance Mann, Nic Claxton, Cam Thomas, Ben Saraf",
+      "off_poss": 108,
+      "def_poss": 109
+    },
+    "baseline_delta": 56.5714911592932,
+    "slot_adjustments": {
+      "c": 0.340014316392269,
+      "sg": 1.02608695652174,
+      "sf": -6.82608695652174,
+      "pg": 6.3641105894627,
+      "pf": -5.71428571428572
+    },
+    "final_delta": 51.7613303508624
+  },
+  {
+    "matchup": "Washington Wizards at Boston Celtics",
+    "date": "2025-11-06T00:30Z",
+    "home_team": {
+      "abbr": "BOS",
+      "name": "Boston Celtics",
+      "team_id": "1610612738"
+    },
+    "away_team": {
+      "abbr": "WSH",
+      "name": "Washington Wizards",
+      "team_id": "1610612764"
+    },
+    "home_lineup": {
+      "entity_id": "1627759-1628401-1629674-1630202-1631169",
+      "name": "Jaylen Brown, Derrick White, Neemias Queta, Payton Pritchard, Josh Minott",
+      "off_poss": 99,
+      "def_poss": 101
+    },
+    "away_lineup": {
+      "entity_id": "1642259-1642267-1642273-203114-203468",
+      "name": "Alex Sarr, Bub Carrington, Kyshawn George, Khris Middleton, CJ McCollum",
+      "off_poss": 146,
+      "def_poss": 147
+    },
+    "baseline_delta": 31.6689384901588,
+    "slot_adjustments": {
+      "sg": 1.69794591399438,
+      "sf": -3.00724102260972,
+      "pf": 7.11237553342816,
+      "c": 11.8629908103592,
+      "pg": 1.57741801577418
+    },
+    "final_delta": 50.912427741105
+  },
+  {
+    "matchup": "Minnesota Timberwolves at New York Knicks",
+    "date": "2025-11-06T00:30Z",
+    "home_team": {
+      "abbr": "NY",
+      "name": "New York Knicks",
+      "team_id": "1610612752"
+    },
+    "away_team": {
+      "abbr": "MIN",
+      "name": "Minnesota Timberwolves",
+      "team_id": "1610612750"
+    },
+    "home_lineup": {
+      "entity_id": "1626157-1628384-1628404-1628969-1628973",
+      "name": "Karl-Anthony Towns, OG Anunoby, Josh Hart, Mikal Bridges, Jalen Brunson",
+      "off_poss": 67,
+      "def_poss": 67
+    },
+    "away_lineup": {
+      "entity_id": "1628978-1630183-201144-203497-203944",
+      "name": "Donte DiVincenzo, Jaden McDaniels, Mike Conley, Rudy Gobert, Julius Randle",
+      "off_poss": 130,
+      "def_poss": 132
+    },
+    "baseline_delta": 4.57850607104339,
+    "slot_adjustments": {
+      "c": 12.3809523809524,
+      "pg": 1.95177956371986,
+      "sg": 1.86204763377668,
+      "sf": -4.41540364986082,
+      "pf": -8.77061469265367
+    },
+    "final_delta": 7.58726730697783
+  },
+  {
+    "matchup": "Houston Rockets at Memphis Grizzlies",
+    "date": "2025-11-06T01:00Z",
+    "home_team": {
+      "abbr": "MEM",
+      "name": "Memphis Grizzlies",
+      "team_id": "1610612763"
+    },
+    "away_team": {
+      "abbr": "HOU",
+      "name": "Houston Rockets",
+      "team_id": "1610612745"
+    },
+    "home_lineup": {
+      "entity_id": "1628991-1629111-1629630-1642377-203484",
+      "name": "Jaren Jackson Jr., Jock Landale, Ja Morant, Jaylen Wells, Kentavious Caldwell-Pope",
+      "off_poss": 100,
+      "def_poss": 102
+    },
+    "away_lineup": {
+      "entity_id": "1629006-1630578-1631095-1641708-201142",
+      "name": "Josh Okogie, Alperen Sengun, Jabari Smith Jr., Amen Thompson, Kevin Durant",
+      "off_poss": 80,
+      "def_poss": 79
+    },
+    "baseline_delta": -33.9014643832217,
+    "slot_adjustments": {
+      "sg": 2.32772308669419,
+      "pg": -0.25,
+      "pf": -15.4761904761905,
+      "c": 0.994694960212201,
+      "sf": -20.0381073356621
+    },
+    "final_delta": -66.3433441481678
+  },
+  {
+    "matchup": "New Orleans Pelicans at Dallas Mavericks",
+    "date": "2025-11-06T01:30Z",
+    "home_team": {
+      "abbr": "DAL",
+      "name": "Dallas Mavericks",
+      "team_id": "1610612742"
+    },
+    "away_team": {
+      "abbr": "NO",
+      "name": "New Orleans Pelicans",
+      "team_id": "1610612740"
+    },
+    "home_lineup": {
+      "entity_id": "1629023-1641726-1642843-202691-203076",
+      "name": "P.J. Washington, Dereck Lively II, Cooper Flagg, Klay Thompson, Anthony Davis",
+      "off_poss": 52,
+      "def_poss": 54
+    },
+    "away_lineup": {
+      "entity_id": "1629627-1630529-1630530-1642274-1642847",
+      "name": "Zion Williamson, Herbert Jones, Trey Murphy III, Yves Missi, Jeremiah Fears",
+      "off_poss": 59,
+      "def_poss": 59
+    },
+    "baseline_delta": -10.8093099618523,
+    "slot_adjustments": {
+      "sf": -12.2448979591837,
+      "pf": 2.5,
+      "sg": -5.71428571428571,
+      "c": 4.20406235238545,
+      "pg": -2.50977835723598
+    },
+    "final_delta": -24.5742096401722
+  },
+  {
+    "matchup": "Miami Heat at Denver Nuggets",
+    "date": "2025-11-06T02:00Z",
+    "home_team": {
+      "abbr": "DEN",
+      "name": "Denver Nuggets",
+      "team_id": "1610612743"
+    },
+    "away_team": {
+      "abbr": "MIA",
+      "name": "Miami Heat",
+      "team_id": "1610612748"
+    },
+    "home_lineup": {
+      "entity_id": "1627750-1629661-1631128-203932-203999",
+      "name": "Jamal Murray, Cameron Johnson, Christian Braun, Aaron Gordon, Nikola Joki\u0107",
+      "off_poss": 218,
+      "def_poss": 215
+    },
+    "away_lineup": {
+      "entity_id": "1630696-1631107-1631170-1631323-1642276",
+      "name": "Dru Smith, Nikola Jovi\u0107, Jaime Jaquez Jr., Simone Fontecchio, Kel'el Ware",
+      "off_poss": 80,
+      "def_poss": 84
+    },
+    "baseline_delta": 3.91235382567791,
+    "slot_adjustments": {
+      "sf": -14.5033282130056,
+      "sg": -0.517153097798259,
+      "pg": 5.65366972477064,
+      "pf": 1.53985507246376,
+      "c": 0.532091785833055
+    },
+    "final_delta": -3.38251090205853
+  },
+  {
+    "matchup": "San Antonio Spurs at Los Angeles Lakers",
+    "date": "2025-11-06T03:00Z",
+    "home_team": {
+      "abbr": "LAL",
+      "name": "Los Angeles Lakers",
+      "team_id": "1610612747"
+    },
+    "away_team": {
+      "abbr": "SA",
+      "name": "San Antonio Spurs",
+      "team_id": "1610612759"
+    },
+    "home_lineup": {
+      "entity_id": "1629028-1629029-1629060-1629216-1630559",
+      "name": "Deandre Ayton, Luka Don\u010di\u0107, Rui Hachimura, Gabe Vincent, Austin Reaves",
+      "off_poss": 63,
+      "def_poss": 64
+    },
+    "away_lineup": {
+      "entity_id": "1630170-1630577-1641705-1642264-203084",
+      "name": "Devin Vassell, Julian Champagnie, Victor Wembanyama, Stephon Castle, Harrison Barnes",
+      "off_poss": 154,
+      "def_poss": 154
+    },
+    "baseline_delta": -40.6407828282828,
+    "slot_adjustments": {
+      "sg": -0.335775335775336,
+      "pf": 10.4545454545455,
+      "pg": 2.66955266955267,
+      "c": -0.756233819321434,
+      "sf": 9.87484737484737
+    },
+    "final_delta": -18.7338464844341
+  },
+  {
+    "matchup": "Oklahoma City Thunder at Portland Trail Blazers",
+    "date": "2025-11-06T03:00Z",
+    "home_team": {
+      "abbr": "POR",
+      "name": "Portland Trail Blazers",
+      "team_id": "1610612757"
+    },
+    "away_team": {
+      "abbr": "OKC",
+      "name": "Oklahoma City Thunder",
+      "team_id": "1610612760"
+    },
+    "home_lineup": {
+      "entity_id": "1630166-1631101-1641739-1642270-201950",
+      "name": "Deni Avdija, Shaedon Sharpe, Toumani Camara, Donovan Clingan, Jrue Holiday",
+      "off_poss": 141,
+      "def_poss": 141
+    },
+    "away_lineup": {
+      "entity_id": "1628392-1628983-1629652-1631096-1641717",
+      "name": "Isaiah Hartenstein, Shai Gilgeous-Alexander, Luguentz Dort, Chet Holmgren, Cason Wallace",
+      "off_poss": 80,
+      "def_poss": 81
+    },
+    "baseline_delta": -26.5481350144471,
+    "slot_adjustments": {
+      "pg": -8.43971631205674,
+      "sf": -12.0188531029065,
+      "sg": 3.19324430479183,
+      "c": 7.95698924731183,
+      "pf": -4.10783055198973
+    },
+    "final_delta": -39.9643014292964
+  },
+  {
+    "matchup": "Golden State Warriors at Sacramento Kings",
+    "date": "2025-11-06T03:00Z",
+    "home_team": {
+      "abbr": "SAC",
+      "name": "Sacramento Kings",
+      "team_id": "1610612758"
+    },
+    "away_team": {
+      "abbr": "GS",
+      "name": "Golden State Warriors",
+      "team_id": "1610612744"
+    },
+    "home_lineup": {
+      "entity_id": "1627734-201566-201942-203471-203897",
+      "name": "Domantas Sabonis, Russell Westbrook, DeMar DeRozan, Dennis Schr\u00f6der, Zach LaVine",
+      "off_poss": 161,
+      "def_poss": 161
+    },
+    "away_lineup": {
+      "entity_id": "1630228-1641764-201939-202710-203110",
+      "name": "Jonathan Kuminga, Brandin Podziemski, Stephen Curry, Jimmy Butler III, Draymond Green",
+      "off_poss": 130,
+      "def_poss": 127
+    },
+    "baseline_delta": -26.4689572666293,
+    "slot_adjustments": {
+      "pg": 0.210224558050645,
+      "pf": -4.23018292682927,
+      "c": 5.43000627746391,
+      "sf": -9.43447690629167,
+      "sg": -1.84628439810886
+    },
+    "final_delta": -36.3396706623446
+  }
+]
