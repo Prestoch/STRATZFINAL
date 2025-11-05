@@ -19,7 +19,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
@@ -66,6 +66,14 @@ TEAM_ID_MAP: Dict[str, str] = {
     "WSH": "1610612764",
 }
 
+SEASON_TYPE_MAP = {
+    1: "Pre Season",
+    2: "Regular Season",
+    3: "Playoffs",
+    4: "Playoffs",
+    5: "Play-In",
+}
+
 
 @dataclass
 class Lineup:
@@ -80,6 +88,8 @@ class GameResult:
     event_id: str
     date: str
     matchup: str
+    season: str
+    season_type: str
     home_abbr: str
     away_abbr: str
     home_team_id: str
@@ -131,6 +141,9 @@ def extract_completed_games(scoreboard_payload: dict) -> List[dict]:
         if not competitions:
             continue
         comp = competitions[0]
+        season_info = event.get("season") or comp.get("season") or {}
+        season_year = season_info.get("year")
+        season_type_id = season_info.get("type")
         status = comp.get("status") or event.get("status") or {}
         stype = status.get("type") or {}
         if stype.get("completed") is not True:
@@ -153,14 +166,17 @@ def extract_completed_games(scoreboard_payload: dict) -> List[dict]:
             "away": away,
             "home_score": home_score,
             "away_score": away_score,
+            "season_year": season_year,
+            "season_type_id": season_type_id,
         })
     return games
 
 
 def fetch_top_lineup(team_id: str, season: str, season_type: str, min_poss: int,
-                     cache: Dict[str, Lineup]) -> Lineup:
-    if team_id in cache:
-        return cache[team_id]
+                     cache: Dict[Tuple[str, str, str, int], Lineup]) -> Lineup:
+    cache_key: Tuple[str, str, str, int] = (team_id, season, season_type, min_poss)
+    if cache_key in cache:
+        return cache[cache_key]
 
     params = urllib.parse.urlencode({
         "Type": "Lineup",
@@ -182,7 +198,7 @@ def fetch_top_lineup(team_id: str, season: str, season_type: str, min_poss: int,
         off_poss=float(top.get("OffPoss", 0)),
         def_poss=float(top.get("DefPoss", 0)),
     )
-    cache[team_id] = lineup
+    cache[cache_key] = lineup
     return lineup
 
 
@@ -209,10 +225,22 @@ def run_nba_delta(team1_id: str, lineup1_id: str,
         raise RuntimeError(f"Invalid JSON from nba_delta.pl: {exc}: {result.stdout}")
 
 
+def format_season(year: Optional[int], fallback_date: dt.date) -> str:
+    if year is None:
+        year = fallback_date.year + (1 if fallback_date.month >= 7 else 0)
+    return f"{year - 1}-{str(year)[-2:]}"
+
+
+def season_type_name(type_id: Optional[int]) -> str:
+    if type_id is None:
+        return "Regular Season"
+    return SEASON_TYPE_MAP.get(type_id, "Regular Season")
+
+
 def evaluate(date_start: dt.date, date_end: dt.date,
-             season: str, season_type: str, min_poss: int,
-             max_games: Optional[int] = None) -> Dict[str, object]:
-    lineup_cache: Dict[str, Lineup] = {}
+             season_override: Optional[str], season_type_override: Optional[str],
+             min_poss: int, max_games: Optional[int] = None) -> Dict[str, object]:
+    lineup_cache: Dict[Tuple[str, str, str, int], Lineup] = {}
     results: List[GameResult] = []
 
     current = date_start
@@ -232,9 +260,12 @@ def evaluate(date_start: dt.date, date_end: dt.date,
 
             home_id = TEAM_ID_MAP[home_abbr]
             away_id = TEAM_ID_MAP[away_abbr]
+            game_date = dt.date.fromisoformat(game["date"][0:10]) if game.get("date") else current
+            season_str = season_override or format_season(game.get("season_year"), game_date)
+            season_type = season_type_override or season_type_name(game.get("season_type_id"))
             try:
-                home_lineup = fetch_top_lineup(home_id, season, season_type, min_poss, lineup_cache)
-                away_lineup = fetch_top_lineup(away_id, season, season_type, min_poss, lineup_cache)
+                home_lineup = fetch_top_lineup(home_id, season_str, season_type, min_poss, lineup_cache)
+                away_lineup = fetch_top_lineup(away_id, season_str, season_type, min_poss, lineup_cache)
             except Exception as exc:
                 # Skip games without lineup data
                 print(f"Skipping {game['matchup']} ({current}): lineup fetch failed: {exc}", file=sys.stderr)
@@ -243,7 +274,7 @@ def evaluate(date_start: dt.date, date_end: dt.date,
             try:
                 output = run_nba_delta(home_id, home_lineup.entity_id,
                                        away_id, away_lineup.entity_id,
-                                       season, season_type, min_poss)
+                                       season_str, season_type, min_poss)
             except Exception as exc:
                 print(f"Skipping {game['matchup']} ({current}): {exc}", file=sys.stderr)
                 continue
@@ -252,6 +283,8 @@ def evaluate(date_start: dt.date, date_end: dt.date,
                 event_id=game["event_id"],
                 date=game["date"],
                 matchup=game["matchup"],
+                season=season_str,
+                season_type=season_type,
                 home_abbr=home_abbr,
                 away_abbr=away_abbr,
                 home_team_id=home_id,
@@ -288,8 +321,8 @@ def evaluate(date_start: dt.date, date_end: dt.date,
         "pearson_correlation": correlation,
         "date_start": date_start.isoformat(),
         "date_end": date_end.isoformat(),
-        "season": season,
-        "season_type": season_type,
+        "season_override": season_override,
+        "season_type_override": season_type_override,
         "min_poss": min_poss,
     }
 
@@ -305,8 +338,8 @@ def evaluate(date_start: dt.date, date_end: dt.date,
 
 def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate nba_delta.pl accuracy over historical games")
-    parser.add_argument("--season", default="2025-26", help="Season string passed to pbpstats (default: 2025-26)")
-    parser.add_argument("--season-type", default="Regular Season", help="Season phase (default: Regular Season)")
+    parser.add_argument("--season", default=None, help="Override season string passed to pbpstats (e.g. 2024-25). Defaults to auto per game.")
+    parser.add_argument("--season-type", default=None, help="Override season type (e.g. Regular Season, Playoffs). Defaults to auto per game.")
     parser.add_argument("--min-poss", type=int, default=50, help="Minimum possessions filter for pbpstats (default: 50)")
     parser.add_argument("--start", default="2025-10-01", help="Start date (inclusive) in YYYY-MM-DD")
     parser.add_argument("--end", default=dt.date.today().isoformat(), help="End date (inclusive) in YYYY-MM-DD")
