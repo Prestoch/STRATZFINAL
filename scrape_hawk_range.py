@@ -199,9 +199,11 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
     total_rows = 0
     skipped = 0
     excluded_championships = 0
-    with output_path.open("w", newline="", encoding="utf-8") as f:
+    write_header = not output_path.exists() or output_path.stat().st_size == 0
+    with output_path.open("a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(OUTPUT_HEADER)
+        if write_header:
+            writer.writerow(OUTPUT_HEADER)
         total_days = (end_date - start_date).days + 1
         processed_days = 0
         start_time = time.time()
