@@ -294,8 +294,12 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
                 f"\r[{bar}] {progress_pct:5.1f}% ({processed_days}/{total_days} days) ETA {eta_str}"
             )
             sys.stdout.flush()
-            print(f"\nProcessed {day.isoformat()} - rows so far: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}")
-    print(f"Done. Total rows: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}. Output -> {output_path}")
+            print(
+                f"\nProcessed {day.isoformat()} - rows total: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}"
+            )
+    print(
+        f"Done. Rows total: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}. Output -> {output_path}"
+    )
 
 
 if __name__ == "__main__":
