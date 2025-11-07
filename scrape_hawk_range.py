@@ -5,6 +5,7 @@ import datetime as dt
 import html
 import json
 import random
+import ssl
 import sys
 import time
 import unicodedata
@@ -13,6 +14,11 @@ from typing import Dict, List, Optional
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 import re
+
+try:
+    import certifi
+except ImportError:
+    certifi = None
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0 Safari/537.36",
@@ -80,13 +86,22 @@ def load_hero_data(cs_path: Path) -> Dict[str, object]:
     }
 
 
+_SSL_CONTEXT = None
+if certifi:
+    _SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+
+
 def fetch_url(url: str, delay: float, jitter: float) -> str:
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             sleep_for = delay + random.uniform(0, jitter)
             time.sleep(sleep_for)
             req = Request(url, headers=HEADERS)
-            with urlopen(req, timeout=25) as resp:
+            if _SSL_CONTEXT is not None:
+                resp = urlopen(req, timeout=25, context=_SSL_CONTEXT)
+            else:
+                resp = urlopen(req, timeout=25)
+            with resp:
                 body = resp.read().decode("utf-8", errors="replace")
             return body
         except HTTPError as exc:
