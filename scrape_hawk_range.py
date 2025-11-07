@@ -5,6 +5,7 @@ import datetime as dt
 import html
 import json
 import random
+import socket
 import ssl
 import sys
 import time
@@ -110,7 +111,7 @@ def fetch_url(url: str, delay: float, jitter: float) -> str:
                 time.sleep(backoff)
                 continue
             raise
-        except URLError:
+        except (URLError, TimeoutError, socket.timeout):
             if attempt < MAX_RETRIES:
                 backoff = delay * (attempt + 1) + random.uniform(0, jitter * (attempt + 1))
                 time.sleep(backoff)
