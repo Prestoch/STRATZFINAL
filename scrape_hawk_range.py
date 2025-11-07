@@ -4,6 +4,7 @@ import csv
 import datetime as dt
 import html
 import json
+import random
 import time
 import unicodedata
 from pathlib import Path
@@ -33,8 +34,12 @@ EXCLUDE_KEYWORDS = [
     "fastinvitational",
 ]
 
-PAGE_DELAY = 0.4
-MATCH_DELAY = 0.3
+# Base delays (seconds) between requests; jitter is added to each call
+PAGE_DELAY = 1.2
+MATCH_DELAY = 0.8
+PAGE_JITTER = 0.5
+MATCH_JITTER = 0.4
+
 MAX_RETRIES = 4
 
 OUTPUT_HEADER = [
@@ -74,24 +79,25 @@ def load_hero_data(cs_path: Path) -> Dict[str, object]:
     }
 
 
-def fetch_url(url: str, delay: float) -> str:
+def fetch_url(url: str, delay: float, jitter: float) -> str:
     for attempt in range(1, MAX_RETRIES + 1):
         try:
+            sleep_for = delay + random.uniform(0, jitter)
+            time.sleep(sleep_for)
             req = Request(url, headers=HEADERS)
             with urlopen(req, timeout=25) as resp:
                 body = resp.read().decode("utf-8", errors="replace")
-            time.sleep(delay)
             return body
         except HTTPError as exc:
             if exc.code in (429, 500, 502, 503, 504) and attempt < MAX_RETRIES:
-                sleep_for = delay + attempt * 2
-                time.sleep(sleep_for)
+                backoff = delay * (attempt + 1) + random.uniform(0, jitter * (attempt + 1))
+                time.sleep(backoff)
                 continue
             raise
         except URLError:
             if attempt < MAX_RETRIES:
-                sleep_for = delay + attempt * 2
-                time.sleep(sleep_for)
+                backoff = delay * (attempt + 1) + random.uniform(0, jitter * (attempt + 1))
+                time.sleep(backoff)
                 continue
             raise
     raise RuntimeError(f"Failed to fetch {url} after {MAX_RETRIES} attempts")
@@ -154,7 +160,7 @@ def extract_odds(match_props: Dict[str, object]) -> (Optional[str], Optional[str
 
 def parse_match_page(match_id: int) -> Dict[str, object]:
     url = f"https://hawk.live/matches/{match_id}"
-    text = fetch_url(url, MATCH_DELAY)
+    text = fetch_url(url, MATCH_DELAY, MATCH_JITTER)
     json_blob = json.loads(html.unescape(re.search(r'data-page="([^"]+)"', text).group(1)))
     return json_blob["props"]
 
@@ -181,7 +187,7 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
         for day in iter_dates(start_date, end_date):
             page_url = f"https://hawk.live/matches/recent/{day.isoformat()}"
             try:
-                page_text = fetch_url(page_url, PAGE_DELAY)
+                page_text = fetch_url(page_url, PAGE_DELAY, PAGE_JITTER)
             except HTTPError as exc:
                 print(f"Failed to fetch {page_url}: HTTP {exc.code}")
                 continue
