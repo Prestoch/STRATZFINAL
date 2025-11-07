@@ -5,6 +5,7 @@ import datetime as dt
 import html
 import json
 import random
+import sys
 import time
 import unicodedata
 from pathlib import Path
@@ -184,6 +185,8 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
     with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(OUTPUT_HEADER)
+        total_days = (end_date - start_date).days + 1
+        processed_days = 0
         for day in iter_dates(start_date, end_date):
             page_url = f"https://hawk.live/matches/recent/{day.isoformat()}"
             try:
@@ -260,7 +263,13 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
                         odds_time or "",
                     ])
                     total_rows += 1
-            print(f"Processed {day.isoformat()} - rows so far: {total_rows}, skipped: {skipped}")
+            processed_days += 1
+            progress_pct = (processed_days / total_days) * 100
+            progress_bar = "#" * int(progress_pct // 2)
+            bar = progress_bar.ljust(50)
+            sys.stdout.write(f"\r[{bar}] {progress_pct:5.1f}% ({processed_days}/{total_days} days)")
+            sys.stdout.flush()
+            print(f"\nProcessed {day.isoformat()} - rows so far: {total_rows}, skipped: {skipped}")
     print(f"Done. Total rows: {total_rows}, skipped: {skipped}. Output -> {output_path}")
 
 
