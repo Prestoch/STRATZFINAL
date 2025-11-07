@@ -42,10 +42,10 @@ EXCLUDE_KEYWORDS = [
 ]
 
 # Base delays (seconds) between requests; jitter is added to each call
-PAGE_DELAY = 1.2
-MATCH_DELAY = 0.8
-PAGE_JITTER = 0.5
-MATCH_JITTER = 0.4
+PAGE_DELAY = 0.4
+MATCH_DELAY = 0.3
+PAGE_JITTER = 0.2
+MATCH_JITTER = 0.15
 
 MAX_RETRIES = 4
 
@@ -197,6 +197,7 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
     hero_data = load_hero_data(Path("cs.json"))
     total_rows = 0
     skipped = 0
+    excluded_championships = 0
     with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(OUTPUT_HEADER)
@@ -222,6 +223,7 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
             for series in series_list:
                 championship = series.get("championship_name") or ""
                 if should_exclude(championship):
+                    excluded_championships += 1
                     continue
                 series_id = series.get("id")
                 team1_name = series.get("team1", {}).get("name", "")
@@ -292,8 +294,8 @@ def scrape_range(start_date: dt.date, end_date: dt.date, output_path: Path):
                 f"\r[{bar}] {progress_pct:5.1f}% ({processed_days}/{total_days} days) ETA {eta_str}"
             )
             sys.stdout.flush()
-            print(f"\nProcessed {day.isoformat()} - rows so far: {total_rows}, skipped: {skipped}")
-    print(f"Done. Total rows: {total_rows}, skipped: {skipped}. Output -> {output_path}")
+            print(f"\nProcessed {day.isoformat()} - rows so far: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}")
+    print(f"Done. Total rows: {total_rows}, excluded: {excluded_championships}, skipped: {skipped}. Output -> {output_path}")
 
 
 if __name__ == "__main__":
