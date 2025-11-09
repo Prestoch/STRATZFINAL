@@ -33,11 +33,25 @@ query MatchLeague($id: Long!) {
 }
 '''
 
+BASE_HEADERS = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) STRATZFetcher/1.0',
+    'Origin': 'https://stratz.com',
+    'Referer': 'https://stratz.com/',
+}
+
 
 def fetch_match(match_id: int, token: str):
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = BASE_HEADERS.copy()
+    headers["Authorization"] = f"Bearer {token}"
     payload = {'query': MATCH_QUERY, 'variables': {'id': match_id}}
     resp = requests.post(GRAPHQL_ENDPOINT, json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
+    if resp.status_code == 403:
+        raise requests.HTTPError(
+            f"403 Forbidden (token may lack access or headers rejected): {resp.text[:200]}",
+            response=resp,
+        )
     resp.raise_for_status()
     data = resp.json()
     match = data.get('data', {}).get('match')
