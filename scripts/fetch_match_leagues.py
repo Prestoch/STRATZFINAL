@@ -16,6 +16,11 @@ from pathlib import Path
 
 import requests
 
+try:
+    import cloudscraper
+except ImportError:
+    cloudscraper = None
+
 MATCHES_FILE = Path('stratz_clean_96507.json')
 OUTPUT_FILE = Path('match_leagues.json')
 DEFAULT_THREADS = 5
@@ -34,19 +39,35 @@ query MatchLeague($id: Long!) {
 '''
 
 BASE_HEADERS = {
-    'Accept': 'application/json',
+    'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) STRATZFetcher/1.0',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
     'Origin': 'https://stratz.com',
     'Referer': 'https://stratz.com/',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Connection': 'keep-alive',
 }
 
 
-def fetch_match(match_id: int, token: str):
+def create_session():
+    if cloudscraper:
+        # cloudscraper already sets realistic headers, but keep ours too
+        scraper = cloudscraper.create_scraper(
+            browser={'browser': 'chrome', 'platform': 'windows', 'mobile': False}
+        )
+        scraper.headers.update(BASE_HEADERS)
+        return scraper
+    session = requests.Session()
+    session.headers.update(BASE_HEADERS)
+    return session
+
+
+def fetch_match(session, match_id: int, token: str):
     headers = BASE_HEADERS.copy()
     headers["Authorization"] = f"Bearer {token}"
     payload = {'query': MATCH_QUERY, 'variables': {'id': match_id}}
-    resp = requests.post(GRAPHQL_ENDPOINT, json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
+    resp = session.post(GRAPHQL_ENDPOINT, json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
     if resp.status_code == 403:
         raise requests.HTTPError(
             f"403 Forbidden (token may lack access or headers rejected): {resp.text[:200]}",
@@ -74,6 +95,7 @@ class Worker(threading.Thread):
         self.task_queue = task_queue
         self.result_dict = result_dict
         self.lock = lock
+        self.session = create_session()
 
     def run(self):
         while True:
@@ -90,13 +112,16 @@ class Worker(threading.Thread):
                     continue
                 try:
                     time.sleep(PER_KEY_DELAY)
-                    info = fetch_match(match_id, token)
+                    info = fetch_match(self.session, match_id, token)
                     with self.lock:
                         if info:
                             self.result_dict[str(match_id)] = info
                     break
                 except Exception as exc:
                     retry_count += 1
+                    if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code == 403:
+                        # reset session on Cloudflare challenges
+                        self.session = create_session()
                     if retry_count > MAX_RETRIES:
                         print(f"Match {match_id} failed after {MAX_RETRIES} retries: {exc}")
                         break
