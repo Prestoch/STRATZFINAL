@@ -5,7 +5,7 @@ Usage:
   python scripts/fetch_match_leagues.py --keys key1 key2 ... [--threads 5]
 
 Writes match_leagues.json mapping matchId -> {"leagueId": int, "leagueName": str, "tier": int}.
-Respects STRATZ rate limits by sleeping ~0.35s per key. Resumable.
+Respects STRATZ rate limits by throttling requests per key and backing off on 429s. Resumable.
 """
 import argparse
 import json
@@ -13,6 +13,7 @@ import queue
 import threading
 import time
 from pathlib import Path
+import random
 
 import requests
 
@@ -24,9 +25,11 @@ except ImportError:
 MATCHES_FILE = Path('stratz_clean_96507.json')
 OUTPUT_FILE = Path('match_leagues.json')
 DEFAULT_THREADS = 5
-PER_KEY_DELAY = 0.35
+PER_KEY_DELAY = 0.65
 REQUEST_TIMEOUT = 15
 MAX_RETRIES = 5
+BASE_BACKOFF = 2.0
+BACKOFF_JITTER = 0.2
 GRAPHQL_ENDPOINT = 'https://api.stratz.com/graphql'
 
 MATCH_QUERY = '''
@@ -126,8 +129,20 @@ class Worker(threading.Thread):
                         print(f"Match {match_id} failed after {MAX_RETRIES} retries: {exc}")
                         break
                     else:
-                        print(f"Retry {retry_count} for match {match_id} due to: {exc}")
-                        time.sleep(1.0 * retry_count)
+                        wait = BASE_BACKOFF * (2 ** (retry_count - 1))
+                        if isinstance(exc, requests.HTTPError) and exc.response is not None:
+                            if exc.response.status_code == 429:
+                                retry_after = exc.response.headers.get("Retry-After")
+                                if retry_after:
+                                    try:
+                                        wait = max(wait, float(retry_after))
+                                    except ValueError:
+                                        pass
+                            elif exc.response.status_code >= 500:
+                                wait = max(wait, 3.0)
+                        print(f"Retry {retry_count} for match {match_id} due to: {exc}; sleeping {wait:.1f}s")
+                        jitter = 1.0 + BACKOFF_JITTER * random.random()
+                        time.sleep(min(wait * jitter, 90.0))
                 finally:
                     self.key_queue.put(token)
             self.task_queue.task_done()
@@ -168,7 +183,8 @@ def main():
 
     result_dict = existing
 
-    workers = [Worker(key_q, task_q, result_dict, lock) for _ in range(args.threads)]
+    worker_count = min(args.threads, len(args.keys))
+    workers = [Worker(key_q, task_q, result_dict, lock) for _ in range(worker_count)]
     for w in workers:
         w.start()
     task_q.join()
