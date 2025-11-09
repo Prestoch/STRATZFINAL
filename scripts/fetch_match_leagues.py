@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Fetch league info for matches in stratz_clean_96507.json using STRATZ REST API.
+"""Fetch league info for matches in stratz_clean_96507.json via STRATZ GraphQL (single-match).
 
 Usage:
   python scripts/fetch_match_leagues.py --keys key1 key2 ... [--threads 5]
 
 Writes match_leagues.json mapping matchId -> {"leagueId": int, "leagueName": str, "tier": int}.
-Respects STRATZ rate limits (20 calls/sec, 250/min) by sleeping ~0.35s per key.
-Resumable: if match_leagues.json exists, skips already fetched matches.
+Respects STRATZ rate limits by sleeping ~0.35s per key. Resumable.
 """
 import argparse
 import json
@@ -20,19 +19,31 @@ import requests
 MATCHES_FILE = Path('stratz_clean_96507.json')
 OUTPUT_FILE = Path('match_leagues.json')
 DEFAULT_THREADS = 5
-PER_KEY_DELAY = 0.35  # ~3 calls/sec per key (180/min)
+PER_KEY_DELAY = 0.35
 REQUEST_TIMEOUT = 15
 MAX_RETRIES = 5
-REST_ENDPOINT = 'https://api.stratz.com/api/match/{}'
+GRAPHQL_ENDPOINT = 'https://api.stratz.com/graphql'
+
+MATCH_QUERY = '''
+query MatchLeague($id: Long!) {
+  match(id: $id) {
+    id
+    league { id name tier }
+  }
+}
+'''
 
 
 def fetch_match(match_id: int, token: str):
-    url = REST_ENDPOINT.format(match_id)
     headers = {"Authorization": f"Bearer {token}"}
-    resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+    payload = {'query': MATCH_QUERY, 'variables': {'id': match_id}}
+    resp = requests.post(GRAPHQL_ENDPOINT, json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
     data = resp.json()
-    league = data.get('league')
+    match = data.get('data', {}).get('match')
+    if not match:
+        raise ValueError('match not found in response')
+    league = match.get('league')
     if not league:
         return None
     return {
