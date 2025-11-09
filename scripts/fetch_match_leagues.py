@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Fetch league info (id, name, tier) for matches in stratz_clean_96507.json.
+"""Fetch league info for matches in stratz_clean_96507.json using STRATZ REST API.
 
 Usage:
-  python scripts/fetch_match_leagues.py --keys key1 key2 ... [--batch-size 40] [--threads 5]
+  python scripts/fetch_match_leagues.py --keys key1 key2 ... [--threads 5]
 
-Respects STRATZ rate limits (~20 req/s; 250/min). This script enforces a conservative
-per-key delay so we stay well below 200/minute, even with multiple threads.
-It writes match_leagues.json mapping matchId -> {leagueId, leagueName, tier}.
-Existing mapping is reused so the script is resumable.
+Writes match_leagues.json mapping matchId -> {"leagueId": int, "leagueName": str, "tier": int}.
+Respects STRATZ rate limits (20 calls/sec, 250/min) by sleeping ~0.35s per key.
+Resumable: if match_leagues.json exists, skips already fetched matches.
 """
 import argparse
 import json
@@ -20,21 +19,27 @@ import requests
 
 MATCHES_FILE = Path('stratz_clean_96507.json')
 OUTPUT_FILE = Path('match_leagues.json')
-GRAPHQL_ENDPOINT = 'https://api.stratz.com/graphql'
-DEFAULT_BATCH_SIZE = 40
 DEFAULT_THREADS = 5
-PER_KEY_DELAY = 0.35  # seconds, ~3 calls per second => ~180 per minute per key
+PER_KEY_DELAY = 0.35  # ~3 calls/sec per key (180/min)
 REQUEST_TIMEOUT = 15
 MAX_RETRIES = 5
+REST_ENDPOINT = 'https://api.stratz.com/api/match/{}'
 
-QUERY = '''
-query MatchesLeagues($ids: [Long!]!) {
-  matches(ids: $ids) {
-    id
-    league { id name tier }
-  }
-}
-'''
+
+def fetch_match(match_id: int, token: str):
+    url = REST_ENDPOINT.format(match_id)
+    headers = {"Authorization": f"Bearer {token}"}
+    resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT)
+    resp.raise_for_status()
+    data = resp.json()
+    league = data.get('league')
+    if not league:
+        return None
+    return {
+        'leagueId': league.get('id'),
+        'leagueName': league.get('name'),
+        'tier': league.get('tier'),
+    }
 
 
 class Worker(threading.Thread):
@@ -48,71 +53,39 @@ class Worker(threading.Thread):
     def run(self):
         while True:
             try:
-                batch = self.task_queue.get(timeout=3)
+                match_id = self.task_queue.get(timeout=3)
             except queue.Empty:
                 return
             retry_count = 0
             while True:
                 try:
-                    api_key = self.key_queue.get(timeout=3)
+                    token = self.key_queue.get(timeout=3)
                 except queue.Empty:
                     time.sleep(0.5)
                     continue
                 try:
                     time.sleep(PER_KEY_DELAY)
-                    headers = {"Authorization": f"Bearer {api_key}"}
-                    resp = requests.post(
-                        GRAPHQL_ENDPOINT,
-                        json={'query': QUERY, 'variables': {'ids': batch}},
-                        headers=headers,
-                        timeout=REQUEST_TIMEOUT,
-                    )
-                    resp.raise_for_status()
-                    data = resp.json()
-                    matches = data.get('data', {}).get('matches', [])
-                    if not matches:
-                        raise ValueError('No matches returned')
+                    info = fetch_match(match_id, token)
                     with self.lock:
-                        for match in matches:
-                            if not match:
-                                continue
-                            league = match.get('league')
-                            if not league:
-                                continue
-                            self.result_dict[str(match['id'])] = {
-                                'leagueId': league.get('id'),
-                                'leagueName': league.get('name'),
-                                'tier': league.get('tier'),
-                            }
+                        if info:
+                            self.result_dict[str(match_id)] = info
                     break
                 except Exception as exc:
                     retry_count += 1
                     if retry_count > MAX_RETRIES:
-                        print(f"Batch {batch[:3]} failed after {MAX_RETRIES} retries: {exc}")
+                        print(f"Match {match_id} failed after {MAX_RETRIES} retries: {exc}")
                         break
                     else:
-                        print(f"Retry {retry_count} for batch {batch[:3]} due to: {exc}")
+                        print(f"Retry {retry_count} for match {match_id} due to: {exc}")
                         time.sleep(1.0 * retry_count)
                 finally:
-                    self.key_queue.put(api_key)
+                    self.key_queue.put(token)
             self.task_queue.task_done()
-
-
-def chunked(iterable, size):
-    chunk = []
-    for item in iterable:
-        chunk.append(item)
-        if len(chunk) == size:
-            yield chunk
-            chunk = []
-    if chunk:
-        yield chunk
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--keys', nargs='+', required=True, help='STRATZ API keys (Bearer tokens)')
-    parser.add_argument('--batch-size', type=int, default=DEFAULT_BATCH_SIZE)
+    parser.add_argument('--keys', nargs='+', required=True, help='STRATZ API tokens (Bearer)')
     parser.add_argument('--threads', type=int, default=DEFAULT_THREADS)
     args = parser.parse_args()
 
@@ -132,16 +105,16 @@ def main():
     for key in args.keys:
         key_q.put(key)
 
-    new_batches = 0
-    for batch in chunked(match_ids, args.batch_size):
-        if all(str(mid) in existing for mid in batch):
+    to_fetch = 0
+    for mid in match_ids:
+        if str(mid) in existing:
             continue
-        task_q.put([int(mid) for mid in batch])
-        new_batches += 1
-    if new_batches == 0:
+        task_q.put(int(mid))
+        to_fetch += 1
+    if to_fetch == 0:
         print("Nothing to fetch")
         return
-    print(f"Queued {new_batches} batches (~{new_batches * args.batch_size} matches)")
+    print(f"Queued {to_fetch} matches")
 
     result_dict = existing
 
