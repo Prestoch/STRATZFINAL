@@ -25,12 +25,14 @@ except ImportError:
 MATCHES_FILE = Path('stratz_clean_96507.json')
 OUTPUT_FILE = Path('match_leagues.json')
 DEFAULT_THREADS = 5
-PER_KEY_DELAY = 0.65
+DEFAULT_PER_KEY_DELAY = 1.5
 REQUEST_TIMEOUT = 15
 MAX_RETRIES = 5
 BASE_BACKOFF = 2.0
 BACKOFF_JITTER = 0.2
 GRAPHQL_ENDPOINT = 'https://api.stratz.com/graphql'
+
+SESSION_REFRESH = f'{GRAPHQL_ENDPOINT}?__refresh=1'
 
 MATCH_QUERY = '''
 query MatchLeague($id: Long!) {
@@ -92,13 +94,14 @@ def fetch_match(session, match_id: int, token: str):
 
 
 class Worker(threading.Thread):
-    def __init__(self, key_queue: queue.Queue, task_queue: queue.Queue, result_dict: dict, lock: threading.Lock):
+    def __init__(self, key_queue: queue.Queue, task_queue: queue.Queue, result_dict: dict, lock: threading.Lock, per_key_delay: float):
         super().__init__(daemon=True)
         self.key_queue = key_queue
         self.task_queue = task_queue
         self.result_dict = result_dict
         self.lock = lock
         self.session = create_session()
+        self.per_key_delay = per_key_delay
 
     def run(self):
         while True:
@@ -114,7 +117,7 @@ class Worker(threading.Thread):
                     time.sleep(0.5)
                     continue
                 try:
-                    time.sleep(PER_KEY_DELAY)
+                    time.sleep(self.per_key_delay)
                     info = fetch_match(self.session, match_id, token)
                     with self.lock:
                         if info:
@@ -125,6 +128,10 @@ class Worker(threading.Thread):
                     if isinstance(exc, requests.HTTPError) and exc.response is not None and exc.response.status_code == 403:
                         # reset session on Cloudflare challenges
                         self.session = create_session()
+                        try:
+                            self.session.get(SESSION_REFRESH, timeout=REQUEST_TIMEOUT)
+                        except Exception:
+                            pass
                     if retry_count > MAX_RETRIES:
                         print(f"Match {match_id} failed after {MAX_RETRIES} retries: {exc}")
                         break
@@ -138,11 +145,13 @@ class Worker(threading.Thread):
                                         wait = max(wait, float(retry_after))
                                     except ValueError:
                                         pass
+                                # back-off harder on 429
+                                wait = max(wait, 90.0)
                             elif exc.response.status_code >= 500:
-                                wait = max(wait, 3.0)
+                                wait = max(wait, 5.0)
                         print(f"Retry {retry_count} for match {match_id} due to: {exc}; sleeping {wait:.1f}s")
                         jitter = 1.0 + BACKOFF_JITTER * random.random()
-                        time.sleep(min(wait * jitter, 90.0))
+                        time.sleep(min(wait * jitter, 300.0))
                 finally:
                     self.key_queue.put(token)
             self.task_queue.task_done()
@@ -152,6 +161,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--keys', nargs='+', required=True, help='STRATZ API tokens (Bearer)')
     parser.add_argument('--threads', type=int, default=DEFAULT_THREADS)
+    parser.add_argument('--per-key-delay', type=float, default=DEFAULT_PER_KEY_DELAY,
+                        help='Seconds to sleep after each request per token (default: %(default)s)')
     args = parser.parse_args()
 
     raw = json.loads(MATCHES_FILE.read_text())
@@ -184,7 +195,7 @@ def main():
     result_dict = existing
 
     worker_count = min(args.threads, len(args.keys))
-    workers = [Worker(key_q, task_q, result_dict, lock) for _ in range(worker_count)]
+    workers = [Worker(key_q, task_q, result_dict, lock, args.per_key_delay) for _ in range(worker_count)]
     for w in workers:
         w.start()
     task_q.join()
