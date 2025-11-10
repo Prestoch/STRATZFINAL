@@ -63,32 +63,29 @@ if (!file_exists(dirname(__FILE__) . '/cs.json')) {
 }
 $csjson = file_get_contents(dirname(__FILE__) . '/cs.json');
 
-$f1 = explode(', heroes_bg = ', $csjson);
-$f2 = explode('var heroes = ', $f1[0]);
-if (!isset($f2[1])) {
+$heroesMatch = [];
+if (!preg_match('/var\s+heroes\s*=\s*(\[[^\]]*\])/m', $csjson, $heroesMatch)) {
     die('cs.json heroes problem');
 }
-$h = json_decode($f2[1], true);
+$h = json_decode($heroesMatch[1], true);
 if (!is_array($h)) {
     die('cs.json heroes problem');
 }
 
-$f3 = explode(', win_rates =', $csjson);
-$f4 = explode(', heroes_wr = ', $f3[0]);
-if (!isset($f4[1])) {
+$heroesWrMatch = [];
+if (!preg_match('/heroes_wr\s*=\s*(\[[^\]]*\])/m', $csjson, $heroesWrMatch)) {
     die('cs.json heroes_wr problem');
 }
-$h_wr = json_decode($f4[1], true);
+$h_wr = json_decode($heroesWrMatch[1], true);
 if (!is_array($h_wr)) {
     die('cs.json heroes_wr problem');
 }
 
-$f5 = explode('win_rates = ', $csjson);
-if (!isset($f5[1])) {
+$winRatesMatch = [];
+if (!preg_match('/win_rates\s*=\s*(\[[\s\S]*?\])\s*;\s*update_time/m', $csjson, $winRatesMatch)) {
     die('cs.json win_rates problem');
 }
-$f6 = explode(', update_time', $f5[1]);
-$h_wrs = json_decode($f6[0], true);
+$h_wrs = json_decode($winRatesMatch[1], true);
 if (!is_array($h_wrs)) {
     die('cs.json win_rates problem');
 }
