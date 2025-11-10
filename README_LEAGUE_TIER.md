@@ -8,6 +8,19 @@ This project adds league and tier information to your Dota 2 pro matches dataset
 - **Missing**: League names and tier classifications for each match
 - **Resources**: 5 Stratz API keys
 
+## 🔒 Stratz API Rate Limits (Per Key)
+
+- **20 calls/second**
+- **250 calls/minute**
+- **2,000 calls/hour**
+- **10,000 calls/day**
+
+With 5 keys, your combined capacity:
+- 100 calls/second
+- 1,250 calls/minute
+- 10,000 calls/hour
+- 50,000 calls/day
+
 ## 🎯 What You'll Get
 
 Enhanced dataset with three new fields for each match:
@@ -65,7 +78,7 @@ python3 add_league_tier.py
 
 This processes all 96,507 matches. Output: `stratz_with_tiers_96507.json`
 
-⏱️ **Estimated time**: 30-60 minutes depending on API rate limits
+⏱️ **Estimated time**: ~2-3 minutes with 5 API keys (respecting rate limits)
 
 ## 📁 Files Included
 
@@ -113,12 +126,13 @@ This processes all 96,507 matches. Output: `stratz_with_tiers_96507.json`
 
 ## ⚙️ Features
 
-✅ **API Key Rotation** - Automatically cycles through your 5 keys
-✅ **Rate Limiting** - Respects API limits and waits when needed
+✅ **Multi-Window Rate Limiting** - Tracks second/minute/hour/day limits per key
+✅ **Smart API Key Rotation** - Automatically uses available keys
 ✅ **Batch Processing** - Processes 50 matches per API call for efficiency
 ✅ **Error Handling** - Retries on failures, handles invalid keys
-✅ **Progress Tracking** - Real-time progress updates
+✅ **Progress Tracking** - Real-time progress updates and ETA
 ✅ **Safe** - Original file is never modified
+✅ **Efficient** - Stays just under rate limits for maximum throughput
 
 ## 🔧 Customization
 
@@ -128,10 +142,15 @@ In any script, modify:
 batch_size = 50  # Change to 25, 100, etc.
 ```
 
-### Adjust Rate Limit
-In the `StratzAPIClient` class:
+### Adjust Rate Limits (if needed)
+At the top of any script:
 ```python
-self.rate_limit_per_minute = 100  # Adjust based on your API plan
+RATE_LIMITS = {
+    'second': 20,   # Calls per second per key
+    'minute': 250,  # Calls per minute per key
+    'hour': 2000,   # Calls per hour per key
+    'day': 10000    # Calls per day per key
+}
 ```
 
 ### Process Different Sample Size
@@ -156,9 +175,9 @@ SAMPLE_SIZE = 100  # Change to 50, 500, etc.
 - Matches without leagues will have `null` values
 
 ### Script is Slow
-- Normal processing time: 30-60 minutes for 96k matches
-- Using 5 API keys helps maximize throughput
-- API rate limits are the bottleneck, not the script
+- Normal processing time: 2-3 minutes for 96k matches with 5 keys
+- Script includes automatic rate limiting to stay under Stratz limits
+- Progress updates every 100 batches show ETA and throughput
 
 ## 📈 Progress Indicators
 

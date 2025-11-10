@@ -2,6 +2,12 @@
 """
 Script to fetch league/tier data for Dota 2 pro matches from Stratz API
 and add it to the existing dataset.
+
+Respects Stratz rate limits:
+- 20 calls/second per key
+- 250 calls/minute per key
+- 2,000 calls/hour per key
+- 10,000 calls/day per key
 """
 
 import json
@@ -9,6 +15,7 @@ import time
 import requests
 from typing import Dict, List, Optional
 from collections import deque
+from datetime import datetime, timedelta
 
 # Stratz GraphQL endpoint
 STRATZ_API_URL = "https://api.stratz.com/graphql"
@@ -22,37 +29,134 @@ API_KEYS = [
     "YOUR_API_KEY_5",
 ]
 
+# Stratz API rate limits per key
+RATE_LIMITS = {
+    'second': 20,
+    'minute': 250,
+    'hour': 2000,
+    'day': 10000
+}
+
+
+class RateLimitTracker:
+    """Tracks API calls for a single key across different time windows"""
+    
+    def __init__(self, key_id: int):
+        self.key_id = key_id
+        self.calls_second = []
+        self.calls_minute = []
+        self.calls_hour = []
+        self.calls_day = []
+        
+    def record_call(self):
+        """Record a new API call"""
+        now = time.time()
+        self.calls_second.append(now)
+        self.calls_minute.append(now)
+        self.calls_hour.append(now)
+        self.calls_day.append(now)
+        
+    def clean_old_calls(self):
+        """Remove calls outside the tracking windows"""
+        now = time.time()
+        self.calls_second = [t for t in self.calls_second if now - t < 1]
+        self.calls_minute = [t for t in self.calls_minute if now - t < 60]
+        self.calls_hour = [t for t in self.calls_hour if now - t < 3600]
+        self.calls_day = [t for t in self.calls_day if now - t < 86400]
+        
+    def can_make_call(self) -> bool:
+        """Check if we can make another call without exceeding limits"""
+        self.clean_old_calls()
+        return (
+            len(self.calls_second) < RATE_LIMITS['second'] and
+            len(self.calls_minute) < RATE_LIMITS['minute'] and
+            len(self.calls_hour) < RATE_LIMITS['hour'] and
+            len(self.calls_day) < RATE_LIMITS['day']
+        )
+    
+    def time_until_available(self) -> float:
+        """Calculate seconds until next call is available"""
+        self.clean_old_calls()
+        now = time.time()
+        wait_times = []
+        
+        if len(self.calls_second) >= RATE_LIMITS['second']:
+            wait_times.append(1 - (now - self.calls_second[0]))
+        if len(self.calls_minute) >= RATE_LIMITS['minute']:
+            wait_times.append(60 - (now - self.calls_minute[0]))
+        if len(self.calls_hour) >= RATE_LIMITS['hour']:
+            wait_times.append(3600 - (now - self.calls_hour[0]))
+        if len(self.calls_day) >= RATE_LIMITS['day']:
+            wait_times.append(86400 - (now - self.calls_day[0]))
+            
+        return max(wait_times) if wait_times else 0
+    
+    def get_stats(self) -> Dict:
+        """Get current usage stats"""
+        self.clean_old_calls()
+        return {
+            'second': len(self.calls_second),
+            'minute': len(self.calls_minute),
+            'hour': len(self.calls_hour),
+            'day': len(self.calls_day)
+        }
+
+
 class StratzAPIClient:
     def __init__(self, api_keys: List[str]):
-        self.api_keys = deque(api_keys)
+        self.api_keys = api_keys
+        self.trackers = [RateLimitTracker(i) for i in range(len(api_keys))]
         self.current_key_index = 0
-        self.request_count = 0
-        self.rate_limit_per_minute = 100  # Adjust based on Stratz rate limits
-        self.last_reset_time = time.time()
+        self.total_calls = 0
+        self.failed_calls = 0
+        self.start_time = time.time()
         
-    def rotate_key(self):
-        """Rotate to the next API key"""
-        self.api_keys.rotate(-1)
-        print(f"Rotated to API key {len(self.api_keys) - list(self.api_keys).index(self.api_keys[0])}")
+    def get_available_key_index(self) -> Optional[int]:
+        """Find an API key that can make a call right now"""
+        # Try current key first
+        if self.trackers[self.current_key_index].can_make_call():
+            return self.current_key_index
         
+        # Try other keys
+        for i in range(len(self.api_keys)):
+            if self.trackers[i].can_make_call():
+                return i
+                
+        return None
+    
+    def wait_for_available_key(self) -> int:
+        """Wait until a key is available and return its index"""
+        while True:
+            key_idx = self.get_available_key_index()
+            if key_idx is not None:
+                self.current_key_index = key_idx
+                return key_idx
+            
+            # Find minimum wait time across all keys
+            wait_times = [tracker.time_until_available() for tracker in self.trackers]
+            min_wait = min(wait_times)
+            
+            if min_wait > 0:
+                print(f"  ⏳ Rate limit reached on all keys. Waiting {min_wait:.1f}s...")
+                time.sleep(min_wait + 0.1)  # Small buffer
+            else:
+                time.sleep(0.1)
+    
     def get_current_key(self) -> str:
         """Get the current API key"""
-        return self.api_keys[0]
+        return self.api_keys[self.current_key_index]
     
-    def check_rate_limit(self):
-        """Check and enforce rate limiting"""
-        current_time = time.time()
-        if current_time - self.last_reset_time >= 60:
-            self.request_count = 0
-            self.last_reset_time = current_time
+    def print_stats(self):
+        """Print current rate limit statistics"""
+        elapsed = time.time() - self.start_time
+        print(f"\n📊 API Usage Statistics:")
+        print(f"   Total calls: {self.total_calls} ({self.failed_calls} failed)")
+        print(f"   Elapsed time: {elapsed/60:.1f} minutes")
+        print(f"   Average: {self.total_calls/(elapsed/60):.1f} calls/minute")
         
-        if self.request_count >= self.rate_limit_per_minute:
-            sleep_time = 60 - (current_time - self.last_reset_time)
-            if sleep_time > 0:
-                print(f"Rate limit reached. Sleeping for {sleep_time:.2f} seconds...")
-                time.sleep(sleep_time)
-                self.request_count = 0
-                self.last_reset_time = time.time()
+        for i, tracker in enumerate(self.trackers):
+            stats = tracker.get_stats()
+            print(f"   Key {i+1}: {stats['minute']}/250 min | {stats['hour']}/2000 hr | {stats['day']}/10000 day")
     
     def fetch_match_league_data(self, match_ids: List[str]) -> Dict:
         """
@@ -60,7 +164,8 @@ class StratzAPIClient:
         
         Returns dict mapping match_id -> league data
         """
-        self.check_rate_limit()
+        # Wait for an available key
+        key_idx = self.wait_for_available_key()
         
         # GraphQL query to get league information
         query = """
@@ -86,52 +191,65 @@ class StratzAPIClient:
             "Content-Type": "application/json"
         }
         
-        try:
-            response = requests.post(
-                STRATZ_API_URL,
-                json={"query": query, "variables": variables},
-                headers=headers,
-                timeout=30
-            )
-            
-            self.request_count += 1
-            
-            if response.status_code == 429:  # Rate limited
-                print("Rate limited, rotating API key...")
-                self.rotate_key()
-                time.sleep(2)
-                return self.fetch_match_league_data(match_ids)
-            
-            if response.status_code == 401:  # Unauthorized
-                print("API key invalid, rotating...")
-                self.rotate_key()
-                return self.fetch_match_league_data(match_ids)
-            
-            response.raise_for_status()
-            data = response.json()
-            
-            if "errors" in data:
-                print(f"GraphQL errors: {data['errors']}")
-                return {}
-            
-            # Parse response into dict
-            result = {}
-            if "data" in data and "matches" in data["data"]:
-                for match in data["data"]["matches"]:
-                    if match:
-                        match_id = str(match["id"])
-                        result[match_id] = {
-                            "leagueId": match.get("leagueId"),
-                            "leagueName": match.get("league", {}).get("displayName") if match.get("league") else None,
-                            "leagueTier": match.get("league", {}).get("tier") if match.get("league") else None
-                        }
-            
-            return result
-            
-        except requests.exceptions.RequestException as e:
-            print(f"Request error: {e}")
-            time.sleep(5)
-            return {}
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(
+                    STRATZ_API_URL,
+                    json={"query": query, "variables": variables},
+                    headers=headers,
+                    timeout=30
+                )
+                
+                # Record the call
+                self.trackers[key_idx].record_call()
+                self.total_calls += 1
+                
+                if response.status_code == 429:  # Rate limited
+                    print(f"  ⚠️  Key {key_idx+1} rate limited (unexpected), rotating...")
+                    self.failed_calls += 1
+                    # Force use of different key
+                    self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
+                    time.sleep(2)
+                    return self.fetch_match_league_data(match_ids)
+                
+                if response.status_code == 401:  # Unauthorized
+                    print(f"  ❌ Key {key_idx+1} invalid, trying next key...")
+                    self.failed_calls += 1
+                    self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
+                    return self.fetch_match_league_data(match_ids)
+                
+                response.raise_for_status()
+                data = response.json()
+                
+                if "errors" in data:
+                    print(f"  GraphQL errors: {data['errors']}")
+                    self.failed_calls += 1
+                    return {}
+                
+                # Parse response into dict
+                result = {}
+                if "data" in data and "matches" in data["data"]:
+                    for match in data["data"]["matches"]:
+                        if match:
+                            match_id = str(match["id"])
+                            result[match_id] = {
+                                "leagueId": match.get("leagueId"),
+                                "leagueName": match.get("league", {}).get("displayName") if match.get("league") else None,
+                                "leagueTier": match.get("league", {}).get("tier") if match.get("league") else None
+                            }
+                
+                return result
+                
+            except requests.exceptions.RequestException as e:
+                print(f"  Request error (attempt {attempt+1}/{max_retries}): {e}")
+                self.failed_calls += 1
+                if attempt < max_retries - 1:
+                    time.sleep(2 ** attempt)  # Exponential backoff
+                else:
+                    return {}
+        
+        return {}
 
 
 def load_matches(filepath: str) -> Dict:
@@ -145,7 +263,7 @@ def load_matches(filepath: str) -> Dict:
 
 def save_matches(filepath: str, data: Dict):
     """Save the enhanced matches JSON file"""
-    print(f"Saving enhanced data to {filepath}...")
+    print(f"\nSaving enhanced data to {filepath}...")
     with open(filepath, 'w') as f:
         json.dump(data, f, indent=2)
     print("Save complete!")
@@ -157,16 +275,30 @@ def process_matches(matches: Dict, api_client: StratzAPIClient, batch_size: int 
     """
     match_ids = list(matches.keys())
     total_matches = len(match_ids)
+    total_batches = (total_matches + batch_size - 1) // batch_size
     processed = 0
     added_data = 0
     
-    print(f"\nProcessing {total_matches} matches in batches of {batch_size}...")
+    # Estimate time
+    print(f"\n📋 Processing Plan:")
+    print(f"   Total matches: {total_matches:,}")
+    print(f"   Batch size: {batch_size}")
+    print(f"   Total API calls: {total_batches:,}")
+    print(f"   API keys: {len(api_client.api_keys)}")
+    
+    # With 5 keys at 250/min each = 1250/min total theoretical max
+    # Conservative estimate: 800 calls/minute to stay safe
+    estimated_minutes = total_batches / 800
+    print(f"   Estimated time: {estimated_minutes:.1f} minutes ({estimated_minutes/60:.1f} hours)")
+    
+    print(f"\n🚀 Starting processing...\n")
+    start_time = time.time()
     
     for i in range(0, total_matches, batch_size):
         batch_ids = match_ids[i:i+batch_size]
+        batch_num = i//batch_size + 1
         
-        print(f"Processing batch {i//batch_size + 1}/{(total_matches + batch_size - 1)//batch_size} "
-              f"(matches {i+1}-{min(i+batch_size, total_matches)})...")
+        print(f"Batch {batch_num}/{total_batches} (matches {i+1}-{min(i+batch_size, total_matches)})...", end=" ")
         
         league_data = api_client.fetch_match_league_data(batch_ids)
         
@@ -185,13 +317,23 @@ def process_matches(matches: Dict, api_client: StratzAPIClient, batch_size: int 
                 })
         
         processed += len(batch_ids)
-        print(f"Progress: {processed}/{total_matches} ({100*processed/total_matches:.1f}%) - "
-              f"{added_data} matches with tier data")
+        percent = 100 * processed / total_matches
+        print(f"✓ ({percent:.1f}% | {added_data} with tier data)")
         
-        # Small delay between batches
-        time.sleep(0.5)
+        # Print detailed stats every 100 batches
+        if batch_num % 100 == 0:
+            api_client.print_stats()
+            elapsed = time.time() - start_time
+            remaining_batches = total_batches - batch_num
+            rate = batch_num / (elapsed / 60)  # batches per minute
+            eta = remaining_batches / rate if rate > 0 else 0
+            print(f"   ETA: {eta:.1f} minutes\n")
     
-    print(f"\nComplete! Added tier data to {added_data}/{total_matches} matches")
+    elapsed_total = time.time() - start_time
+    print(f"\n✅ Complete! Added tier data to {added_data}/{total_matches} matches")
+    print(f"   Total time: {elapsed_total/60:.1f} minutes")
+    print(f"   Average rate: {total_batches/(elapsed_total/60):.1f} calls/minute")
+    
     return matches
 
 
@@ -199,13 +341,20 @@ def main():
     """Main execution"""
     import sys
     
+    print("=" * 70)
+    print("Dota 2 Pro Matches - League/Tier Data Enrichment")
+    print("=" * 70)
+    
     # Check if API keys are provided
     if API_KEYS[0] == "YOUR_API_KEY_1":
-        print("ERROR: Please add your Stratz API keys to the script!")
-        print("Edit the API_KEYS list at the top of this file.")
+        print("\n❌ ERROR: Please add your Stratz API keys to the script!")
+        print("Edit the API_KEYS list at the top of this file.\n")
         sys.exit(1)
     
     # Initialize API client
+    print(f"\nInitializing with {len(API_KEYS)} API keys...")
+    print(f"Rate limits per key: {RATE_LIMITS['second']}/sec, {RATE_LIMITS['minute']}/min, "
+          f"{RATE_LIMITS['hour']}/hour, {RATE_LIMITS['day']}/day")
     api_client = StratzAPIClient(API_KEYS)
     
     # Load existing matches
@@ -215,12 +364,16 @@ def main():
     # Process matches and add league data
     enhanced_matches = process_matches(matches, api_client)
     
+    # Final statistics
+    api_client.print_stats()
+    
     # Save enhanced dataset
     output_file = "stratz_with_tiers_96507.json"
     save_matches(output_file, enhanced_matches)
     
     print(f"\n✓ Enhanced dataset saved to {output_file}")
     print("The dataset now includes: leagueId, leagueName, and leagueTier for each match")
+    print("\n" + "=" * 70)
 
 
 if __name__ == "__main__":

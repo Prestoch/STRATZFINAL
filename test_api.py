@@ -2,6 +2,9 @@
 """
 Quick test script to verify Stratz API keys work correctly
 before processing all 96,507 matches.
+
+Note: This script makes very few API calls, so rate limits won't be an issue.
+Stratz limits per key: 20/sec, 250/min, 2000/hour, 10000/day
 """
 
 import json
@@ -133,6 +136,14 @@ def main():
     print("=" * 60)
     print(f"RESULTS: {valid_keys}/{len(API_KEYS)} API keys are valid and working")
     print("=" * 60)
+    
+    # Show rate limit capacity
+    if valid_keys > 0:
+        print(f"\n📊 Combined Rate Limit Capacity ({valid_keys} keys):")
+        print(f"   {valid_keys * 20} calls/second")
+        print(f"   {valid_keys * 250} calls/minute")
+        print(f"   {valid_keys * 2000} calls/hour")
+        print(f"   {valid_keys * 10000} calls/day")
     
     if valid_keys == 0:
         print("\n❌ No valid API keys found. Please check your keys and try again.")

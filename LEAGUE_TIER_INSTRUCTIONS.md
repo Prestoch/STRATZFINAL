@@ -15,6 +15,16 @@ Your current dataset (`stratz_clean_96507.json`) contains 96,507 pro matches wit
 
 2. **5 Stratz API keys** - You mentioned you have these available
 
+## Stratz API Rate Limits
+
+Each API key has these limits:
+- **20 calls/second**
+- **250 calls/minute**
+- **2,000 calls/hour**
+- **10,000 calls/day**
+
+The scripts automatically track and respect these limits across all time windows.
+
 ## Setup Instructions
 
 ### Step 1: Add Your API Keys
@@ -40,14 +50,15 @@ python3 add_league_tier.py
 ## What the Script Does
 
 1. **Loads your existing dataset** (`stratz_clean_96507.json`)
-2. **Processes matches in batches** of 50 to respect API rate limits
-3. **Rotates through your 5 API keys** to maximize throughput
-4. **Fetches league data** for each match using Stratz GraphQL API
-5. **Adds three new fields** to each match:
+2. **Processes matches in batches** of 50 (efficient API usage)
+3. **Intelligently rotates through your 5 API keys** based on availability
+4. **Tracks rate limits** across second/minute/hour/day windows per key
+5. **Fetches league data** for each match using Stratz GraphQL API
+6. **Adds three new fields** to each match:
    - `leagueId`: The ID of the league
    - `leagueName`: The display name of the league
    - `leagueTier`: The tier of the league (this is what you need!)
-6. **Saves the enhanced dataset** as `stratz_with_tiers_96507.json`
+7. **Saves the enhanced dataset** as `stratz_with_tiers_96507.json`
 
 ## Output Format
 
@@ -78,8 +89,11 @@ Stratz typically uses these tier classifications:
 
 - Processing ~96,000 matches
 - Batch size: 50 matches per API call
-- Estimated time: 30-60 minutes (depending on API rate limits)
-- The script includes progress indicators
+- Total API calls needed: ~1,931
+- With 5 keys at 250/min each: theoretical max 1,250 calls/minute
+- Conservative rate: ~800 calls/minute (staying under limits)
+- **Estimated time: 2-3 minutes** with proper rate limiting
+- The script includes detailed progress indicators and ETA
 
 ## Troubleshooting
 
@@ -94,9 +108,14 @@ If an API key is invalid:
 - Check that your keys are valid Bearer tokens
 
 ### Adjusting Rate Limits
-If needed, modify the `rate_limit_per_minute` in the script:
+The scripts use Stratz's documented limits by default. If your API plan has different limits, modify the `RATE_LIMITS` dictionary at the top of the script:
 ```python
-self.rate_limit_per_minute = 100  # Adjust this value
+RATE_LIMITS = {
+    'second': 20,
+    'minute': 250,
+    'hour': 2000,
+    'day': 10000
+}
 ```
 
 ## Next Steps
