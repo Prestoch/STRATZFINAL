@@ -29,12 +29,13 @@ API_KEYS = [
     "YOUR_API_KEY_5",
 ]
 
-# Stratz API rate limits per key
+# Stratz API rate limits per key (set at 80% of actual limits for safety)
+# Actual Stratz limits: 20/sec, 250/min, 2000/hour, 10000/day
 RATE_LIMITS = {
-    'second': 20,
-    'minute': 250,
-    'hour': 2000,
-    'day': 10000
+    'second': 15,
+    'minute': 200,
+    'hour': 1600,
+    'day': 8000
 }
 
 
