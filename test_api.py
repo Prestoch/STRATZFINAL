@@ -44,8 +44,11 @@ def test_api_key(api_key: str, match_ids: list) -> bool:
     }
     
     headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "authorization": f"bearer {api_key}",
+        "content-type": "application/json",
+        "origin": "https://stratz.com",
+        "referer": "https://stratz.com/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
     }
     
     try:

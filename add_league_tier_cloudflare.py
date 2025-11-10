@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 """
 Script to fetch league/tier data for Dota 2 pro matches from Stratz API
-and add it to the existing dataset.
+Bypasses Cloudflare protection using cloudscraper.
 
-Respects Stratz rate limits:
-- 20 calls/second per key
-- 250 calls/minute per key
-- 2,000 calls/hour per key
-- 10,000 calls/day per key
+Install: pip install cloudscraper
 """
 
 import json
 import time
-import requests
+import cloudscraper
 from typing import Dict, List, Optional
 from collections import deque
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Stratz GraphQL endpoint
 STRATZ_API_URL = "https://api.stratz.com/graphql"
@@ -112,13 +108,20 @@ class StratzAPIClient:
         self.failed_calls = 0
         self.start_time = time.time()
         
+        # Create cloudscraper session (bypasses Cloudflare)
+        self.scraper = cloudscraper.create_scraper(
+            browser={
+                'browser': 'chrome',
+                'platform': 'darwin',
+                'mobile': False
+            }
+        )
+        
     def get_available_key_index(self) -> Optional[int]:
         """Find an API key that can make a call right now"""
-        # Try current key first
         if self.trackers[self.current_key_index].can_make_call():
             return self.current_key_index
         
-        # Try other keys
         for i in range(len(self.api_keys)):
             if self.trackers[i].can_make_call():
                 return i
@@ -133,13 +136,12 @@ class StratzAPIClient:
                 self.current_key_index = key_idx
                 return key_idx
             
-            # Find minimum wait time across all keys
             wait_times = [tracker.time_until_available() for tracker in self.trackers]
             min_wait = min(wait_times)
             
             if min_wait > 0:
                 print(f"  ⏳ Rate limit reached on all keys. Waiting {min_wait:.1f}s...")
-                time.sleep(min_wait + 0.1)  # Small buffer
+                time.sleep(min_wait + 0.1)
             else:
                 time.sleep(0.1)
     
@@ -157,18 +159,13 @@ class StratzAPIClient:
         
         for i, tracker in enumerate(self.trackers):
             stats = tracker.get_stats()
-            print(f"   Key {i+1}: {stats['minute']}/250 min | {stats['hour']}/2000 hr | {stats['day']}/10000 day")
+            print(f"   Key {i+1}: {stats['minute']}/200 min | {stats['hour']}/1600 hr | {stats['day']}/8000 day")
     
     def fetch_match_league_data(self, match_ids: List[str]) -> Dict:
-        """
-        Fetch league/tier data for a batch of match IDs
+        """Fetch league/tier data for a batch of match IDs"""
         
-        Returns dict mapping match_id -> league data
-        """
-        # Wait for an available key
         key_idx = self.wait_for_available_key()
         
-        # GraphQL query to get league information
         query = """
         query GetMatchLeagues($matchIds: [Long!]!) {
             matches(ids: $matchIds) {
@@ -192,32 +189,29 @@ class StratzAPIClient:
             "content-type": "application/json",
             "origin": "https://stratz.com",
             "referer": "https://stratz.com/",
-            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
         }
         
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                response = requests.post(
+                response = self.scraper.post(
                     STRATZ_API_URL,
                     json={"query": query, "variables": variables},
                     headers=headers,
                     timeout=30
                 )
                 
-                # Record the call
                 self.trackers[key_idx].record_call()
                 self.total_calls += 1
                 
-                if response.status_code == 429:  # Rate limited
-                    print(f"  ⚠️  Key {key_idx+1} rate limited (unexpected), rotating...")
+                if response.status_code == 429:
+                    print(f"  ⚠️  Key {key_idx+1} rate limited, rotating...")
                     self.failed_calls += 1
-                    # Force use of different key
                     self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
                     time.sleep(2)
                     return self.fetch_match_league_data(match_ids)
                 
-                if response.status_code == 401:  # Unauthorized
+                if response.status_code == 401:
                     print(f"  ❌ Key {key_idx+1} invalid, trying next key...")
                     self.failed_calls += 1
                     self.current_key_index = (self.current_key_index + 1) % len(self.api_keys)
@@ -231,7 +225,6 @@ class StratzAPIClient:
                     self.failed_calls += 1
                     return {}
                 
-                # Parse response into dict
                 result = {}
                 if "data" in data and "matches" in data["data"]:
                     for match in data["data"]["matches"]:
@@ -245,11 +238,11 @@ class StratzAPIClient:
                 
                 return result
                 
-            except requests.exceptions.RequestException as e:
+            except Exception as e:
                 print(f"  Request error (attempt {attempt+1}/{max_retries}): {e}")
                 self.failed_calls += 1
                 if attempt < max_retries - 1:
-                    time.sleep(2 ** attempt)  # Exponential backoff
+                    time.sleep(2 ** attempt)
                 else:
                     return {}
         
@@ -274,26 +267,23 @@ def save_matches(filepath: str, data: Dict):
 
 
 def process_matches(matches: Dict, api_client: StratzAPIClient, batch_size: int = 50):
-    """
-    Process all matches and add league/tier data
-    """
+    """Process all matches and add league/tier data"""
+    
     match_ids = list(matches.keys())
     total_matches = len(match_ids)
     total_batches = (total_matches + batch_size - 1) // batch_size
     processed = 0
     added_data = 0
     
-    # Estimate time
     print(f"\n📋 Processing Plan:")
     print(f"   Total matches: {total_matches:,}")
     print(f"   Batch size: {batch_size}")
     print(f"   Total API calls: {total_batches:,}")
     print(f"   API keys: {len(api_client.api_keys)}")
+    print(f"   Using Cloudflare bypass: cloudscraper")
     
-    # With 5 keys at 250/min each = 1250/min total theoretical max
-    # Conservative estimate: 800 calls/minute to stay safe
     estimated_minutes = total_batches / 800
-    print(f"   Estimated time: {estimated_minutes:.1f} minutes ({estimated_minutes/60:.1f} hours)")
+    print(f"   Estimated time: {estimated_minutes:.1f} minutes")
     
     print(f"\n🚀 Starting processing...\n")
     start_time = time.time()
@@ -306,14 +296,12 @@ def process_matches(matches: Dict, api_client: StratzAPIClient, batch_size: int 
         
         league_data = api_client.fetch_match_league_data(batch_ids)
         
-        # Add league data to matches
         for match_id in batch_ids:
             if match_id in league_data:
                 matches[match_id].update(league_data[match_id])
                 if league_data[match_id].get("leagueTier") is not None:
                     added_data += 1
             else:
-                # Add null values if no data found
                 matches[match_id].update({
                     "leagueId": None,
                     "leagueName": None,
@@ -324,12 +312,11 @@ def process_matches(matches: Dict, api_client: StratzAPIClient, batch_size: int 
         percent = 100 * processed / total_matches
         print(f"✓ ({percent:.1f}% | {added_data} with tier data)")
         
-        # Print detailed stats every 100 batches
         if batch_num % 100 == 0:
             api_client.print_stats()
             elapsed = time.time() - start_time
             remaining_batches = total_batches - batch_num
-            rate = batch_num / (elapsed / 60)  # batches per minute
+            rate = batch_num / (elapsed / 60)
             eta = remaining_batches / rate if rate > 0 else 0
             print(f"   ETA: {eta:.1f} minutes\n")
     
@@ -346,32 +333,27 @@ def main():
     import sys
     
     print("=" * 70)
-    print("Dota 2 Pro Matches - League/Tier Data Enrichment")
+    print("Dota 2 Pro Matches - League/Tier Data Enrichment (Cloudflare Bypass)")
     print("=" * 70)
     
-    # Check if API keys are provided
     if API_KEYS[0] == "YOUR_API_KEY_1":
         print("\n❌ ERROR: Please add your Stratz API keys to the script!")
         print("Edit the API_KEYS list at the top of this file.\n")
         sys.exit(1)
     
-    # Initialize API client
     print(f"\nInitializing with {len(API_KEYS)} API keys...")
-    print(f"Rate limits per key: {RATE_LIMITS['second']}/sec, {RATE_LIMITS['minute']}/min, "
-          f"{RATE_LIMITS['hour']}/hour, {RATE_LIMITS['day']}/day")
+    print(f"Rate limits per key: {RATE_LIMITS['second']}/sec, {RATE_LIMITS['minute']}/min")
+    print("Using cloudscraper to bypass Cloudflare protection")
+    
     api_client = StratzAPIClient(API_KEYS)
     
-    # Load existing matches
     input_file = "stratz_clean_96507.json"
     matches = load_matches(input_file)
     
-    # Process matches and add league data
     enhanced_matches = process_matches(matches, api_client)
     
-    # Final statistics
     api_client.print_stats()
     
-    # Save enhanced dataset
     output_file = "stratz_with_tiers_96507.json"
     save_matches(output_file, enhanced_matches)
     

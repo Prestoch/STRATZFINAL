@@ -154,8 +154,11 @@ class StratzAPIClient:
         }
         
         headers = {
-            "Authorization": f"Bearer {self.api_keys[key_idx]}",
-            "Content-Type": "application/json"
+            "authorization": f"bearer {self.api_keys[key_idx]}",
+            "content-type": "application/json",
+            "origin": "https://stratz.com",
+            "referer": "https://stratz.com/",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
         }
         
         try:
