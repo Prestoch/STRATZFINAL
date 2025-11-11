@@ -31,10 +31,17 @@ def fetch_heroes(scraper: cloudscraper.CloudScraper) -> list[dict]:
     return response.json()
 
 
-def fetch_matchups(scraper: cloudscraper.CloudScraper, hero_id: int) -> dict:
+def fetch_matchups(
+    scraper: cloudscraper.CloudScraper, hero_id: int, hero_slug: str
+) -> dict:
     response = scraper.get(
         f"{BASE_URL}/hero/{hero_id}/matchups",
         params={"minified": "true", "min_matches": 0},
+        headers={
+            "Referer": f"https://dota2protracker.com/hero/{hero_slug}",
+            "Origin": "https://dota2protracker.com",
+        },
+        timeout=10,
     )
     response.raise_for_status()
     return response.json()
@@ -45,7 +52,15 @@ def build_matrix(heroes: list[dict], scraper: cloudscraper.CloudScraper) -> dict
 
     for hero in heroes:
         hero_id = hero["hero_id"]
-        data = fetch_matchups(scraper, hero_id)
+        hero_slug = hero["npc"]
+
+        scraper.get(
+            f"https://dota2protracker.com/hero/{hero_slug}",
+            headers={"Referer": "https://dota2protracker.com"},
+            timeout=10,
+        )
+
+        data = fetch_matchups(scraper, hero_id, hero_slug)
         fields = {name: idx for idx, name in enumerate(data["fields"])}
 
         for row in data["data"]:
