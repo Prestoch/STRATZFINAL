@@ -31,9 +31,6 @@
        }
 
        .navbar #version { margin-right: 15px !important; }
-       /* Navbar layout pinned via flex; brand left, version flush right */
-
-
 
        /* Lock search field size regardless of viewport */
        form.hero-search-form .form-control#hero-search {
@@ -50,21 +47,20 @@
          .navbar .nav > li > a { line-height: 50px; padding-top: 0; padding-bottom: 0; }
        }
 
-      div.main-wrapper {
-        width: 967px !important;
-        margin: 0 auto;
-        position: relative;
-        height: 100%;
-      }
+       div.main-wrapper {
+         width: 967px !important;
+         position: relative;
+         height: 100%;
+       }
 
-      #main-container {
-        position: absolute;
-        bottom: 0;
-        top: 70px;
-        width: 967px !important;
-        padding-right: 30px;
-        overflow: visible;
-      }
+       #main-container {
+         position: absolute;
+         bottom: 0;
+         top: 70px;
+         width: 967px !important;
+         padding-right: 30px;
+         overflow: visible;
+       }
 
        div.main-col {
          position: absolute;
@@ -78,16 +74,13 @@
         top: 0;
         right: 30px;
         overflow: visible;
-        /* Ensure iOS allows panning within this column */
-        -webkit-overflow-scrolling: touch;
       }
 
-      #hero-list {
+       #hero-list {
          position: absolute;
          top: 50px;
          bottom: 0;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+         overflow-y: auto;
          left: 15px;
          right: 20px;
        }
@@ -120,7 +113,7 @@
        div.lineup div.col-md-2 {
          cursor: pointer;
        }
-      /* Removed change% label styles */
+      /* Removed per-role/change bubbles */
        div.red {
 
        }
@@ -131,14 +124,13 @@
 
       #counters {
         position: absolute;
-        top: 378px;
+        top: 333px;
         bottom: 0;
         left: 30px;
         right: 20px;
         overflow-y: auto;
         overflow-x: hidden;
         padding-right: 20px;
-        -webkit-overflow-scrolling: touch;
       }
       #counters-scroll { height: auto; overflow: visible; padding-right: 0; margin-left: 0; margin-right: 0; }
 
@@ -254,14 +246,15 @@
       /* Remove previous separator to rely on flex gap */
       #counters-scroll > .col-md-3:nth-child(3),
       #counters-scroll > .col-xs-3:nth-child(3) { border-left: 0; padding-left: 0; }
-      #total .alert { font-size: 120px; padding: 4px 6px; }
-      #total .lane-bubble { font-size: 120px !important; padding: 4px 6px !important; }
+      #total .alert { font-size: 12px; padding: 4px 6px; }
+      #total .lane-bubble { font-size: 12px !important; padding: 4px 6px !important; }
       /* Remove global alert shrink to keep original component sizes */
 
       div.pick-title {
         text-align: center;
         padding-top: 8px;
         font-size: 1.2em;
+        font-family: Arial, Helvetica, sans-serif;
         margin-top: 25px;
         position: relative;
         z-index: 1;
@@ -322,7 +315,7 @@
             <label class="sr-only" for="hero-search">Hero Name</label>
             <input type="text" class="form-control" id="hero-search" placeholder="Search" autocomplete="off">
           </div>
-        
+          
         </form>
 
         <ul id="hero-list"></ul>

@@ -9,10 +9,6 @@ var DotaBuffCP = {
     this.lineup = [ -1, -1, -1, -1, -1 ];
     this.lineup2 = [ -1, -1, -1, -1, -1 ];
     this.initialized = true;
-    // Initialize default roles per slot for both lineups
-    this.roles = [];
-    var __defaultRoles = ['carry','mid','offlane','softsupport','hardsupport'];
-    for (var __r = 0; __r < 10; ++__r) this.roles[__r] = __defaultRoles[__r % 5];
     
   },
 
@@ -276,20 +272,7 @@ if (typeof heroes_wr === 'undefined' || !Array.isArray(heroes_wr)) {
   }
 }
 
-var __roleKeys = ['carry','mid','offlane','softsupport','hardsupport'];
-if (typeof heroes_roles_db_wr === 'undefined' || typeof heroes_roles_db_wr !== 'object') {
-  var heroes_roles_db_wr = {};
-}
-for (var __rk2 = 0; __rk2 < __roleKeys.length; ++__rk2) {
-  var __role2 = __roleKeys[__rk2];
-  if (typeof heroes_roles_db_wr[__role2] === 'undefined') heroes_roles_db_wr[__role2] = {};
-  if (!Array.isArray(heroes_roles_db_wr[__role2].wr)) {
-    heroes_roles_db_wr[__role2].wr = [];
-    if (typeof heroes !== 'undefined' && Array.isArray(heroes)) {
-      for (var __q = 0; __q < heroes.length; ++__q) heroes_roles_db_wr[__role2].wr[__q] = 50;
-    }
-  }
-}
+// Removed per-role change and per-role WR fallbacks
 
 var MainView = Backbone.View.extend ({
 
@@ -313,7 +296,6 @@ var MainView = Backbone.View.extend ({
     'click #hero-search-reset': 'heroSearchReset',
     'click #hero-list li': 'addHero',
     'click div.lineup div.col-md-2 img': 'removeHero',
-    'change .hero-role-select': 'changeHeroRole',
     'click #reset-all': 'resetAll',
     'submit form': function () { return false; }
   },
@@ -392,64 +374,33 @@ var MainView = Backbone.View.extend ({
     //console.log(heroes);
     //console.log(win_rates);
     //console.log(heroes_wr);
-    // Always assign default role by slot index on new pick
-    var slot = pick_i % 5;
-    var defaultRoles = ['carry','mid','offlane','softsupport','hardsupport'];
-    DotaBuffCP.roles[pick_i] = defaultRoles[slot];
-    var role = DotaBuffCP.roles[pick_i];
-    var selectHtml = this.roleSelectHtml(pick_i, role);
-    $('#hero-' + pick_i).html (selectHtml + "<img src='" + heroes_bg[hid] + "' data-idx='" + pick_i + "'>");
+    // Render hero tile with just the image (no per-role UI)
+    $('#hero-' + pick_i).html ("<img src='" + heroes_bg[hid] + "' data-idx='" + pick_i + "'>");
 
     this.calculateAndShow ();
     this.switchLink ();
   },
 
   addHeroToIndex: function (hid, pick_i) {
-    var slot = pick_i % 5;
-    var defaultRoles = ['carry','mid','offlane','softsupport','hardsupport'];
-    DotaBuffCP.roles[pick_i] = defaultRoles[slot];
-    var role = DotaBuffCP.roles[pick_i];
-    var selectHtml = this.roleSelectHtml(pick_i, role);
-    $('#hero-' + pick_i).html (selectHtml + "<img src='" + heroes_bg[hid] + "' data-idx='" + pick_i + "'>");
+    // Render hero tile with just the image (no per-role UI)
+    $('#hero-' + pick_i).html ("<img src='" + heroes_bg[hid] + "' data-idx='" + pick_i + "'>");
   },
 
-  roleSelectHtml: function (idx, role) {
-    var opts = [
-      {v:'carry', t:'Carry'},
-      {v:'mid', t:'Mid'},
-      {v:'offlane', t:'Offlane'},
-      {v:'softsupport', t:'Soft'},
-      {v:'hardsupport', t:'Hard'}
-    ];
-    var html = "<select class='hero-role-select' data-idx='" + idx + "' style='font-size:14px; padding:0; margin:2px 0; width: 90px'>";
-    for (var i=0;i<opts.length;i++) {
-      var o=opts[i];
-      html += "<option value='" + o.v + "'" + (role===o.v?" selected":"") + ">" + o.t + "</option>";
-    }
-    html += "</select>";
-    return html;
-  },
+  
 
   getHeroIdAtSlot: function (idx) {
     if (idx < 5) return DotaBuffCP.lineup[idx];
     return DotaBuffCP.lineup2[idx-5];
   },
 
-  getWrFor: function (heroId, idx) {
-    var role = DotaBuffCP.roles[idx];
-    var arr = heroes_roles_db_wr && heroes_roles_db_wr[role] && heroes_roles_db_wr[role].wr;
-    var v = arr && arr[heroId] != null ? arr[heroId] : 50;  // Default 50%
+  getWrFor: function (heroId) {
+    var v = Array.isArray(heroes_wr) && heroes_wr[heroId] != null ? heroes_wr[heroId] : 50;  // Default 50%
     return parseFloat(v || 0);
   },
 
   
 
-  changeHeroRole: function (ev) {
-    var idx = parseInt($(ev.currentTarget).attr('data-idx'), 10);
-    var role = $(ev.currentTarget).val();
-    DotaBuffCP.roles[idx] = role;
-    this.calculateAndShow();
-  },
+  
 
   removeHero: function (ev) {
     var i = parseInt($(ev.currentTarget).attr ('data-idx'), 10);
@@ -460,9 +411,6 @@ var MainView = Backbone.View.extend ({
     } else {
       DotaBuffCP.lineup2[i-5] = -1;
     }
-    
-    // Clear role (reset to default)
-    DotaBuffCP.roles[i] = 'carry';
     
     // Clear HTML
     $('#hero-' + i).html ('');
@@ -589,8 +537,8 @@ var MainView = Backbone.View.extend ({
       for (var i=0; i <5; i++) {
         var id1 = DotaBuffCP.lineup[i];
         var id3 = DotaBuffCP.lineup2[i];
-        nb1 += this.getWrFor(id1, i);
-        nb2 += this.getWrFor(id3, i+5);
+        nb1 += this.getWrFor(id1);
+        nb2 += this.getWrFor(id3);
         var nb1a = 0;
         var nb2a = 0;
         for (var j=0; j <5; j++) {   
@@ -611,8 +559,8 @@ var MainView = Backbone.View.extend ({
         var advStr2 = (advDisp2 < 0 ? '-' : '') + Math.abs(advDisp2).toFixed(2);
         var adv1Class = (advDisp1 < 0) ? 'alert alert-danger' : 'alert alert-success';
         var adv2Class = (advDisp2 < 0) ? 'alert alert-danger' : 'alert alert-success';
-        var wr1Txt = this.getWrFor(id1, i).toFixed(2);
-        var wr2Txt = this.getWrFor(id3, i+5).toFixed(2);
+        var wr1Txt = this.getWrFor(id1).toFixed(2);
+        var wr2Txt = this.getWrFor(id3).toFixed(2);
         var line1a = "<span style='white-space:nowrap; font-size:14px; line-height:16px'>" + wr1Txt + " + " + "<span class='" + adv1Class + "' style='padding:0px 2px; display:inline-block; font-size:14px'>" + advStr1 + "</span></span>";
         var line1b = "<span style='white-space:nowrap; font-size:14px; line-height:16px'>" + wr2Txt + " + " + "<span class='" + adv2Class + "' style='padding:0px 2px; display:inline-block; font-size:14px'>" + advStr2 + "</span></span>";
         var cell1 = "<div class='col-md-2 col-xs-2'>" + line1a + "</div>";
